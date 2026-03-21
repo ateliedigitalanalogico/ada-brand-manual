@@ -245,23 +245,72 @@ function copyEmail() {
     }, 400);
   }
 
-  /* ── Scroll spy na navegação ── */
-  var navItems = document.querySelectorAll('.nav-item[data-target]');
+  /* ── Scroll spy na navegação (dropdown) ── */
+  var dropItems = document.querySelectorAll('.nav-drop-item[data-target]');
+  var navCurrent = document.getElementById('nav-current');
   var secs = document.querySelectorAll('[data-sec]');
+  var secNames = {
+    'cover':'Capa','01-04':'01–04 Fundamentos','05':'05 Imagética',
+    '06':'06 Impressos','07':'07 Motion','08':'08 Redes',
+    '09':'09 Voz','10':'10 Merch'
+  };
   function onScroll(){
     var scrollY = window.scrollY + 100;
     var current = 'cover';
     secs.forEach(function(s){
       if(s.offsetTop <= scrollY) current = s.getAttribute('data-sec');
     });
-    navItems.forEach(function(n){
+    dropItems.forEach(function(n){
       n.classList.toggle('active', n.getAttribute('data-target') === current);
     });
+    if(navCurrent) navCurrent.textContent = secNames[current] || current;
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 
+  /* ── Menu dropdown toggle ── */
+  var toggle = document.getElementById('nav-toggle');
+  var dropdown = document.getElementById('nav-dropdown');
+  if(toggle && dropdown){
+    toggle.addEventListener('click', function(){
+      toggle.classList.toggle('open');
+      dropdown.classList.toggle('open');
+    });
+    dropdown.addEventListener('click', function(e){
+      if(e.target.classList.contains('nav-drop-item')){
+        toggle.classList.remove('open');
+        dropdown.classList.remove('open');
+      }
+    });
+  }
+
 })();
+/* == Download de mockup como PNG == */
+function dlMock(elId, filename, w, h) {
+  var el = document.getElementById(elId);
+  if (!el || typeof html2canvas === 'undefined') {
+    alert('Aguarde o carregamento completo da página.');
+    return;
+  }
+  var btn = event && event.target;
+  if (btn) { btn.textContent = 'Gerando...'; btn.disabled = true; }
+  html2canvas(el, {
+    scale: Math.max(w / el.offsetWidth, 2),
+    useCORS: true,
+    backgroundColor: null,
+    logging: false
+  }).then(function(canvas) {
+    var link = document.createElement('a');
+    link.download = filename + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    if (btn) { btn.textContent = '\u2193 Baixar PNG'; btn.disabled = false; }
+  }).catch(function() {
+    if (btn) { btn.textContent = '\u2193 Baixar PNG'; btn.disabled = false; }
+    alert('Erro ao gerar imagem. Tente novamente.');
+  });
+}
+
 /* == Copiar prompt do moodboard == */
 function cpPrompt(id, btn) {
   var el = document.getElementById(id);

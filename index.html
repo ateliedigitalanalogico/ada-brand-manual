@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/system.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 </head>
 <body>
 <nav class="manual-nav">
@@ -24,14 +25,21 @@
       </svg>
       <span>Manual de Marca</span>
     </div>
-    <a href="#cover"     class="nav-item" data-target="cover">Capa</a>
-    <a href="#sec-01-04" class="nav-item" data-target="01-04">01–04 Fundamentos</a>
-    <a href="#sec-05"    class="nav-item" data-target="05">05 Imagética</a>
-    <a href="#sec-06"    class="nav-item" data-target="06">06 Impressos</a>
-    <a href="#sec-07"    class="nav-item" data-target="07">07 Motion</a>
-    <a href="#sec-08"    class="nav-item" data-target="08">08 Redes</a>
-    <a href="#sec-09"    class="nav-item" data-target="09">09 Voz</a>
-    <a href="#sec-10"    class="nav-item" data-target="10">10 Merch</a>
+    <div class="nav-current" id="nav-current">Capa</div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu de seções">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+  <div class="nav-dropdown" id="nav-dropdown">
+    <a href="#cover"     class="nav-drop-item" data-target="cover">Capa</a>
+    <a href="#sec-01-04" class="nav-drop-item" data-target="01-04">01–04 Fundamentos</a>
+    <a href="#sec-05"    class="nav-drop-item" data-target="05">05 Linguagem Imagética</a>
+    <a href="#sec-06"    class="nav-drop-item" data-target="06">06 Usos Impressos</a>
+    <a href="#sec-07"    class="nav-drop-item" data-target="07">07 Motion e Vídeo</a>
+    <a href="#sec-08"    class="nav-drop-item" data-target="08">08 Redes Sociais</a>
+    <a href="#sec-09"    class="nav-drop-item" data-target="09">09 Voz e Tom</a>
+    <a href="#sec-10"    class="nav-drop-item" data-target="10">10 Merchandise</a>
   </div>
 </nav>
 
@@ -2549,7 +2557,7 @@
   <!-- YouTube 2560×1440 -->
   <div style="padding:16px 40px 0;">
     <div style="font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">YouTube · 2560×1440px</div>
-    <div class="cover-mock cover-yt" style="background:#000;">
+    <div class="cover-mock cover-yt" id="mock-yt" style="background:#000;">
       <img src="assets/ADA_urbano_feixe_03.jpg" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;opacity:.6;" loading="lazy">
       <!-- Zona segura — conteúdo visível em todas as telas -->
       <div style="position:absolute;inset:0;border:1px dashed rgba(255,214,0,.06);margin:12.5% 21.7%;pointer-events:none;z-index:2;">
@@ -2570,13 +2578,16 @@
       </div>
       <div class="corners pc-y"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
     </div>
-    <div class="spec-tag" style="text-align:left;margin-top:6px;">2560×1440px · Zona segura central: 1546×423px · Safe area marcada em tracejado</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:6px;">
+      <div class="spec-tag">2560×1440px · Zona segura central: 1546×423px · Safe area marcada em tracejado</div>
+      <button onclick="dlMock('mock-yt','ADA_cover_youtube',2560,1440)" class="dl-mock-btn">&#8595; Baixar PNG</button>
+    </div>
   </div>
 
   <!-- LinkedIn 1584×396 -->
   <div style="padding:16px 40px 0;">
     <div style="font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">LinkedIn · 1584×396px</div>
-    <div class="cover-mock cover-li" style="background:#0A0F1E;">
+    <div class="cover-mock cover-li" id="mock-li" style="background:#0A0F1E;">
       <img src="assets/ADA_tecnico_concreto_03.jpg" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;opacity:.5;" loading="lazy">
       <!-- Logo à esquerda — longe da área do avatar (canto inf esq no LinkedIn) -->
       <div style="position:absolute;top:50%;left:6%;transform:translateY(-50%);z-index:2;display:flex;align-items:center;gap:8px;">
@@ -2592,13 +2603,16 @@
       </div>
       <div class="corners pc-bl"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
     </div>
-    <div class="spec-tag" style="text-align:left;margin-top:6px;">1584×396px · Meia-noite · Logo à esquerda — avatar fica no canto inf esq</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:6px;">
+      <div class="spec-tag">1584×396px · Meia-noite · Logo à esquerda — avatar fica no canto inf esq</div>
+      <button onclick="dlMock('mock-li','ADA_cover_linkedin',1584,396)" class="dl-mock-btn">&#8595; Baixar PNG</button>
+    </div>
   </div>
 
   <!-- Twitter/X 1500×500 -->
   <div style="padding:16px 40px 0;">
     <div style="font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Twitter/X · 1500×500px</div>
-    <div class="cover-mock cover-tw" style="background:#000;">
+    <div class="cover-mock cover-tw" id="mock-tw" style="background:#000;">
       <img src="assets/ADA_abstrato_linhas_02.jpg" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;opacity:.55;" loading="lazy">
       <!-- Logo direita — avatar fica à esq no X -->
       <div style="position:absolute;right:6%;top:50%;transform:translateY(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:5px;">
@@ -2612,31 +2626,37 @@
       </div>
       <div class="corners pc-y"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
     </div>
-    <div class="spec-tag" style="text-align:left;margin-top:6px;">1500×500px · Logo à direita — avatar sobrepõe canto esquerdo</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:6px;">
+      <div class="spec-tag">1500×500px · Logo à direita — avatar sobrepõe canto esquerdo</div>
+      <button onclick="dlMock('mock-tw','ADA_cover_twitter',1500,500)" class="dl-mock-btn">&#8595; Baixar PNG</button>
+    </div>
   </div>
 
   <!-- GitHub 1280×640 -->
   <div style="padding:16px 40px 16px;">
     <div style="font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">GitHub · 1280×640px · Profile README banner</div>
-    <div class="cover-mock cover-gh" style="background:#0A0F1E;">
-      <img src="assets/ADA_abstrato_triangulo_02.jpg" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;opacity:.4;" loading="lazy">
-      <!-- Wordmark completo + tagline centrados -->
+    <div class="cover-mock cover-gh" id="mock-gh" style="background:#000;">
+      <img src="assets/ADA_urbano_mapping_04.jpg" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;opacity:.45;" loading="lazy">
+      <!-- Wordmark completo + tagline centrados — Amarelo -->
       <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;">
-        <svg viewBox="225 225 414 126" style="width:min(40%,200px);height:auto;" xmlns="http://www.w3.org/2000/svg">
-          <polygon fill="#4A7FD4" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
-          <polygon fill="#4A7FD4" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
-          <polygon fill="#4A7FD4" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
-          <path fill="#4A7FD4" d="M387,297v-54h45c24.81,0,45,20.19,45,45,0,3.08-.31,6.09-.91,9h18.26c.42-2.94.65-5.94.65-9,0-34.79-28.21-63-63-63h-63v72h18Z"/>
-          <path fill="#4A7FD4" d="M458.97,324c-7.52,5.65-16.86,9-26.97,9h-45v-9h-18v27h63c21.4,0,40.3-10.68,51.69-27h-24.72Z"/>
-          <polygon fill="#4A7FD4" points="609.49 324 613.99 333 622.99 351 639 351 625.5 324 609.49 324"/>
-          <polygon fill="#4A7FD4" points="556.01 297 576 257.02 595.99 297 612 297 576 225 540 297 556.01 297"/>
-          <polygon fill="#4A7FD4" points="526.5 324 513 351 529.01 351 538.01 333 542.51 324 526.5 324"/>
+        <svg viewBox="225 225 414 126" style="width:min(40%,200px);height:auto;filter:drop-shadow(0 0 6px rgba(255,214,0,.5));" xmlns="http://www.w3.org/2000/svg">
+          <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+          <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+          <polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+          <path fill="#FFD600" d="M387,297v-54h45c24.81,0,45,20.19,45,45,0,3.08-.31,6.09-.91,9h18.26c.42-2.94.65-5.94.65-9,0-34.79-28.21-63-63-63h-63v72h18Z"/>
+          <path fill="#FFD600" d="M458.97,324c-7.52,5.65-16.86,9-26.97,9h-45v-9h-18v27h63c21.4,0,40.3-10.68,51.69-27h-24.72Z"/>
+          <polygon fill="#FFD600" points="609.49 324 613.99 333 622.99 351 639 351 625.5 324 609.49 324"/>
+          <polygon fill="#FFD600" points="556.01 297 576 257.02 595.99 297 612 297 576 225 540 297 556.01 297"/>
+          <polygon fill="#FFD600" points="526.5 324 513 351 529.01 351 538.01 333 542.51 324 526.5 324"/>
         </svg>
-        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.28em;text-transform:uppercase;color:rgba(74,127,212,.45);">ANTES DO HYPE.</div>
+        <div style="font-family:var(--mono);font-size:7px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,214,0,.45);">ANTES DO HYPE.</div>
       </div>
-      <div class="corners pc-bl"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+      <div class="corners pc-y"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
     </div>
-    <div class="spec-tag" style="text-align:left;margin-top:6px;">1280×640px · Wordmark completo · Meia-noite · README.md banner</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:6px;">
+      <div class="spec-tag">1280×640px · Wordmark completo · Modo Amarelo · README.md banner</div>
+      <button onclick="dlMock('mock-gh','ADA_cover_github',1280,640)" class="dl-mock-btn">&#8595; Baixar PNG</button>
+    </div>
   </div>
 </div>
 
