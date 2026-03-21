@@ -250,9 +250,10 @@ function copyEmail() {
   var navCurrent = document.getElementById('nav-current');
   var secs = document.querySelectorAll('[data-sec]');
   var secNames = {
-    'cover':'Capa','01-04':'01–04 Fundamentos','05':'05 Imagética',
-    '06':'06 Impressos','07':'07 Motion','08':'08 Redes',
-    '09':'09 Voz','10':'10 Merch'
+    'cover':'Capa',
+    '01':'01 Logo','02':'02 Tipografia','03':'03 Paleta','04':'04 Grid',
+    '05':'05 Imagética','06':'06 Impressos','07':'07 Motion',
+    '08':'08 Redes','09':'09 Voz','10':'10 Merch'
   };
   function onScroll(){
     var scrollY = window.scrollY + 100;
