@@ -2448,7 +2448,7 @@
 
     <!-- Instagram: círculo, fundo preto, amarelo — 320px -->
     <div class="avatar-item">
-      <div class="avatar" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
+      <div class="avatar" id="av-ig" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
         <svg width="42" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
           <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
           <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
@@ -2457,11 +2457,12 @@
       </div>
       <div class="piece-label">Instagram</div>
       <div class="spec-tag">320×320px · círculo</div>
+      <button onclick="dlMock('av-ig','ADA_avatar_instagram',320,320)" class="dl-mock-btn" style="margin-top:6px;">&#8595; PNG</button>
     </div>
 
     <!-- Instagram modo meia-noite -->
     <div class="avatar-item">
-      <div class="avatar" style="width:80px;height:80px;background:#0A0F1E;border:2px solid rgba(74,127,212,.2);">
+      <div class="avatar" id="av-ig-mn" style="width:80px;height:80px;background:#0A0F1E;border:2px solid rgba(74,127,212,.2);">
         <svg width="42" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
           <polygon fill="#4A7FD4" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
           <polygon fill="#4A7FD4" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
@@ -2470,11 +2471,12 @@
       </div>
       <div class="piece-label">Alternativo</div>
       <div class="spec-tag">Meia-noite</div>
+      <button onclick="dlMock('av-ig-mn','ADA_avatar_meianoite',320,320)" class="dl-mock-btn" style="margin-top:6px;">&#8595; PNG</button>
     </div>
 
     <!-- YouTube: círculo 800px -->
     <div class="avatar-item">
-      <div class="avatar" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
+      <div class="avatar" id="av-yt" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
         <svg width="42" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
           <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
           <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
@@ -2483,11 +2485,12 @@
       </div>
       <div class="piece-label">YouTube</div>
       <div class="spec-tag">800×800px · círculo</div>
+      <button onclick="dlMock('av-yt','ADA_avatar_youtube',800,800)" class="dl-mock-btn" style="margin-top:6px;">&#8595; PNG</button>
     </div>
 
     <!-- LinkedIn: quadrado com bordas -->
     <div class="avatar-item">
-      <div class="avatar avatar-sq" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
+      <div class="avatar avatar-sq" id="av-li" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
         <svg width="42" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
           <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
           <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
@@ -2496,11 +2499,12 @@
       </div>
       <div class="piece-label">LinkedIn</div>
       <div class="spec-tag">400×400px · quadrado</div>
+      <button onclick="dlMock('av-li','ADA_avatar_linkedin',400,400)" class="dl-mock-btn" style="margin-top:6px;">&#8595; PNG</button>
     </div>
 
     <!-- Twitter/X -->
     <div class="avatar-item">
-      <div class="avatar" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
+      <div class="avatar" id="av-tw" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
         <svg width="42" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
           <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
           <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
@@ -2509,11 +2513,12 @@
       </div>
       <div class="piece-label">Twitter/X</div>
       <div class="spec-tag">400×400px · círculo</div>
+      <button onclick="dlMock('av-tw','ADA_avatar_twitter',400,400)" class="dl-mock-btn" style="margin-top:6px;">&#8595; PNG</button>
     </div>
 
     <!-- GitHub -->
     <div class="avatar-item">
-      <div class="avatar avatar-sq" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
+      <div class="avatar avatar-sq" id="av-gh" style="width:80px;height:80px;background:#000;border:2px solid rgba(255,214,0,.15);">
         <svg width="42" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
           <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
           <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
@@ -2522,12 +2527,13 @@
       </div>
       <div class="piece-label">GitHub</div>
       <div class="spec-tag">400×400px · quadrado</div>
+      <button onclick="dlMock('av-gh','ADA_avatar_github',400,400)" class="dl-mock-btn" style="margin-top:6px;">&#8595; PNG</button>
     </div>
 
     <!-- Favicon / App icon -->
     <div class="avatar-item">
       <div style="display:flex;gap:6px;align-items:flex-end;">
-        <div class="avatar avatar-sq" style="width:48px;height:48px;background:#000;border:1px solid rgba(255,214,0,.15);">
+        <div class="avatar avatar-sq" id="av-fav48" style="width:48px;height:48px;background:#000;border:1px solid rgba(255,214,0,.15);">
           <svg width="26" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
             <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
             <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
@@ -2551,6 +2557,7 @@
       </div>
       <div class="piece-label">Favicon / App</div>
       <div class="spec-tag">48 · 32 · 20px</div>
+      <button onclick="dlMock('av-fav48','ADA_favicon_48',48,48)" class="dl-mock-btn" style="margin-top:6px;">&#8595; PNG</button>
     </div>
 
   </div>
