@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 841.89 595.28">
+  <!-- Generator: Adobe Illustrator 29.8.5, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g>
+    <polygon class="st0" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+    <polygon class="st0" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+    <polygon class="st0" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+  </g>
+  <g>
+    <path class="st0" d="M387,297v-54h45c24.81,0,45,20.19,45,45,0,3.08-.31,6.09-.91,9h18.26c.42-2.94.65-5.94.65-9,0-34.79-28.21-63-63-63h-63v72h18Z"/>
+    <path class="st0" d="M458.97,324c-7.52,5.65-16.86,9-26.97,9h-45v-9h-18v27h63c21.4,0,40.3-10.68,51.69-27h-24.72Z"/>
+  </g>
+  <g>
+    <polygon class="st0" points="609.49 324 613.99 333 622.99 351 639 351 625.5 324 609.49 324"/>
+    <polygon class="st0" points="556.01 297 576 257.02 595.99 297 612 297 576 225 540 297 556.01 297"/>
+    <polygon class="st0" points="526.5 324 513 351 529.01 351 538.01 333 542.51 324 526.5 324"/>
+  </g>
+</svg>
