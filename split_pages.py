@@ -253,7 +253,12 @@ def build_index():
         '<body>\n'
         + SVG_DEFS + '\n'
         + nav_html('cover') + '\n\n'
+        # Envolver capa+indice em <section data-sec="cover"> para que o
+        # infinite scroll bidirecional possa extrair e injetar este bloco
+        # da mesma forma que extrai as demais secoes.
+        + '<section data-sec="cover" class="cover-page">\n'
         + cover_block + '\n'
+        + '</section>\n'
         + FOOTER_HTML + '\n\n'
         + '<script src="js/ada.js"></script>\n'
         '</body>\n'

@@ -619,7 +619,7 @@ function mbDownload() {
   // Ao inserir conteudo acima do scroll atual, o browser desloca a
   // pagina. Compensamos ajustando window.scrollY pelo tamanho inserido.
   function loadUp() {
-    if (loadingUp || prevIdx < 1) return;  // indice 0 = capa, nao carregamos acima
+    if (loadingUp || prevIdx < 0) return;
     loadingUp = true;
     var page = PAGES[prevIdx];
 
@@ -660,7 +660,7 @@ function mbDownload() {
     }
   }, { rootMargin: '800px' });
 
-  // So observar topo se ha secoes anteriores (prevIdx >= 1)
-  if (prevIdx >= 1) obsUp.observe(sentTop);
+  // Observar topo se ha paginas anteriores (prevIdx >= 0 inclui a capa)
+  if (prevIdx >= 0) obsUp.observe(sentTop);
 
 })();
