@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/system.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<title>ADA — 07 Motion e Video · Manual de Marca</title>
+<meta name="description" content="ADA Manual de Marca — 07 Motion e Video">
+<meta property="og:title" content="ADA — 07 Motion e Video">
+<meta property="og:description" content="Tecnologia como linguagem. Brasil como ponto de vista.">
+</head>
+<body>
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+  <defs>
+    <!-- ADA Symbol A - use with style="color:XXX" on the <svg> wrapper -->
+    <symbol id="ada-sym" viewBox="225 225 126 126">
+      <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+      <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+      <polygon fill="currentColor" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+    </symbol>
+    <!-- ADA Wordmark - A.D.A - use with style="color:XXX" on the <svg> wrapper -->
+    <symbol id="ada-wm" viewBox="225 225 414 126">
+      <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+      <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+      <polygon fill="currentColor" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+      <path fill="currentColor" d="M387,297v-54h45c24.81,0,45,20.19,45,45,0,3.08-.31,6.09-.91,9h18.26c.42-2.94.65-5.94.65-9,0-34.79-28.21-63-63-63h-63v72h18Z"/>
+      <path fill="currentColor" d="M458.97,324c-7.52,5.65-16.86,9-26.97,9h-45v-9h-18v27h63c21.4,0,40.3-10.68,51.69-27h-24.72Z"/>
+      <polygon fill="currentColor" points="609.49 324 613.99 333 622.99 351 639 351 625.5 324 609.49 324"/>
+      <polygon fill="currentColor" points="556.01 297 576 257.02 595.99 297 612 297 576 225 540 297 556.01 297"/>
+      <polygon fill="currentColor" points="526.5 324 513 351 529.01 351 538.01 333 542.51 324 526.5 324"/>
+    </symbol>
+  </defs>
+</svg>
+<nav class="manual-nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <svg width="18" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
+        <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+        <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+        <polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+      </svg>
+      <span>Manual de Marca</span>
+    </div>
+    <div class="nav-current" id="nav-current">07 Motion</div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu de secoes">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+  </div>
+  <div class="nav-dropdown" id="nav-dropdown">
+    <a href="index.html" class="nav-drop-item" data-target="cover">Capa</a>
+    <a href="01-logo.html" class="nav-drop-item" data-target="01">01 Logo e Wordmark</a>
+    <a href="02-tipografia.html" class="nav-drop-item" data-target="02">02 Tipografia</a>
+    <a href="03-paleta.html" class="nav-drop-item" data-target="03">03 Paleta de Cores</a>
+    <a href="04-grid.html" class="nav-drop-item" data-target="04">04 Grid e Espacamento</a>
+    <a href="05-imagetica.html" class="nav-drop-item" data-target="05">05 Linguagem Imagetica</a>
+    <a href="06-impressos.html" class="nav-drop-item" data-target="06">06 Usos Impressos</a>
+    <a href="07-motion.html" class="nav-drop-item active" data-target="07">07 Motion e Video</a>
+    <a href="08-redes.html" class="nav-drop-item" data-target="08">08 Redes Sociais</a>
+    <a href="09-voz.html" class="nav-drop-item" data-target="09">09 Voz e Tom</a>
+    <a href="10-merch.html" class="nav-drop-item" data-target="10">10 Merchandise</a>
+  </div>
+</nav>
+
+<section data-sec="07" class="manual-section">
+<div class="page">
+
+<div class="hdr">
+  <span class="hdr-num">07</span>
+  <div class="hdr-title">Motion e Vídeo</div>
+  <div class="hdr-sub">Animações do logo · Lower thirds · Prompts de vídeo e frame estático</div>
+</div>
+
+<!-- ══ 01 PRINCÍPIOS ══ -->
+<div class="blk ac">
+  <div class="blk-inner">
+    <span class="sec-label">01 — Princípios de animação</span>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div>
+        <div class="rule-item"><span class="bullet ok">→</span><span>Entradas lentas — ease-out, nunca linear ou bounce</span></div>
+        <div class="rule-item"><span class="bullet ok">→</span><span>Símbolo entra antes de qualquer texto</span></div>
+        <div class="rule-item"><span class="bullet ok">→</span><span>Hold longo — o elemento respira antes de sair</span></div>
+        <div class="rule-item"><span class="bullet ok">→</span><span>Saída: mesma direção que a entrada, mais rápida</span></div>
+        <div class="rule-item"><span class="bullet ok">→</span><span>Hairline se desenha da esquerda para a direita</span></div>
+        <div class="rule-item"><span class="bullet ok">→</span><span>Tagline entra com letter-spacing comprimindo</span></div>
+      </div>
+      <div>
+        <div class="rule-item"><span class="bullet no">×</span><span>Rotação ou deformação do símbolo A</span></div>
+        <div class="rule-item"><span class="bullet no">×</span><span>Bounce, spring ou qualquer easing elástico</span></div>
+        <div class="rule-item"><span class="bullet no">×</span><span>Glitch ou distorção digital estética</span></div>
+        <div class="rule-item"><span class="bullet no">×</span><span>Dois elementos entrando ao mesmo tempo</span></div>
+        <div class="rule-item"><span class="bullet no">×</span><span>Loop infinito no hold — a pausa é essencial</span></div>
+        <div class="rule-item"><span class="bullet no">×</span><span>Fundo animado mais luminoso que o lock-up</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTROLE ══ -->
+<div class="speed-bar">
+  <span class="speed-lbl">Velocidade</span>
+  <button class="spd-btn on" onclick="setSpd(6,this)">Lento</button>
+  <button class="spd-btn" onclick="setSpd(4,this)">Normal</button>
+  <button class="spd-btn" onclick="setSpd(2.5,this)">Rápido</button>
+  <span class="spd-val" id="spd-val">6s</span>
+  <span style="font-family:var(--mono);font-size:10px;color:var(--text-faint);letter-spacing:.1em;">por ciclo completo</span>
+</div>
+
+<!-- ══ 02 ANIMAÇÕES DO LOGO ══ -->
+<div class="blk ac">
+  <div class="blk-inner" style="padding-bottom:0;">
+    <span class="sec-label">02 — Animações do logo · 4 variações em loop</span>
+    <div class="sec-desc">Cada variação completa um ciclo: entra → hold → sai → pausa → repete. Nos dois modos de cor do sistema.</div>
+  </div>
+
+  <!-- 4 quadrados iguais -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px;padding:16px 40px 0;">
+
+    <!-- A · Rise · Void Black -->
+    <div>
+      <div class="comp r-1-1 void c-y">
+        <div class="lockup">
+          <svg style="animation:A-sym var(--dur) cubic-bezier(.22,1,.36,1) infinite;" width="52" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
+            <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+            <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+            <polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+          </svg>
+          <div class="lk-rule" style="width:52px;background:rgba(255,214,0,.22);margin-top:11px;transform-origin:left;animation:A-rule var(--dur) ease-out infinite;"></div>
+          <div class="lk-tag" style="font-size:7px;letter-spacing:.34em;color:rgba(255,214,0,.48);margin-top:8px;animation:A-tag var(--dur) ease-out infinite;"><span class="tagline-cycle">ANTES DO HYPE.</span></div>
+        </div>
+        <div class="corners"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+        <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:rgba(255,214,0,.25);z-index:3;">A · Rise</div>
+      </div>
+      <div class="piece-label">Rise · Void Black</div>
+    </div>
+
+    <!-- B · Split · Amarelo -->
+    <div>
+      <div class="comp r-1-1 yellow c-b">
+        <div class="lockup">
+          <svg style="animation:B-sym var(--dur) cubic-bezier(.22,1,.36,1) infinite;" width="52" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
+            <polygon fill="#000" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+            <polygon fill="#000" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+            <polygon fill="#000" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+          </svg>
+          <div class="lk-rule" style="width:52px;background:rgba(0,0,0,.22);margin-top:11px;transform-origin:left;animation:B-rule var(--dur) ease-out infinite;"></div>
+          <div class="lk-tag" style="font-size:7px;letter-spacing:.34em;color:rgba(0,0,0,.55);margin-top:8px;animation:B-tag var(--dur) ease-out infinite;"><span class="tagline-cycle">ANTES DO HYPE.</span></div>
+        </div>
+        <div class="corners"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+        <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:rgba(0,0,0,.25);z-index:3;">B · Split</div>
+      </div>
+      <div class="piece-label">Split · Inversão Amarela</div>
+    </div>
+
+    <!-- C · Burn · Meia-noite -->
+    <div>
+      <div class="comp r-1-1 midnight c-bl">
+        <div class="lockup">
+          <svg style="animation:C-sym var(--dur) ease-out infinite;" width="52" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
+            <polygon fill="#4A7FD4" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+            <polygon fill="#4A7FD4" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+            <polygon fill="#4A7FD4" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+          </svg>
+          <div class="lk-rule" style="width:52px;background:rgba(74,127,212,.22);margin-top:11px;animation:C-rule var(--dur) ease-out infinite;"></div>
+          <div class="lk-tag" style="font-size:7px;letter-spacing:.34em;color:rgba(74,127,212,.55);margin-top:8px;animation:C-tag var(--dur) ease-out infinite;"><span class="tagline-cycle">ANTES DO HYPE.</span></div>
+        </div>
+        <div class="corners"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+        <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:rgba(74,127,212,.28);z-index:3;">C · Burn</div>
+      </div>
+      <div class="piece-label">Burn · Meia-noite</div>
+    </div>
+
+    <!-- D · Dissolve · Fundo Claro -->
+    <div>
+      <div class="comp r-1-1 white c-b">
+        <div class="lockup">
+          <svg style="animation:D-sym var(--dur) ease-out infinite;" width="52" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
+            <polygon fill="#000" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+            <polygon fill="#000" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+            <polygon fill="#000" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+          </svg>
+          <div class="lk-rule" style="width:52px;background:rgba(0,0,0,.2);margin-top:11px;animation:D-rule var(--dur) ease-out infinite;"></div>
+          <div class="lk-tag" style="font-size:7px;letter-spacing:.34em;color:rgba(0,0,0,.45);margin-top:8px;animation:D-tag var(--dur) ease-out infinite;"><span class="tagline-cycle">ANTES DO HYPE.</span></div>
+        </div>
+        <div class="corners"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+        <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:rgba(0,0,0,.2);z-index:3;">D · Dissolve</div>
+      </div>
+      <div class="piece-label">Dissolve · Fundo Claro</div>
+    </div>
+
+  </div>
+
+  <!-- Mesmas 4 animações em 16:9 horizontal -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:2px 40px 16px;">
+
+    <!-- Rise · 16:9 · Void -->
+    <div>
+      <div class="comp r-16-9 void c-y">
+        <div class="lockup">
+          <svg style="animation:A-sym var(--dur) cubic-bezier(.22,1,.36,1) infinite;filter:drop-shadow(0 0 6px rgba(255,214,0,.6));" width="68" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
+            <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+            <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+            <polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+          </svg>
+          <div class="lk-rule" style="width:68px;background:rgba(255,214,0,.22);margin-top:12px;transform-origin:left;animation:A-rule var(--dur) ease-out infinite;"></div>
+          <div class="lk-tag" style="font-size:9px;letter-spacing:.34em;color:rgba(255,214,0,.48);margin-top:9px;animation:A-tag var(--dur) ease-out infinite;"><span class="tagline-cycle">ANTES DO HYPE.</span></div>
+        </div>
+        <!-- Metadados rodapé -->
+        <div style="position:absolute;bottom:14px;left:20px;right:20px;display:flex;justify-content:space-between;z-index:3;animation:D-rule var(--dur) ease-out infinite;">
+          <div style="font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.14);">ADA · 2015</div>
+          <div style="font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.14);">ada.art.br</div>
+        </div>
+        <div class="corners"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+      </div>
+      <div class="piece-label">Rise · Horizontal 16:9 · Abertura</div>
+    </div>
+
+    <!-- Burn · 16:9 · Meia-noite -->
+    <div>
+      <div class="comp r-16-9 midnight c-bl">
+        <!-- partículas sutis -->
+        <div style="position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(255,214,0,.2);top:28%;left:18%;animation:drift 7s ease-in-out infinite;"></div>
+        <div style="position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(74,127,212,.3);top:62%;left:76%;animation:drift2 8s ease-in-out 1.5s infinite;"></div>
+        <div class="lockup">
+          <svg style="animation:C-sym var(--dur) ease-out infinite;" width="68" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
+            <polygon fill="#4A7FD4" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+            <polygon fill="#4A7FD4" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+            <polygon fill="#4A7FD4" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+          </svg>
+          <div class="lk-rule" style="width:68px;background:rgba(74,127,212,.22);margin-top:12px;animation:C-rule var(--dur) ease-out infinite;"></div>
+          <div class="lk-tag" style="font-size:9px;letter-spacing:.34em;color:rgba(74,127,212,.55);margin-top:9px;animation:C-tag var(--dur) ease-out infinite;"><span class="tagline-cycle">ANTES DO HYPE.</span></div>
+        </div>
+        <div style="position:absolute;bottom:14px;left:20px;right:20px;display:flex;justify-content:space-between;z-index:3;animation:D-rule var(--dur) ease-out infinite;">
+          <div style="font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.12);">ADA · 2015</div>
+          <div style="font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.12);">ada.art.br</div>
+        </div>
+        <div class="corners"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+      </div>
+      <div class="piece-label">Burn · Horizontal 16:9 · Meia-noite</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ 03 LOWER THIRDS ══ -->
+<div class="blk">
+  <div class="blk-inner" style="padding-bottom:0;">
+    <span class="sec-label">03 — Lower thirds</span>
+    <div class="sec-desc">Quatro variações. Alinhamento preciso — símbolo, divisória e texto na mesma linha base.</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:16px 40px 16px;">
+
+    <!-- LT1: Padrão escuro — rodapé esq — nome + cargo -->
+    <div>
+      <div class="comp r-16-9" style="background:#080808;">
+        <!-- Fundo simulado de vídeo -->
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#060606 0%,#0E0E0E 100%);"></div>
+        <!-- Lower third — alinhado ao rodapé esquerdo -->
+        <div style="
+          position:absolute;
+          bottom:16%;
+          left:6%;
+          z-index:2;
+          animation:LT var(--dur) cubic-bezier(.22,1,.36,1) infinite;
+        ">
+          <!-- Linha horizontal acima -->
+          <div style="
+            height:1px;
+            background:rgba(255,214,0,.25);
+            margin-bottom:8px;
+            animation:LT-line var(--dur) ease-out infinite;
+          "></div>
+          <!-- Símbolo + divisória + texto — todos na mesma linha -->
+          <div style="display:flex;align-items:center;gap:0;">
+            <svg width="20" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+              <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+              <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+              <polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+            </svg>
+            <!-- Linha divisória vertical -->
+            <div style="width:1px;height:28px;background:rgba(255,214,0,.2);margin:0 10px;flex-shrink:0;"></div>
+            <!-- Textos -->
+            <div style="display:flex;flex-direction:column;gap:2px;">
+              <div style="
+                font-family:var(--mono);font-size:13px;
+                letter-spacing:.04em;color:#fff;
+                line-height:1;
+                animation:LT-name var(--dur) ease-out infinite;
+              ">Caio Fazolin</div>
+              <div style="
+                font-family:var(--mono);font-size:9px;
+                letter-spacing:.18em;text-transform:uppercase;
+                color:rgba(255,214,0,.55);line-height:1;
+                animation:LT-role var(--dur) ease-out infinite;
+              ">Diretor Criativo · ADA</div>
+            </div>
+          </div>
+        </div>
+        <div class="corners c-y"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+      </div>
+      <div class="piece-label">Padrão · Escuro · Nome + Cargo</div>
+    </div>
+
+    <!-- LT2: Sobre claro — mesmo alinhamento -->
+    <div>
+      <div class="comp r-16-9 white">
+        <div style="
+          position:absolute;
+          bottom:16%;
+          left:6%;
+          z-index:2;
+          animation:LT var(--dur) cubic-bezier(.22,1,.36,1) infinite;
+        ">
+          <div style="
+            height:1px;background:rgba(0,0,0,.2);
+            margin-bottom:8px;
+            animation:LT-line var(--dur) ease-out infinite;
+          "></div>
+          <div style="display:flex;align-items:center;gap:0;">
+            <svg width="20" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+              <polygon fill="#000" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+              <polygon fill="#000" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+              <polygon fill="#000" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+            </svg>
+            <div style="width:1px;height:28px;background:rgba(0,0,0,.18);margin:0 10px;flex-shrink:0;"></div>
+            <div style="display:flex;flex-direction:column;gap:2px;">
+              <div style="
+                font-family:var(--mono);font-size:13px;
+                letter-spacing:.04em;color:#000;line-height:1;
+                animation:LT-name var(--dur) ease-out infinite;
+              ">Tatiane Gonzalez</div>
+              <div style="
+                font-family:var(--mono);font-size:9px;
+                letter-spacing:.18em;text-transform:uppercase;
+                color:rgba(0,0,0,.45);line-height:1;
+                animation:LT-role var(--dur) ease-out infinite;
+              ">Diretora Criativa · ADA</div>
+            </div>
+          </div>
+        </div>
+        <div class="corners c-b"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+      </div>
+      <div class="piece-label">Sobre Claro · Nome + Cargo</div>
+    </div>
+
+    <!-- LT3: Crédito de obra — topo esquerdo -->
+    <div>
+      <div class="comp r-16-9 void c-y">
+        <div style="
+          position:absolute;
+          top:14%;
+          left:6%;
+          z-index:2;
+          animation:LT var(--dur) cubic-bezier(.22,1,.36,1) infinite;
+        ">
+          <div style="display:flex;align-items:center;gap:0;">
+            <svg width="16" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+              <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+              <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+              <polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+            </svg>
+            <div style="width:1px;height:24px;background:rgba(255,214,0,.2);margin:0 8px;flex-shrink:0;"></div>
+            <div style="display:flex;flex-direction:column;gap:2px;">
+              <div style="
+                font-family:var(--mono);font-size:8px;
+                letter-spacing:.2em;text-transform:uppercase;
+                color:rgba(255,214,0,.45);line-height:1;
+                animation:LT-name var(--dur) ease-out infinite;
+              ">Direção Criativa</div>
+              <div style="
+                font-family:var(--mono);font-size:11px;
+                letter-spacing:.04em;
+                color:rgba(255,255,255,.7);line-height:1;
+                animation:LT-role var(--dur) ease-out infinite;
+              ">Caio Fazolin + Tatiane Gonzalez / ADA</div>
+            </div>
+          </div>
+        </div>
+        <div class="corners"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+      </div>
+      <div class="piece-label">Crédito de Obra · Topo Esquerdo</div>
+    </div>
+
+    <!-- LT4: Meia-noite — URL com linha animada -->
+    <div>
+      <div class="comp r-16-9 midnight c-bl">
+        <div style="
+          position:absolute;
+          bottom:16%;
+          left:6%;
+          z-index:2;
+          animation:LT var(--dur) cubic-bezier(.22,1,.36,1) infinite;
+        ">
+          <div style="display:flex;align-items:center;gap:0;">
+            <svg width="20" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+              <polygon fill="#4A7FD4" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+              <polygon fill="#4A7FD4" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+              <polygon fill="#4A7FD4" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+            </svg>
+            <div style="width:1px;height:28px;background:rgba(74,127,212,.2);margin:0 10px;flex-shrink:0;"></div>
+            <div style="display:flex;flex-direction:column;gap:2px;">
+              <div style="
+                font-family:var(--mono);font-size:8px;
+                letter-spacing:.2em;text-transform:uppercase;
+                color:rgba(74,127,212,.5);line-height:1;
+                animation:LT-name var(--dur) ease-out infinite;
+              ">ADA · São Paulo</div>
+              <div style="
+                font-family:var(--mono);font-size:14px;font-weight:300;
+                letter-spacing:.06em;
+                color:#fff;line-height:1;
+                animation:LT-role var(--dur) ease-out infinite;
+              ">ada.art.br</div>
+            </div>
+          </div>
+          <div style="
+            height:1px;background:rgba(74,127,212,.3);
+            margin-top:8px;
+            animation:LT-line var(--dur) ease-out infinite;
+          "></div>
+        </div>
+        <div class="corners"><div class="pc tl"></div><div class="pc tr"></div><div class="pc bl"></div><div class="pc br"></div></div>
+      </div>
+      <div class="piece-label">URL · Meia-noite · Linha Animada</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ 04 PROMPTS DE VÍDEO ══ -->
+<div class="blk ac">
+  <div class="blk-inner">
+    <span class="sec-label">04 — Prompts · Freepik</span>
+    <div class="sec-desc" style="margin-bottom:20px;">Cada aplicação tem dois prompts: um para o <strong style="color:rgba(255,214,0,.6);">frame estático</strong> (imagem, capa, cartaz) e um para a <strong style="color:rgba(255,214,0,.6);">animação</strong> (vídeo de background). O lock-up entra no After Effects sobre o vídeo gerado.</div>
+
+    <div style="display:flex;flex-direction:column;gap:2px;">
+
+      <!-- Prompt 1: Partículas -->
+      <div style="border:1px solid var(--border);overflow:hidden;">
+        <div style="background:var(--bg3);padding:14px 20px;border-bottom:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.6);">Background · Partículas de luz</div>
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--text-faint);">Reel · Abertura</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:16px 20px;gap:16px;">
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Frame estático</div>
+            <div id="p1s" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Sparse golden yellow light particles suspended in deep black void space, ultra high contrast, asymmetric composition, some particles in sharp focus with light trails, cinematic grain, meditative atmosphere, no objects, pure light field, dark negative space on upper third for logo</div>
+            <button onclick="cp('p1s',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Animação (vídeo)</div>
+            <div id="p1v" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Abstract slow motion video of golden light particles drifting through deep black void space, ultra slow movement, sparse bright yellow points of light floating asymmetrically, subtle light trails, deep black background dominates 85% of frame, cinematic grain, no fast movement, meditative pace, seamless loop suitable</div>
+            <button onclick="cp('p1v',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prompt 2: São Paulo -->
+      <div style="border:1px solid var(--border-dim);overflow:hidden;">
+        <div style="background:var(--bg3);padding:14px 20px;border-bottom:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.5);">Urbano · São Paulo noturno</div>
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--text-faint);">Cartaz · Reel · Capa</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;padding:16px 20px;gap:16px;">
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Frame estático</div>
+            <div id="p2s" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Aerial night photography of São Paulo megacity, brutalist concrete towers casting geometric shadows, a single vertical beam of intense golden yellow light rising from city center pointing straight up, low fog settling between skyscrapers, deep black sky, cinematic grain, extreme high contrast, muted desaturated palette with only one intense yellow light beam, vast dark negative space in upper corners</div>
+            <button onclick="cp('p2s',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Animação (vídeo)</div>
+            <div id="p2v" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Slow cinematic aerial video of São Paulo megacity at night, camera slowly drifting forward over urban grid, brutalist towers in darkness, single vertical golden light beam visible at center of city, low fog between buildings, very slow camera movement, cinematic grain, high contrast, muted palette with only golden yellow accent, no fast cuts, meditative pace</div>
+            <button onclick="cp('p2v',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prompt 3: Abstrato / Geometria -->
+      <div style="border:1px solid var(--border-dim);overflow:hidden;">
+        <div style="background:var(--bg3);padding:14px 20px;border-bottom:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.5);">Abstrato · Geometria dissolvendo</div>
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--text-faint);">Reel · Background imersivo</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;padding:16px 20px;gap:16px;">
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Frame estático</div>
+            <div id="p3s" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Abstract light painting photography of triangular geometric forms dissolving into particles, deep black void background, fragments of intense golden yellow and deep navy blue light, long exposure capturing geometric shapes breaking apart, the letter A geometry deconstructed into light trails, ultra high contrast, minimal composition, no objects or people</div>
+            <button onclick="cp('p3s',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Animação (vídeo)</div>
+            <div id="p3v" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Abstract slow motion video of geometric triangular light forms slowly dissolving into particles in deep black void, golden yellow light gradually fragmenting into thousands of floating points, disintegration extremely slow and graceful, particles drift outward and fade, high contrast, cinematic grain, the geometry of the letter A deconstructing into light, seamless loop</div>
+            <button onclick="cp('p3v',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+</section>
+
+<div style="background:#0A0A0A;padding:32px 40px;text-align:center;border-top:1px solid rgba(255,214,0,.06);">
+  <div style="font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.12);">ADA · Manual de Marca · v1.0 · Marco 2026 · ada.art.br</div>
+</div>
+
+<script src="js/ada.js"></script>
+</body>
+</html>

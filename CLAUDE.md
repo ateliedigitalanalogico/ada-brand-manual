@@ -17,31 +17,92 @@ Você não executa pedidos mecânicos. Você constrói sistemas coesos, defende 
 
 **Manual de Marca da ADA — Ateliê Digital Analógico**
 
-Site estático em HTML/CSS/JS puro. Sem frameworks. Sem bundlers. Dependências externas apenas: Google Fonts.
+Site estático em HTML/CSS/JS puro. Sem frameworks. Sem bundlers. Dependências externas apenas: Google Fonts e html2canvas.
 
 ### Repositório
 
-GitHub: `ateliedigitalanalogico/ada-brand-manual` (master)
+GitHub: `ateliedigitalanalogico/ada-brand-manual` (main)
 
-### Estrutura de pastas
+### Estrutura de arquivos
 
 ```
 ada-manual/
-├── index.html                   ← site completo (~3900 linhas)
+├── index.html              ← Capa + Índice (ponto de entrada)
+├── 01-logo.html            ← Seção 01 — Logo e Wordmark
+├── 02-tipografia.html      ← Seção 02 — Tipografia
+├── 03-paleta.html          ← Seção 03 — Paleta de Cores
+├── 04-grid.html            ← Seção 04 — Grid e Espaçamento
+├── 05-imagetica.html       ← Seção 05 — Linguagem Imagética
+├── 06-impressos.html       ← Seção 06 — Usos Impressos
+├── 07-motion.html          ← Seção 07 — Motion e Vídeo
+├── 08-redes.html           ← Seção 08 — Redes Sociais
+├── 09-voz.html             ← Seção 09 — Voz e Tom
+├── 10-merch.html           ← Seção 10 — Merchandise
+├── split_pages.py          ← Script que gera as páginas a partir do index.html original
 ├── css/
-│   └── system.css               ← variáveis, layout, componentes
+│   └── system.css          ← Variáveis, layout, componentes — compartilhado por todas as páginas
 ├── js/
-│   ├── ada.js                   ← menu dropdown, scroll spy, download mocks, taglines
-│   └── merch.js                 ← scripts da seção 10 (merchandise)
+│   ├── ada.js              ← Scripts globais: nav, taglines, dlMock, moodboard, emails
+│   └── merch.js            ← Scripts exclusivos da seção 10
 └── assets/
-    ├── logo/WORDMARK.svg        ← wordmark original — não modificar
-    └── 44 imagens .jpg          ← 5 territórios × subgrupos × 4 variações
+    ├── logo/WORDMARK.svg   ← Wordmark original — não modificar
+    ├── 44 imagens .jpg     ← 5 territórios × subgrupos × 4 variações
+    └── ADA_imersivo_01-08.png ← 8 imagens do território Imersivo (01-04: dourado, 05-08: meia-noite)
 ```
 
 ### Dependências externas
 
 - Google Fonts (DM Mono, Syne, Cormorant Garamond)
-- html2canvas 1.4.1 (CDN) — para download de mockups como PNG
+- html2canvas 1.4.1 (CDN) — download de mockups como PNG
+
+---
+
+## Arquitetura multi-página
+
+### Como o split funciona
+
+Cada seção vive em seu próprio arquivo HTML. Todos compartilham:
+- `css/system.css` — via `<link>`
+- `js/ada.js` — via `<script>` no final do `<body>`
+- Bloco SVG `<defs>` com `#ada-sym` e `#ada-wm` — inline em cada página
+- Mesmo `<nav>` — item ativo pré-marcado com classe `.active` no HTML
+
+### Regenerar as páginas
+
+Se você modificar o `index.html` original (que contém todas as seções), rode:
+
+```bash
+python split_pages.py
+```
+
+Isso recria `index.html` (capa+índice) e todos os `XX-slug.html`.
+
+**Atenção:** `split_pages.py` sobrescreve todos os arquivos gerados. Edições diretas nos arquivos de seção serão perdidas. Edite sempre o `index.html` de origem, depois rode o script.
+
+### Navegação entre páginas
+
+Links de navegação usam URLs relativas: `href="01-logo.html"`, `href="index.html"` etc. Não há `#anchor` para seções — cada seção é uma página.
+
+O item ativo no nav é definido em tempo de build (pelo script), não por JavaScript. Não há scroll spy.
+
+---
+
+## SVG reutilizável — `<symbol>/<use>`
+
+Todos os `<svg>` do símbolo A e wordmark usam o padrão `<use href="#ada-sym">` com `currentColor`:
+
+```html
+<!-- Símbolo amarelo padrão -->
+<svg width="64" style="color:#FFD600"><use href="#ada-sym"/></svg>
+
+<!-- Símbolo meia-noite -->
+<svg width="64" style="color:#4A7FD4"><use href="#ada-sym"/></svg>
+
+<!-- Wordmark amarelo -->
+<svg width="180" style="color:#FFD600"><use href="#ada-wm"/></svg>
+```
+
+Os `<defs>` estão inline no início do `<body>` de cada página.
 
 ---
 
@@ -72,15 +133,15 @@ ada-manual/
 
 ## Símbolo A — geometria intocável
 
-```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126">
-  <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
-  <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
-  <polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
-</svg>
+```html
+<symbol id="ada-sym" viewBox="225 225 126 126">
+  <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+  <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+  <polygon fill="currentColor" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+</symbol>
 ```
 
-Nunca redesenhar, nunca como `<img>`, mínimo 32px, sempre SVG inline.
+Nunca redesenhar, nunca como `<img>`, mínimo 32px, sempre SVG inline via `<use href="#ada-sym">`.
 
 ---
 
@@ -94,50 +155,88 @@ Nunca redesenhar, nunca como `<img>`, mínimo 32px, sempre SVG inline.
 
 ---
 
-## Os dois modos de cor
+## Os quatro modos de cor (seção 01)
 
-| Modo | Fundo | Símbolo |
-|---|---|---|
-| Amarelo (padrão) | `#000000` | `#FFD600` |
-| Meia-noite | `#0A0F1E` | `#4A7FD4` |
+| Modo | Classe CSS | Fundo | Elemento |
+|---|---|---|---|
+| Padrão | — | `#000000` | `#FFD600` |
+| Inversão | `.inversao` | `#FFD600` | `#000000` |
+| Monocromático | — | `#FFFFFF` | `#000000` |
+| Meia-noite | — | `#0A0F1E` | `#4A7FD4` |
 
-Nunca coexistem na mesma peça.
+Grid de 4 colunas simétricas: `grid-template-columns: 1fr 1fr 1fr 1fr`
 
 ---
 
 ## Banco de taglines
 
 ```javascript
-const TAGLINES = [
-  'Antes da IA.', 'Antes do prompt.', 'Antes do imersivo.',
-  'Antes do mapping.', 'Antes do hype.', 'Antes do algoritmo.',
-  'Antes da experiência.', 'Antes do futuro.',
+const TAGS = [
+  'ANTES DA IA.', 'ANTES DO PROMPT.', 'ANTES DO IMERSIVO.',
+  'ANTES DO MAPPING.', 'ANTES DO HYPE.', 'ANTES DO ALGORITMO.',
+  'ANTES DA EXPERIÊNCIA.', 'ANTES DO FUTURO.',
 ];
 ```
 
-Generativas — trocam em ciclo. Sincronizadas entre todas as instâncias.
+- Capa: crossfade entre `#ctag-a` e `#ctag-b`
+- Seção 07: classe `.tagline-cycle` em sincronia com a animação CSS `--dur`
 
 ---
 
 ## Seções — 10 seções independentes
 
-Cada seção é um `<section data-sec="XX">` com hdr → content → ftr.
-
-| Seção | Nome | Status |
-|---|---|---|
-| 01 | Logo e Wordmark | ✅ |
-| 02 | Tipografia | ✅ |
-| 03 | Paleta de Cores | ✅ |
-| 04 | Grid e Espaçamento | ✅ |
-| 05 | Linguagem Imagética | ✅ |
-| 06 | Usos Impressos | ✅ |
-| 07 | Motion e Vídeo | ✅ |
-| 08 | Redes Sociais | ✅ |
-| 09 | Voz e Tom | ✅ |
-| 10 | Merchandise | ✅ |
-| 11 | Aplicações Especiais | ⏳ Adiada |
+| Seção | Arquivo | Nome | Status |
+|---|---|---|---|
+| 01 | 01-logo.html | Logo e Wordmark | ✅ |
+| 02 | 02-tipografia.html | Tipografia | ✅ |
+| 03 | 03-paleta.html | Paleta de Cores | ✅ |
+| 04 | 04-grid.html | Grid e Espaçamento | ✅ |
+| 05 | 05-imagetica.html | Linguagem Imagética | ✅ |
+| 06 | 06-impressos.html | Usos Impressos | ✅ |
+| 07 | 07-motion.html | Motion e Vídeo | ✅ |
+| 08 | 08-redes.html | Redes Sociais | ✅ |
+| 09 | 09-voz.html | Voz e Tom | ✅ |
+| 10 | 10-merch.html | Merchandise | ✅ |
+| 11 | — | Aplicações Especiais | ⏳ Adiada |
 
 **Seção 11 — nota:** aguarda imagens reais dos projetos autorais.
+
+### Estrutura interna de cada seção
+
+```html
+<section data-sec="XX" class="manual-section">
+  <div class="page">
+    <div class="hdr"> ... </div>
+    <!-- conteúdo da seção -->
+    <div class="sec-ftr"> ... </div>
+  </div>
+</section>
+```
+
+---
+
+## Scripts — ada.js (v2.0)
+
+Funções globais disponíveis em todas as páginas:
+
+| Função | Uso |
+|---|---|
+| `showP(name, btn)` | Alterna painéis `.ppanel` (seção 01) |
+| `cp(id, btn)` | Copia texto de elemento pelo ID |
+| `cpPrompt(id, btn)` | Copia prompt com feedback de cor |
+| `dlMock(elId, filename, w)` | Download PNG via html2canvas |
+| `mbRegen()` | Embaralha moodboard (seção 05) |
+| `mbDownload()` | Download PNG do moodboard |
+| `setSpd(sec, btn)` | Altera velocidade da animação (seção 07) |
+| `startTagCycle(durSec)` | Inicia ciclo de taglines `.tagline-cycle` |
+| `carouselMove(dir)` | Navega no carrossel (seção 08) |
+| `carouselGo(idx)` | Vai para slide específico |
+| `showEmail(v, btn)` | Alterna versão de assinatura (seção 08) |
+| `copyEmail()` | Copia HTML da assinatura padrão |
+| `copyEmailCor()` | Copia HTML da assinatura escura |
+| `copyEmailImagem()` | Copia HTML da assinatura meia-noite |
+
+**Nota sobre scroll spy:** removido na v2.0. O item ativo no nav é definido em tempo de build pelo `split_pages.py`.
 
 ---
 
@@ -148,6 +247,8 @@ Cada seção é um `<section data-sec="XX">` com hdr → content → ftr.
 2. **Nomes dos fundadores em bios curtas** — não aparecem em bios de 150 caracteres (Instagram). Aparecem em: site/about, proposta, press release, créditos.
 
 3. **Wordmark em peças pequenas** — nunca abaixo de 240px / 60mm. Usar o símbolo A isolado.
+
+4. **Arquivos gerados** — nunca editar `01-logo.html` ... `10-merch.html` diretamente. Sempre editar o `index.html` de origem e rodar `split_pages.py`.
 
 ---
 
@@ -166,17 +267,13 @@ Plataforma criativa fundada em 2015 por Caio Fazolin e Tatiane Gonzalez.
 
 ---
 
-## Navegação
-
-- Menu dropdown sticky com scroll spy (atualiza nome da seção atual)
-- 10 itens individuais no dropdown (01–10)
-- JS em `ada.js`: toggle dropdown, scroll spy com `data-sec`, taglines animadas
-
 ## Features implementadas
 
 - **Download de mockups**: avatares e capas de redes sociais via `html2canvas` → PNG na resolução correta
 - **Moodboard**: mosaic grid (mondrian) 6×6, só imagens, sem botões
-- **Territórios**: grid 3×2 com placeholder "Em breve" no 6º slot
+- **Territórios**: 13 grupos com prompt copiável e 4 imagens cada, antes do moodboard
+- **Imersivo dourado** (pr-g09): 4 imagens ADA_imersivo_01-04.png
+- **Imersivo meia-noite** (pr-g09b): 4 imagens ADA_imersivo_05-08.png
 - **Bios**: Instagram, LinkedIn, GitHub (seção 09)
 
 ## Specs de redes sociais (verificados Mar 2026)
@@ -192,11 +289,11 @@ Plataforma criativa fundada em 2015 por Caio Fazolin e Tatiane Gonzalez.
 ## Próximos passos
 
 1. Deploy: GitHub Pages, Vercel ou Netlify
-2. Otimizar: minificar, meta tags, favicon, OG image
+2. Otimizar: minificar, meta tags OG com imagem, favicon
 3. Seção 11 quando houver imagens reais dos projetos autorais
 4. Revisar responsividade mobile
 
 ---
 
-*ADA Manual de Marca · v1.0 · Março 2026*
+*ADA Manual de Marca · v2.0 · Março 2026*
 *Repo: ateliedigitalanalogico/ada-brand-manual*
