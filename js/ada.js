@@ -487,10 +487,11 @@ function mbDownload() {
 
 
 /* ------------------------------------------------------------
-   Infinite scroll — carregamento progressivo das secoes
-   Ao aproximar do fim de uma pagina, a proxima secao e
-   buscada via fetch() e inserida antes do rodape.
-   URL e item ativo do nav atualizam conforme o scroll.
+   Infinite scroll bidirecional
+   - Scroll para baixo: carrega proxima secao antes do rodape
+   - Scroll para cima:  carrega secao anterior acima do topo,
+     compensando o deslocamento de scroll para o usuario nao saltar
+   - URL e nav atualizam via IntersectionObserver (scroll spy)
    ------------------------------------------------------------ */
 
 (function() {
@@ -516,19 +517,28 @@ function mbDownload() {
     if (PAGES[pi].href === filename) { currentIdx = pi; break; }
   }
 
-  var nextIdx = currentIdx + 1;
-  var loading  = false;
+  var nextIdx    = currentIdx + 1;   // proxima secao a carregar (baixo)
+  var prevIdx    = currentIdx - 1;   // secao anterior a carregar (cima)
+  var loadingDown = false;
+  var loadingUp   = false;
 
-  // Precisamos do rodape para inserir secoes antes dele
   var footer = document.getElementById('page-footer');
   if (!footer) return;
 
-  // Sentinel — elemento invisivel antes do rodape; dispara o fetch ao entrar na viewport
-  var sentinel = document.createElement('div');
-  sentinel.style.height = '1px';
-  footer.parentNode.insertBefore(sentinel, footer);
+  // ── Sentinel inferior — antes do rodape, dispara fetch para baixo ──
+  var sentBottom = document.createElement('div');
+  sentBottom.style.height = '1px';
+  footer.parentNode.insertBefore(sentBottom, footer);
 
-  // ── Scroll spy — atualiza URL e nav conforme a secao ativa ──
+  // ── Sentinel superior — antes da primeira section, dispara fetch para cima ──
+  var firstSection = document.querySelector('section[data-sec]');
+  var sentTop = document.createElement('div');
+  sentTop.style.height = '1px';
+  if (firstSection) {
+    firstSection.parentNode.insertBefore(sentTop, firstSection);
+  }
+
+  // ── Scroll spy — atualiza URL e nav conforme a secao mais visivel ──
   var spyObs = new IntersectionObserver(function(entries) {
     var best = null;
     for (var i = 0; i < entries.length; i++) {
@@ -546,13 +556,9 @@ function mbDownload() {
     }
     if (!page) return;
 
-    // Atualizar URL sem empilhar historico
-    var newUrl = page.href;
-    if (window.location.pathname.indexOf(newUrl) < 0) {
-      history.replaceState(null, '', newUrl);
+    if (window.location.pathname.indexOf(page.href) < 0) {
+      history.replaceState(null, '', page.href);
     }
-
-    // Atualizar item ativo no dropdown
     document.querySelectorAll('.nav-drop-item').forEach(function(a) {
       a.classList.toggle('active', a.getAttribute('data-target') === sec);
     });
@@ -561,64 +567,100 @@ function mbDownload() {
 
   }, { threshold: 0.15 });
 
-  // Observar secao ja presente na pagina
-  var initialSec = document.querySelector('section[data-sec]');
-  if (initialSec) spyObs.observe(initialSec);
+  if (firstSection) spyObs.observe(firstSection);
 
-  // ── Fetch da proxima pagina ──────────────────────────────────
-  function loadNext() {
-    if (loading || nextIdx >= PAGES.length) return;
-    loading = true;
-
-    var page = PAGES[nextIdx];
-
-    fetch(page.href)
-      .then(function(r) { return r.text(); })
-      .then(function(html) {
-        var parser  = new DOMParser();
-        var doc     = parser.parseFromString(html, 'text/html');
-        var section = doc.querySelector('section[data-sec]');
-        if (!section) { loading = false; return; }
-
-        // Inserir secao antes do sentinel (que esta antes do rodape)
-        footer.parentNode.insertBefore(section, sentinel);
-
-        // Observar nova secao para o scroll spy
-        spyObs.observe(section);
-
-        // Secao 07: reiniciar ciclo de taglines se elementos .tagline-cycle presentes
-        if (section.querySelector('.tagline-cycle')) {
-          startTagCycle(6);
-        }
-
-        // Secao 10: canvas e merch.js (injetados dinamicamente)
-        if (page.num === '10') {
-          if (!document.getElementById('render-canvas')) {
-            var canvas = document.createElement('canvas');
-            canvas.id    = 'render-canvas';
-            canvas.style.display = 'none';
-            footer.parentNode.insertBefore(canvas, footer);
-          }
-          if (!document.querySelector('script[src="js/merch.js"]')) {
-            var s  = document.createElement('script');
-            s.src  = 'js/merch.js';
-            document.body.appendChild(s);
-          }
-        }
-
-        nextIdx++;
-        loading = false;
-      })
-      .catch(function() { loading = false; });
+  // ── Helper: injetar section e ativar funcionalidades dependentes ──
+  function activateSection(section, page) {
+    spyObs.observe(section);
+    if (section.querySelector('.tagline-cycle')) startTagCycle(6);
+    if (page.num === '10') {
+      if (!document.getElementById('render-canvas')) {
+        var canvas = document.createElement('canvas');
+        canvas.id = 'render-canvas';
+        canvas.style.display = 'none';
+        footer.parentNode.insertBefore(canvas, footer);
+      }
+      if (!document.querySelector('script[src="js/merch.js"]')) {
+        var s = document.createElement('script');
+        s.src = 'js/merch.js';
+        document.body.appendChild(s);
+      }
+    }
   }
 
-  // ── IntersectionObserver no sentinel (margem de 800px) ──────
-  var sentObs = new IntersectionObserver(function(entries) {
+  // ── Fetch e injecao de secao ──────────────────────────────────
+  function fetchSection(href, callback) {
+    fetch(href)
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var section = doc.querySelector('section[data-sec]');
+        callback(section);
+      })
+      .catch(function() { callback(null); });
+  }
+
+  // ── Carregar proxima secao (scroll para baixo) ────────────────
+  function loadDown() {
+    if (loadingDown || nextIdx >= PAGES.length) return;
+    loadingDown = true;
+    var page = PAGES[nextIdx];
+
+    fetchSection(page.href, function(section) {
+      if (!section) { loadingDown = false; return; }
+      footer.parentNode.insertBefore(section, sentBottom);
+      activateSection(section, page);
+      nextIdx++;
+      loadingDown = false;
+    });
+  }
+
+  // ── Carregar secao anterior (scroll para cima) ─────────────────
+  // Ao inserir conteudo acima do scroll atual, o browser desloca a
+  // pagina. Compensamos ajustando window.scrollY pelo tamanho inserido.
+  function loadUp() {
+    if (loadingUp || prevIdx < 1) return;  // indice 0 = capa, nao carregamos acima
+    loadingUp = true;
+    var page = PAGES[prevIdx];
+
+    fetchSection(page.href, function(section) {
+      if (!section) { loadingUp = false; return; }
+
+      // Capturar posicao atual antes da insercao
+      var heightBefore = document.body.scrollHeight;
+      var scrollBefore = window.scrollY;
+
+      // Inserir a nova secao antes do sentinel de topo
+      sentTop.parentNode.insertBefore(section, sentTop);
+
+      // Mover o sentinel de topo para ficar antes da secao recem inserida
+      section.parentNode.insertBefore(sentTop, section);
+
+      // Compensar deslocamento: manter o usuario na mesma posicao visual
+      var added = document.body.scrollHeight - heightBefore;
+      window.scrollTo(0, scrollBefore + added);
+
+      activateSection(section, page);
+      prevIdx--;
+      loadingUp = false;
+    });
+  }
+
+  // ── Observers ────────────────────────────────────────────────
+  var obsDown = new IntersectionObserver(function(entries) {
     for (var i = 0; i < entries.length; i++) {
-      if (entries[i].isIntersecting) { loadNext(); break; }
+      if (entries[i].isIntersecting) { loadDown(); break; }
+    }
+  }, { rootMargin: '800px' });
+  obsDown.observe(sentBottom);
+
+  var obsUp = new IntersectionObserver(function(entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) { loadUp(); break; }
     }
   }, { rootMargin: '800px' });
 
-  sentObs.observe(sentinel);
+  // So observar topo se ha secoes anteriores (prevIdx >= 1)
+  if (prevIdx >= 1) obsUp.observe(sentTop);
 
 })();
