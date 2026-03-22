@@ -1,6 +1,6 @@
 /* ============================================================
    ADA - Manual de Marca - Scripts Globais
-   v2.0 - Arquitetura multi-pagina
+   v2.1 - Arquitetura multi-pagina + infinite scroll
    ============================================================ */
 
 
@@ -484,3 +484,141 @@ function mbDownload() {
       alert('Erro ao gerar imagem. Verifique CORS das imagens.');
     });
 }
+
+
+/* ------------------------------------------------------------
+   Infinite scroll — carregamento progressivo das secoes
+   Ao aproximar do fim de uma pagina, a proxima secao e
+   buscada via fetch() e inserida antes do rodape.
+   URL e item ativo do nav atualizam conforme o scroll.
+   ------------------------------------------------------------ */
+
+(function() {
+
+  var PAGES = [
+    { num: 'cover', href: 'index.html',        title: 'Capa'          },
+    { num: '01',    href: '01-logo.html',       title: '01 Logo'       },
+    { num: '02',    href: '02-tipografia.html', title: '02 Tipografia' },
+    { num: '03',    href: '03-paleta.html',     title: '03 Paleta'     },
+    { num: '04',    href: '04-grid.html',       title: '04 Grid'       },
+    { num: '05',    href: '05-imagetica.html',  title: '05 Imagetica'  },
+    { num: '06',    href: '06-impressos.html',  title: '06 Impressos'  },
+    { num: '07',    href: '07-motion.html',     title: '07 Motion'     },
+    { num: '08',    href: '08-redes.html',      title: '08 Redes'      },
+    { num: '09',    href: '09-voz.html',        title: '09 Voz'        },
+    { num: '10',    href: '10-merch.html',      title: '10 Merch'      },
+  ];
+
+  // Determinar pagina atual pelo nome do arquivo na URL
+  var filename = (window.location.pathname.split('/').pop()) || 'index.html';
+  var currentIdx = 0;
+  for (var pi = 0; pi < PAGES.length; pi++) {
+    if (PAGES[pi].href === filename) { currentIdx = pi; break; }
+  }
+
+  var nextIdx = currentIdx + 1;
+  var loading  = false;
+
+  // Precisamos do rodape para inserir secoes antes dele
+  var footer = document.getElementById('page-footer');
+  if (!footer) return;
+
+  // Sentinel — elemento invisivel antes do rodape; dispara o fetch ao entrar na viewport
+  var sentinel = document.createElement('div');
+  sentinel.style.height = '1px';
+  footer.parentNode.insertBefore(sentinel, footer);
+
+  // ── Scroll spy — atualiza URL e nav conforme a secao ativa ──
+  var spyObs = new IntersectionObserver(function(entries) {
+    var best = null;
+    for (var i = 0; i < entries.length; i++) {
+      var e = entries[i];
+      if (e.isIntersecting && (!best || e.intersectionRatio > best.intersectionRatio)) {
+        best = e;
+      }
+    }
+    if (!best) return;
+
+    var sec = best.target.getAttribute('data-sec');
+    var page = null;
+    for (var j = 0; j < PAGES.length; j++) {
+      if (PAGES[j].num === sec) { page = PAGES[j]; break; }
+    }
+    if (!page) return;
+
+    // Atualizar URL sem empilhar historico
+    var newUrl = page.href;
+    if (window.location.pathname.indexOf(newUrl) < 0) {
+      history.replaceState(null, '', newUrl);
+    }
+
+    // Atualizar item ativo no dropdown
+    document.querySelectorAll('.nav-drop-item').forEach(function(a) {
+      a.classList.toggle('active', a.getAttribute('data-target') === sec);
+    });
+    var navCurrent = document.getElementById('nav-current');
+    if (navCurrent) navCurrent.textContent = page.title;
+
+  }, { threshold: 0.15 });
+
+  // Observar secao ja presente na pagina
+  var initialSec = document.querySelector('section[data-sec]');
+  if (initialSec) spyObs.observe(initialSec);
+
+  // ── Fetch da proxima pagina ──────────────────────────────────
+  function loadNext() {
+    if (loading || nextIdx >= PAGES.length) return;
+    loading = true;
+
+    var page = PAGES[nextIdx];
+
+    fetch(page.href)
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        var parser  = new DOMParser();
+        var doc     = parser.parseFromString(html, 'text/html');
+        var section = doc.querySelector('section[data-sec]');
+        if (!section) { loading = false; return; }
+
+        // Inserir secao antes do sentinel (que esta antes do rodape)
+        footer.parentNode.insertBefore(section, sentinel);
+
+        // Observar nova secao para o scroll spy
+        spyObs.observe(section);
+
+        // Secao 07: reiniciar ciclo de taglines se elementos .tagline-cycle presentes
+        if (section.querySelector('.tagline-cycle')) {
+          startTagCycle(6);
+        }
+
+        // Secao 10: canvas e merch.js (injetados dinamicamente)
+        if (page.num === '10') {
+          if (!document.getElementById('render-canvas')) {
+            var canvas = document.createElement('canvas');
+            canvas.id    = 'render-canvas';
+            canvas.style.display = 'none';
+            footer.parentNode.insertBefore(canvas, footer);
+          }
+          if (!document.querySelector('script[src="js/merch.js"]')) {
+            var s  = document.createElement('script');
+            s.src  = 'js/merch.js';
+            document.body.appendChild(s);
+          }
+        }
+
+        nextIdx++;
+        loading = false;
+      })
+      .catch(function() { loading = false; });
+  }
+
+  // ── IntersectionObserver no sentinel (margem de 800px) ──────
+  var sentObs = new IntersectionObserver(function(entries) {
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].isIntersecting) { loadNext(); break; }
+    }
+  }, { rootMargin: '800px' });
+
+  sentObs.observe(sentinel);
+
+})();

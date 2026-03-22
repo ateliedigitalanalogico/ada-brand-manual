@@ -86,7 +86,7 @@ SVG_DEFS = '''\
 </svg>'''
 
 FOOTER_HTML = '''\
-<div style="background:#0A0A0A;padding:32px 40px;text-align:center;border-top:1px solid rgba(255,214,0,.06);">
+<div id="page-footer" style="background:#0A0A0A;padding:32px 40px;text-align:center;border-top:1px solid rgba(255,214,0,.06);">
   <div style="font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.12);">ADA · Manual de Marca · v1.0 · Marco 2026 · ada.art.br</div>
 </div>'''
 
@@ -129,11 +129,28 @@ def nav_html(active_num):
     )
 
 # ---------------------------------------------------------------------------
-# Extrair secoes do index.html
+# Extrair secoes do arquivo fonte (_source.html)
+#
+# Fluxo de edicao:
+#   1. Edite _source.html (arquivo com todas as <section>)
+#   2. python split_pages.py  → gera index.html (capa+indice) + XX-slug.html
+#   3. Commite _source.html + todos os arquivos gerados
+#
+# _source.html nunca e sobrescrito por este script.
 # ---------------------------------------------------------------------------
-src = read(os.path.join(BASE, 'index.html'))
+SOURCE_FILE = os.path.join(BASE, '_source.html')
+if not os.path.exists(SOURCE_FILE):
+    print('ERRO: _source.html nao encontrado.')
+    print('Crie _source.html com o conteudo completo do manual (todas as sections).')
+    sys.exit(1)
+
+src = read(SOURCE_FILE)
 lines = src.splitlines(keepends=True)
-print(f'index.html: {len(lines)} linhas')
+print(f'_source.html: {len(lines)} linhas')
+
+if '<section data-sec=' not in src:
+    print('ERRO: _source.html nao contem secoes <section data-sec="XX">.')
+    sys.exit(1)
 
 # Localizar <section data-sec="XX"> e </section>
 sec_open  = {}  # num -> linha 0-based
