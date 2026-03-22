@@ -1,18 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-split_pages.py - ADA Manual de Marca
-Divide index.html em paginas independentes por secao.
-Saida: index.html (capa+indice), 01-logo.html ... 10-merch.html
+build/split_pages.py - ADA Manual de Marca
+Divide _source.html em paginas independentes por secao.
+
+Fluxo de edicao:
+  1. Edite _source.html (arquivo mestre com todas as <section>)
+  2. python build/split_pages.py  (ou cd build && python split_pages.py)
+  3. Commite tudo
+
+Saida:
+  ../index.html           <- capa + indice (raiz do site)
+  ../pages/01-logo.html   <- secoes 01-10
 """
 
 import re, os, sys
 
-# Forcar UTF-8 no stdout (Windows)
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BUILD     = os.path.dirname(os.path.abspath(__file__))   # .../ada-manual/build/
+ROOT      = os.path.dirname(BUILD)                        # .../ada-manual/
+PAGES_DIR = os.path.join(ROOT, 'pages')
+
+os.makedirs(PAGES_DIR, exist_ok=True)
 
 def read(path):
     with open(path, encoding='utf-8') as f:
@@ -21,7 +32,7 @@ def read(path):
 def write(path, content):
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
-    print('  OK', os.path.basename(path))
+    print('  OK', os.path.relpath(path, ROOT))
 
 # ---------------------------------------------------------------------------
 # Mapa de secoes
@@ -39,9 +50,6 @@ SECTIONS = [
     ('10', 'merch',      '10 Merchandise'),
 ]
 
-SLUG  = {num: slug  for num, slug, _     in SECTIONS}
-TITLE = {num: title for num, slug, title in SECTIONS}
-
 NAV_SHORT = {
     'cover': 'Capa',
     '01': '01 Logo', '02': '02 Tipografia', '03': '03 Paleta', '04': '04 Grid',
@@ -50,28 +58,33 @@ NAV_SHORT = {
 }
 
 # ---------------------------------------------------------------------------
-# Blocos HTML reutilizaveis
+# Blocos HTML compartilhados
+# context='root'  -> caminhos relativos a raiz  (css/, js/, assets/)
+# context='pages' -> caminhos relativos a pages/ (../css/, ../js/, ../assets/)
 # ---------------------------------------------------------------------------
-HEAD_COMMON = '''\
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#000000">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/system.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>'''
+def head_common(context='root'):
+    base = '../' if context == 'pages' else ''
+    return (
+        '<meta charset="UTF-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        '<meta name="theme-color" content="#000000">\n'
+        '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
+        '<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500'
+        '&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400'
+        '&display=swap" rel="stylesheet">\n'
+        f'<link rel="stylesheet" href="{base}css/system.css">\n'
+        '<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>'
+    )
 
 SVG_DEFS = '''\
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
   <defs>
-    <!-- ADA Symbol A - use with style="color:XXX" on the <svg> wrapper -->
     <symbol id="ada-sym" viewBox="225 225 126 126">
       <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
       <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
       <polygon fill="currentColor" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
     </symbol>
-    <!-- ADA Wordmark - A.D.A - use with style="color:XXX" on the <svg> wrapper -->
     <symbol id="ada-wm" viewBox="225 225 414 126">
       <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
       <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
@@ -87,16 +100,20 @@ SVG_DEFS = '''\
 
 FOOTER_HTML = '''\
 <div id="page-footer" style="background:#0A0A0A;padding:32px 40px;text-align:center;border-top:1px solid rgba(255,214,0,.06);">
-  <div style="font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.12);">ADA · Manual de Marca · v1.0 · Marco 2026 · ada.art.br</div>
+  <div style="font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.12);">ADA - Manual de Marca - v1.0 - Marco 2026 - ada.art.br</div>
 </div>'''
 
 # ---------------------------------------------------------------------------
-# Gerar bloco <nav>
+# Nav
+# context='root'  -> secoes linkam para pages/XX.html, capa para index.html
+# context='pages' -> secoes linkam para XX.html (mesmo dir), capa para ../index.html
 # ---------------------------------------------------------------------------
-def nav_html(active_num):
-    items = [('cover', 'index.html', 'Capa')]
-    for num, slug, title in SECTIONS:
-        items.append((num, f'{num}-{slug}.html', title))
+def nav_html(active_num, context='root'):
+    capa_href = '../index.html' if context == 'pages' else 'index.html'
+    items = [('cover', capa_href, 'Capa')]
+    for num, slug, _ in SECTIONS:
+        href = f'{num}-{slug}.html' if context == 'pages' else f'pages/{num}-{slug}.html'
+        items.append((num, href, NAV_SHORT.get(num, num)))
 
     drop_items = ''
     for target, href, label in items:
@@ -104,7 +121,6 @@ def nav_html(active_num):
         drop_items += f'    <a href="{href}" class="nav-drop-item{cls}" data-target="{target}">{label}</a>\n'
 
     current_text = NAV_SHORT.get(active_num, active_num)
-
     return (
         '<nav class="manual-nav">\n'
         '  <div class="nav-inner">\n'
@@ -129,39 +145,29 @@ def nav_html(active_num):
     )
 
 # ---------------------------------------------------------------------------
-# Extrair secoes do arquivo fonte (_source.html)
-#
-# Fluxo de edicao:
-#   1. Edite _source.html (arquivo com todas as <section>)
-#   2. python split_pages.py  → gera index.html (capa+indice) + XX-slug.html
-#   3. Commite _source.html + todos os arquivos gerados
-#
-# _source.html nunca e sobrescrito por este script.
+# Ler e fragmentar _source.html
 # ---------------------------------------------------------------------------
-SOURCE_FILE = os.path.join(BASE, '_source.html')
+SOURCE_FILE = os.path.join(BUILD, '_source.html')
 if not os.path.exists(SOURCE_FILE):
-    print('ERRO: _source.html nao encontrado.')
-    print('Crie _source.html com o conteudo completo do manual (todas as sections).')
+    print('ERRO: build/_source.html nao encontrado.')
     sys.exit(1)
 
-src = read(SOURCE_FILE)
+src   = read(SOURCE_FILE)
 lines = src.splitlines(keepends=True)
 print(f'_source.html: {len(lines)} linhas')
 
 if '<section data-sec=' not in src:
-    print('ERRO: _source.html nao contem secoes <section data-sec="XX">.')
+    print('ERRO: _source.html nao contem secoes.')
     sys.exit(1)
 
-# Localizar <section data-sec="XX"> e </section>
-sec_open  = {}  # num -> linha 0-based
-sec_close = {}  # num -> linha 0-based (a linha com </section>)
+sec_open  = {}
+sec_close = {}
 
 for i, line in enumerate(lines):
     m = re.search(r'<section[^>]+data-sec="(\d{2})"', line)
     if m:
         sec_open[m.group(1)] = i
 
-# Para cada secao, encontrar o </section> correspondente
 for num, open_line in sec_open.items():
     depth = 0
     for j in range(open_line, len(lines)):
@@ -173,107 +179,93 @@ for num, open_line in sec_open.items():
 
 print('Secoes mapeadas:', sorted(sec_open.keys()))
 
-# Encontrar inicio do cover e do indice
-cover_line = next(i for i, l in enumerate(lines) if '<div id="cover"' in l)
-
-# Inicio do bloco de secoes (linha do span anchor da secao 01, ou fallback)
-# Queremos tudo do cover ate antes da secao 01
-first_sec_open = sec_open['01']
-# O span anchor vem antes da <section> - vamos pegar 2 linhas antes
-anchor_line = first_sec_open
-for k in range(first_sec_open - 1, max(0, first_sec_open - 5), -1):
+# Bloco capa + indice
+cover_line     = next(i for i, l in enumerate(lines) if '<div id="cover"' in l)
+first_sec_line = sec_open['01']
+anchor_line    = first_sec_line
+for k in range(first_sec_line - 1, max(0, first_sec_line - 5), -1):
     if '<span id="sec-' in lines[k] or '<!-- ' in lines[k]:
         anchor_line = k
         break
-
 cover_block_raw = ''.join(lines[cover_line:anchor_line])
 
-# Atualizar links #sec-XX -> XX-slug.html no cover block
-def update_links(html):
+def update_links(html, context='root'):
     for num, slug, _ in SECTIONS:
-        html = html.replace(f'href="#sec-{num}"', f'href="{num}-{slug}.html"')
+        anchor = f'href="#sec-{num}"'
+        target = f'href="{num}-{slug}.html"' if context == 'pages' else f'href="pages/{num}-{slug}.html"'
+        html = html.replace(anchor, target)
     return html
 
-cover_block = update_links(cover_block_raw)
+def fix_asset_paths(html):
+    """Prefixar caminhos de assets com ../ para paginas em pages/"""
+    for attr in ('src', 'href'):
+        html = html.replace(f'{attr}="assets/', f'{attr}="../assets/')
+        html = html.replace(f"{attr}='assets/", f"{attr}='../assets/")
+    return html
 
 # ---------------------------------------------------------------------------
-# Extrair corpo de cada secao (apenas <section>...</section>)
+# Extrair corpo de cada secao
 # ---------------------------------------------------------------------------
 def get_section_body(num):
     start = sec_open[num]
     end   = sec_close[num]
-    raw = ''.join(lines[start:end+1])
-    return update_links(raw)
+    raw   = ''.join(lines[start:end+1])
+    raw   = update_links(raw, 'pages')
+    raw   = fix_asset_paths(raw)
+    return raw
 
 # ---------------------------------------------------------------------------
-# Montar pagina de secao
+# Montar pagina de secao -> pages/XX-slug.html
 # ---------------------------------------------------------------------------
 def build_section_page(num, slug, title_full):
-    body = get_section_body(num)
-
+    body  = get_section_body(num)
     extra = ''
     if num == '10':
-        extra = '<canvas id="render-canvas" style="display:none;"></canvas>\n<script src="js/merch.js"></script>\n'
+        extra = '<canvas id="render-canvas" style="display:none;"></canvas>\n<script src="../js/merch.js"></script>\n'
 
     return (
-        '<!DOCTYPE html>\n'
-        '<html lang="pt">\n'
-        '<head>\n'
-        + HEAD_COMMON + '\n'
+        '<!DOCTYPE html>\n<html lang="pt">\n<head>\n'
+        + head_common('pages') + '\n'
         + f'<title>ADA \u2014 {title_full} \u00b7 Manual de Marca</title>\n'
         + f'<meta name="description" content="ADA Manual de Marca \u2014 {title_full}">\n'
-        + f'<meta property="og:title" content="ADA \u2014 {title_full}">\n'
-        + '<meta property="og:description" content="Tecnologia como linguagem. Brasil como ponto de vista.">\n'
-        + '</head>\n'
-        '<body>\n'
+        + '</head>\n<body>\n'
         + SVG_DEFS + '\n'
-        + nav_html(num) + '\n\n'
+        + nav_html(num, 'pages') + '\n\n'
         + body + '\n'
         + FOOTER_HTML + '\n\n'
         + extra
-        + '<script src="js/ada.js"></script>\n'
-        '</body>\n'
-        '</html>\n'
+        + '<script src="../js/ada.js"></script>\n'
+        '</body>\n</html>\n'
     )
 
 # ---------------------------------------------------------------------------
-# Montar novo index.html (capa + indice)
+# Montar index.html -> raiz
 # ---------------------------------------------------------------------------
 def build_index():
+    cover = update_links(cover_block_raw, 'root')
     return (
-        '<!DOCTYPE html>\n'
-        '<html lang="pt">\n'
-        '<head>\n'
-        + HEAD_COMMON + '\n'
+        '<!DOCTYPE html>\n<html lang="pt">\n<head>\n'
+        + head_common('root') + '\n'
         + '<title>ADA \u2014 Manual de Marca \u00b7 2026</title>\n'
-        + '<meta name="description" content="Manual de Marca da ADA \u2014 Atelie Digital Analogico. Tecnologia como linguagem. Brasil como ponto de vista.">\n'
+        + '<meta name="description" content="Manual de Marca da ADA \u2014 Atelie Digital Analogico.">\n'
         + '<meta property="og:title" content="ADA \u2014 Manual de Marca">\n'
         + '<meta property="og:description" content="Tecnologia como linguagem. Brasil como ponto de vista.">\n'
-        + '</head>\n'
-        '<body>\n'
+        + '</head>\n<body>\n'
         + SVG_DEFS + '\n'
-        + nav_html('cover') + '\n\n'
-        # Envolver capa+indice em <section data-sec="cover"> para que o
-        # infinite scroll bidirecional possa extrair e injetar este bloco
-        # da mesma forma que extrai as demais secoes.
+        + nav_html('cover', 'root') + '\n\n'
         + '<section data-sec="cover" class="cover-page">\n'
-        + cover_block + '\n'
+        + cover + '\n'
         + '</section>\n'
         + FOOTER_HTML + '\n\n'
         + '<script src="js/ada.js"></script>\n'
-        '</body>\n'
-        '</html>\n'
+        '</body>\n</html>\n'
     )
 
 # ---------------------------------------------------------------------------
-# Gerar arquivos
+# Gerar
 # ---------------------------------------------------------------------------
 print('\nGerando paginas...')
-
-write(os.path.join(BASE, 'index.html'), build_index())
-
+write(os.path.join(ROOT, 'index.html'), build_index())
 for num, slug, title_full in SECTIONS:
-    filename = f'{num}-{slug}.html'
-    write(os.path.join(BASE, filename), build_section_page(num, slug, title_full))
-
-print('\nConcluido. 11 arquivos gerados.')
+    write(os.path.join(PAGES_DIR, f'{num}-{slug}.html'), build_section_page(num, slug, title_full))
+print(f'\nConcluido. 11 arquivos gerados.')

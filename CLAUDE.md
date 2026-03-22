@@ -27,22 +27,25 @@ GitHub: `ateliedigitalanalogico/ada-brand-manual` (main)
 
 ```
 ada-manual/
-├── index.html              ← Capa + Índice (ponto de entrada)
-├── 01-logo.html            ← Seção 01 — Logo e Wordmark
-├── 02-tipografia.html      ← Seção 02 — Tipografia
-├── 03-paleta.html          ← Seção 03 — Paleta de Cores
-├── 04-grid.html            ← Seção 04 — Grid e Espaçamento
-├── 05-imagetica.html       ← Seção 05 — Linguagem Imagética
-├── 06-impressos.html       ← Seção 06 — Usos Impressos
-├── 07-motion.html          ← Seção 07 — Motion e Vídeo
-├── 08-redes.html           ← Seção 08 — Redes Sociais
-├── 09-voz.html             ← Seção 09 — Voz e Tom
-├── 10-merch.html           ← Seção 10 — Merchandise
-├── split_pages.py          ← Script que gera as páginas a partir do index.html original
+├── index.html              ← Capa + Índice — GERADO por split_pages.py, não editar diretamente
+├── pages/                  ← Seções individuais — GERADAS por split_pages.py, não editar diretamente
+│   ├── 01-logo.html
+│   ├── 02-tipografia.html
+│   ├── 03-paleta.html
+│   ├── 04-grid.html
+│   ├── 05-imagetica.html
+│   ├── 06-impressos.html
+│   ├── 07-motion.html
+│   ├── 08-redes.html
+│   ├── 09-voz.html
+│   └── 10-merch.html
+├── build/                  ← Ferramentas de build
+│   ├── _source.html        ← FONTE MESTRE com todas as 10 <section> — editar aqui
+│   └── split_pages.py      ← Gera index.html + pages/*.html a partir de _source.html
 ├── css/
 │   └── system.css          ← Variáveis, layout, componentes — compartilhado por todas as páginas
 ├── js/
-│   ├── ada.js              ← Scripts globais: nav, taglines, dlMock, moodboard, emails
+│   ├── ada.js              ← Scripts globais: nav, taglines, dlMock, moodboard, scroll infinito
 │   └── merch.js            ← Scripts exclusivos da seção 10
 └── assets/
     ├── logo/WORDMARK.svg   ← Wordmark original — não modificar
@@ -67,23 +70,26 @@ Cada seção vive em seu próprio arquivo HTML. Todos compartilham:
 - Bloco SVG `<defs>` com `#ada-sym` e `#ada-wm` — inline em cada página
 - Mesmo `<nav>` — item ativo pré-marcado com classe `.active` no HTML
 
-### Regenerar as páginas
+### Fluxo de edição
 
-Se você modificar o `index.html` original (que contém todas as seções), rode:
+1. Editar `build/_source.html` (fonte mestre — contém todas as 10 `<section>`)
+2. Rodar o script:
 
 ```bash
-python split_pages.py
+python build/split_pages.py
 ```
 
-Isso recria `index.html` (capa+índice) e todos os `XX-slug.html`.
+Isso regenera `index.html` (capa+índice) e todos os `pages/XX-slug.html`.
 
-**Atenção:** `split_pages.py` sobrescreve todos os arquivos gerados. Edições diretas nos arquivos de seção serão perdidas. Edite sempre o `index.html` de origem, depois rode o script.
+**Nunca editar** `index.html` ou qualquer arquivo em `pages/` diretamente — serão sobrescritos na próxima build.
 
-### Navegação entre páginas
+### Navegação e scroll infinito
 
-Links de navegação usam URLs relativas: `href="01-logo.html"`, `href="index.html"` etc. Não há `#anchor` para seções — cada seção é uma página.
-
-O item ativo no nav é definido em tempo de build (pelo script), não por JavaScript. Não há scroll spy.
+- Links do nav usam caminhos relativos: `pages/01-logo.html` (da raiz) ou `01-logo.html` (de dentro de pages/)
+- O item ativo no nav é definido em tempo de build, não por JavaScript
+- Scroll infinito bidirecional via `IntersectionObserver` + `fetch()` — funciona com HTTP server (ex.: VS Code Live Server); **não funciona em `file://`**
+- Scroll para cima injeta seções anteriores com compensação de posição para não saltar a viewport
+- A capa (`index.html`) pode ser alcançada scrollando para cima a partir de qualquer seção
 
 ---
 
@@ -248,7 +254,7 @@ Funções globais disponíveis em todas as páginas:
 
 3. **Wordmark em peças pequenas** — nunca abaixo de 240px / 60mm. Usar o símbolo A isolado.
 
-4. **Arquivos gerados** — nunca editar `01-logo.html` ... `10-merch.html` diretamente. Sempre editar o `index.html` de origem e rodar `split_pages.py`.
+4. **Arquivos gerados** — nunca editar `pages/*.html` ou `index.html` diretamente. Sempre editar `build/_source.html` e rodar `python build/split_pages.py`.
 
 ---
 

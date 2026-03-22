@@ -422,30 +422,34 @@ function dlMock(elId, filename, w) {
    Moodboard interativo (secao 05)
    ------------------------------------------------------------ */
 
+// Detectar se estamos em pages/ ou na raiz — usado por MB_POOL e pelo scroll infinito
+var _inPages   = window.location.pathname.indexOf('/pages/') >= 0;
+var _assetBase = _inPages ? '../' : '';
+
 var MB_POOL = [
-  'assets/ADA_urbano_feixe_01.jpg',      'assets/ADA_urbano_feixe_02.jpg',
-  'assets/ADA_urbano_feixe_03.jpg',      'assets/ADA_urbano_feixe_04.jpg',
-  'assets/ADA_urbano_mapping_01.jpg',    'assets/ADA_urbano_mapping_02.jpg',
-  'assets/ADA_urbano_mapping_03.jpg',    'assets/ADA_urbano_mapping_04.jpg',
-  'assets/ADA_urbano_mapping_05.jpg',    'assets/ADA_urbano_mapping_06.jpg',
-  'assets/ADA_urbano_mapping_07.jpg',    'assets/ADA_urbano_mapping_08.jpg',
-  'assets/ADA_natural_rio_01.jpg',       'assets/ADA_natural_rio_02.jpg',
-  'assets/ADA_natural_rio_03.jpg',       'assets/ADA_natural_rio_04.jpg',
-  'assets/ADA_natural_floresta_01.jpg',  'assets/ADA_natural_floresta_02.jpg',
-  'assets/ADA_natural_floresta_03.jpg',  'assets/ADA_natural_floresta_04.jpg',
-  'assets/ADA_tecnico_concreto_01.jpg',  'assets/ADA_tecnico_concreto_02.jpg',
-  'assets/ADA_tecnico_concreto_03.jpg',  'assets/ADA_tecnico_concreto_04.jpg',
-  'assets/ADA_tecnico_pcb_01.jpg',       'assets/ADA_tecnico_pcb_02.jpg',
-  'assets/ADA_tecnico_pcb_03.jpg',       'assets/ADA_tecnico_pcb_04.jpg',
-  'assets/ADA_performance_01.jpg',       'assets/ADA_performance_02.jpg',
-  'assets/ADA_performance_03.jpg',       'assets/ADA_performance_04.jpg',
-  'assets/ADA_abstrato_linhas_01.jpg',   'assets/ADA_abstrato_linhas_02.jpg',
-  'assets/ADA_abstrato_linhas_03.jpg',   'assets/ADA_abstrato_linhas_04.jpg',
-  'assets/ADA_abstrato_particulas_01.jpg','assets/ADA_abstrato_particulas_02.jpg',
-  'assets/ADA_abstrato_particulas_03.jpg','assets/ADA_abstrato_particulas_04.jpg',
-  'assets/ADA_abstrato_triangulo_01.jpg', 'assets/ADA_abstrato_triangulo_02.jpg',
-  'assets/ADA_abstrato_triangulo_03.jpg', 'assets/ADA_abstrato_triangulo_04.jpg',
-];
+  'ADA_urbano_feixe_01.jpg',       'ADA_urbano_feixe_02.jpg',
+  'ADA_urbano_feixe_03.jpg',       'ADA_urbano_feixe_04.jpg',
+  'ADA_urbano_mapping_01.jpg',     'ADA_urbano_mapping_02.jpg',
+  'ADA_urbano_mapping_03.jpg',     'ADA_urbano_mapping_04.jpg',
+  'ADA_urbano_mapping_05.jpg',     'ADA_urbano_mapping_06.jpg',
+  'ADA_urbano_mapping_07.jpg',     'ADA_urbano_mapping_08.jpg',
+  'ADA_natural_rio_01.jpg',        'ADA_natural_rio_02.jpg',
+  'ADA_natural_rio_03.jpg',        'ADA_natural_rio_04.jpg',
+  'ADA_natural_floresta_01.jpg',   'ADA_natural_floresta_02.jpg',
+  'ADA_natural_floresta_03.jpg',   'ADA_natural_floresta_04.jpg',
+  'ADA_tecnico_concreto_01.jpg',   'ADA_tecnico_concreto_02.jpg',
+  'ADA_tecnico_concreto_03.jpg',   'ADA_tecnico_concreto_04.jpg',
+  'ADA_tecnico_pcb_01.jpg',        'ADA_tecnico_pcb_02.jpg',
+  'ADA_tecnico_pcb_03.jpg',        'ADA_tecnico_pcb_04.jpg',
+  'ADA_performance_01.jpg',        'ADA_performance_02.jpg',
+  'ADA_performance_03.jpg',        'ADA_performance_04.jpg',
+  'ADA_abstrato_linhas_01.jpg',    'ADA_abstrato_linhas_02.jpg',
+  'ADA_abstrato_linhas_03.jpg',    'ADA_abstrato_linhas_04.jpg',
+  'ADA_abstrato_particulas_01.jpg','ADA_abstrato_particulas_02.jpg',
+  'ADA_abstrato_particulas_03.jpg','ADA_abstrato_particulas_04.jpg',
+  'ADA_abstrato_triangulo_01.jpg', 'ADA_abstrato_triangulo_02.jpg',
+  'ADA_abstrato_triangulo_03.jpg', 'ADA_abstrato_triangulo_04.jpg',
+].map(function(f) { return _assetBase + 'assets/' + f; });
 
 function _mbShuffle(arr) {
   var a = arr.slice(), i = a.length, j, t;
@@ -496,25 +500,31 @@ function mbDownload() {
 
 (function() {
 
+  // Prefixos dependem de onde o script esta sendo executado:
+  //   pages/XX.html  -> secoes: 'XX.html'  | capa: '../index.html' | js: '../js/'
+  //   index.html     -> secoes: 'pages/XX.html' | capa: 'index.html' | js: 'js/'
+  var _pb = _inPages ? '' : 'pages/';      // prefixo para paginas de secao
+  var _rb = _inPages ? '../' : '';         // prefixo para raiz (index.html, js/, css/)
+
   var PAGES = [
-    { num: 'cover', href: 'index.html',        title: 'Capa'          },
-    { num: '01',    href: '01-logo.html',       title: '01 Logo'       },
-    { num: '02',    href: '02-tipografia.html', title: '02 Tipografia' },
-    { num: '03',    href: '03-paleta.html',     title: '03 Paleta'     },
-    { num: '04',    href: '04-grid.html',       title: '04 Grid'       },
-    { num: '05',    href: '05-imagetica.html',  title: '05 Imagetica'  },
-    { num: '06',    href: '06-impressos.html',  title: '06 Impressos'  },
-    { num: '07',    href: '07-motion.html',     title: '07 Motion'     },
-    { num: '08',    href: '08-redes.html',      title: '08 Redes'      },
-    { num: '09',    href: '09-voz.html',        title: '09 Voz'        },
-    { num: '10',    href: '10-merch.html',      title: '10 Merch'      },
+    { num: 'cover', href: _rb + 'index.html',              title: 'Capa'          },
+    { num: '01',    href: _pb + '01-logo.html',            title: '01 Logo'       },
+    { num: '02',    href: _pb + '02-tipografia.html',      title: '02 Tipografia' },
+    { num: '03',    href: _pb + '03-paleta.html',          title: '03 Paleta'     },
+    { num: '04',    href: _pb + '04-grid.html',            title: '04 Grid'       },
+    { num: '05',    href: _pb + '05-imagetica.html',       title: '05 Imagetica'  },
+    { num: '06',    href: _pb + '06-impressos.html',       title: '06 Impressos'  },
+    { num: '07',    href: _pb + '07-motion.html',          title: '07 Motion'     },
+    { num: '08',    href: _pb + '08-redes.html',           title: '08 Redes'      },
+    { num: '09',    href: _pb + '09-voz.html',             title: '09 Voz'        },
+    { num: '10',    href: _pb + '10-merch.html',           title: '10 Merch'      },
   ];
 
-  // Determinar pagina atual pelo nome do arquivo na URL
+  // Determinar pagina atual pelo nome do arquivo na URL (sem caminho)
   var filename = (window.location.pathname.split('/').pop()) || 'index.html';
   var currentIdx = 0;
   for (var pi = 0; pi < PAGES.length; pi++) {
-    if (PAGES[pi].href === filename) { currentIdx = pi; break; }
+    if (PAGES[pi].href.split('/').pop() === filename) { currentIdx = pi; break; }
   }
 
   var nextIdx    = currentIdx + 1;   // proxima secao a carregar (baixo)
@@ -580,9 +590,9 @@ function mbDownload() {
         canvas.style.display = 'none';
         footer.parentNode.insertBefore(canvas, footer);
       }
-      if (!document.querySelector('script[src="js/merch.js"]')) {
+      if (!document.querySelector('script[src$="js/merch.js"]')) {
         var s = document.createElement('script');
-        s.src = 'js/merch.js';
+        s.src = _rb + 'js/merch.js';
         document.body.appendChild(s);
       }
     }
@@ -625,6 +635,12 @@ function mbDownload() {
 
     fetchSection(page.href, function(section) {
       if (!section) { loadingUp = false; return; }
+
+      // Quando a capa (index.html) e injetada em pages/, seus links internos
+      // apontam para 'pages/XX.html' — corrigir para 'XX.html' (mesmo diretorio)
+      if (_inPages && page.num === 'cover') {
+        section.innerHTML = section.innerHTML.replace(/href="pages\//g, 'href="');
+      }
 
       // Capturar posicao atual antes da insercao
       var heightBefore = document.body.scrollHeight;
