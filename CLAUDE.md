@@ -90,6 +90,8 @@ Isso regenera `index.html` (capa+índice) e todos os `pages/XX-slug.html`.
 - Scroll infinito bidirecional via `IntersectionObserver` + `fetch()` — funciona com HTTP server (ex.: VS Code Live Server); **não funciona em `file://`**
 - Scroll para cima injeta seções anteriores com compensação de posição para não saltar a viewport
 - A capa (`index.html`) pode ser alcançada scrollando para cima a partir de qualquer seção
+- **IMPORTANTE:** o array `PAGES` em `js/ada.js` lista a ordem e os nomes dos arquivos. Ao renumerar seções, esse array deve ser atualizado manualmente — não é gerado pelo `split_pages.py`
+- Scripts com dependência de DOM (`patterns.js` para SEC 06, `merch.js` para SEC 10) são injetados dinamicamente em `activateSection()` no `ada.js` quando a seção é carregada via scroll infinito
 
 ---
 
