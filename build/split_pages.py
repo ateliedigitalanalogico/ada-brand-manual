@@ -38,23 +38,31 @@ def write(path, content):
 # Mapa de secoes
 # ---------------------------------------------------------------------------
 SECTIONS = [
+    # ── REGRAS ──────────────────────────────
     ('01', 'logo',       '01 Logo e Wordmark'),
     ('02', 'tipografia', '02 Tipografia'),
     ('03', 'paleta',     '03 Paleta de Cores'),
     ('04', 'grid',       '04 Grid e Espacamento'),
-    ('05', 'imagetica',  '05 Linguagem Imagetica'),
-    ('06', 'impressos',  '06 Usos Impressos'),
-    ('07', 'motion',     '07 Motion e Video'),
-    ('08', 'redes',      '08 Redes Sociais'),
-    ('09', 'voz',        '09 Voz e Tom'),
+    ('05', 'voz',        '05 Voz e Tom'),
+    ('06', 'imagetica',  '06 Linguagem Imagetica'),
+    # ── USOS ────────────────────────────────
+    ('07', 'impressos',  '07 Usos Impressos'),
+    ('08', 'motion',     '08 Motion e Video'),
+    ('09', 'redes',      '09 Redes Sociais'),
     ('10', 'merch',      '10 Merchandise'),
 ]
 
 NAV_SHORT = {
     'cover': 'Capa',
-    '01': '01 Logo', '02': '02 Tipografia', '03': '03 Paleta', '04': '04 Grid',
-    '05': '05 Imagetica', '06': '06 Impressos', '07': '07 Motion',
-    '08': '08 Redes',     '09': '09 Voz',       '10': '10 Merch',
+    '01': '01 Logo',       '02': '02 Tipografia', '03': '03 Paleta',  '04': '04 Grid',
+    '05': '05 Voz',        '06': '06 Imagetica',
+    '07': '07 Impressos',  '08': '08 Motion',     '09': '09 Redes',   '10': '10 Merch',
+}
+
+# Grupos para distinção visual no nav e nos headers
+NAV_GRUPOS = {
+    '01':'regras','02':'regras','03':'regras','04':'regras','05':'regras','06':'regras',
+    '07':'usos',  '08':'usos',  '09':'usos',  '10':'usos',
 }
 
 # ---------------------------------------------------------------------------
@@ -110,15 +118,29 @@ FOOTER_HTML = '''\
 # ---------------------------------------------------------------------------
 def nav_html(active_num, context='root'):
     capa_href = '../index.html' if context == 'pages' else 'index.html'
-    items = [('cover', capa_href, 'Capa')]
-    for num, slug, _ in SECTIONS:
-        href = f'{num}-{slug}.html' if context == 'pages' else f'pages/{num}-{slug}.html'
-        items.append((num, href, NAV_SHORT.get(num, num)))
 
     drop_items = ''
-    for target, href, label in items:
-        cls = ' active' if target == active_num else ''
-        drop_items += f'    <a href="{href}" class="nav-drop-item{cls}" data-target="{target}">{label}</a>\n'
+    # Capa
+    cls = ' active' if active_num == 'cover' else ''
+    drop_items += f'    <a href="{capa_href}" class="nav-drop-item{cls}" data-target="cover">Capa</a>\n'
+
+    # Separador de grupo REGRAS
+    drop_items += '    <div class="nav-group-label">Regras do Sistema</div>\n'
+    for num, slug, _ in SECTIONS:
+        if NAV_GRUPOS.get(num) != 'regras':
+            continue
+        href = f'{num}-{slug}.html' if context == 'pages' else f'pages/{num}-{slug}.html'
+        cls = ' active' if num == active_num else ''
+        drop_items += f'    <a href="{href}" class="nav-drop-item{cls}" data-target="{num}">{NAV_SHORT.get(num, num)}</a>\n'
+
+    # Separador de grupo USOS
+    drop_items += '    <div class="nav-group-label nav-group-usos">Aplica\u00e7\u00f5es</div>\n'
+    for num, slug, _ in SECTIONS:
+        if NAV_GRUPOS.get(num) != 'usos':
+            continue
+        href = f'{num}-{slug}.html' if context == 'pages' else f'pages/{num}-{slug}.html'
+        cls = ' active' if num == active_num else ''
+        drop_items += f'    <a href="{href}" class="nav-drop-item{cls}" data-target="{num}">{NAV_SHORT.get(num, num)}</a>\n'
 
     current_text = NAV_SHORT.get(active_num, active_num)
     return (
@@ -220,6 +242,8 @@ def get_section_body(num):
 def build_section_page(num, slug, title_full):
     body  = get_section_body(num)
     extra = ''
+    if num == '06':
+        extra = '<canvas id="pattern-canvas" style="display:none;"></canvas>\n<script src="../js/patterns.js"></script>\n'
     if num == '10':
         extra = '<canvas id="render-canvas" style="display:none;"></canvas>\n<script src="../js/merch.js"></script>\n'
 

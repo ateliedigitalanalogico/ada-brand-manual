@@ -137,9 +137,9 @@ function cpPrompt(id, btn) {
     setInterval(nextCoverTag, 3800);
   }
 
-  /* -- Secao 07: .tagline-cycle em sincronia com a animacao CSS -- */
+  /* -- Secao 01 e 07: .tagline-cycle -- */
   if (document.querySelector('.tagline-cycle')) {
-    startTagCycle(6);
+    startTagCycle(3);
   }
 })();
 
@@ -155,19 +155,22 @@ var _TAGS = [
   'ANTES DA EXPERIENCIA.', 'ANTES DO FUTURO.'
 ];
 
-/** Inicia (ou reinicia) o ciclo de troca de taglines com a duracao dada em segundos. */
+/** Inicia (ou reinicia) o ciclo de troca de taglines com a duracao dada em segundos.
+    Fade out -> troca texto -> fade in via CSS transition (opacity 0.3s em .tagline-cycle). */
 function startTagCycle(durSec) {
   clearInterval(window._tagTimer);
-  var interval = durSec * 1000;
-  var pauseAt  = durSec * 0.92 * 1000;  // troca durante a pausa no fim do ciclo CSS
+  var fadeMs = 300;
   window._tagTimer = setInterval(function() {
+    _tagIdx = (_tagIdx + 1) % _TAGS.length;
+    var els = document.querySelectorAll('.tagline-cycle');
+    els.forEach(function(el) { el.style.opacity = '0'; });
     setTimeout(function() {
-      _tagIdx = (_tagIdx + 1) % _TAGS.length;
-      document.querySelectorAll('.tagline-cycle').forEach(function(el) {
+      els.forEach(function(el) {
         el.textContent = _TAGS[_tagIdx];
+        el.style.opacity = '1';
       });
-    }, pauseAt);
-  }, interval);
+    }, fadeMs);
+  }, durSec * 1000);
 }
 
 /** Aplica nova velocidade de animacao (botoes da secao 07). */
@@ -503,21 +506,43 @@ function mbDownload() {
   // Prefixos dependem de onde o script esta sendo executado:
   //   pages/XX.html  -> secoes: 'XX.html'  | capa: '../index.html' | js: '../js/'
   //   index.html     -> secoes: 'pages/XX.html' | capa: 'index.html' | js: 'js/'
-  var _pb = _inPages ? '' : 'pages/';      // prefixo para paginas de secao
+  var _pb = _inPages ? '' : 'pages/';      // prefixo para paginas de secao (nav/replaceState)
   var _rb = _inPages ? '../' : '';         // prefixo para raiz (index.html, js/, css/)
 
+  // URL absoluta da raiz do site — capturada antes de qualquer history.replaceState.
+  // fetch() resolve caminhos relativos contra window.location, que muda com replaceState.
+  // Usar URLs absolutas garante que os fetches funcionam independente da URL atual.
+  var _siteRoot = (function() {
+    var a = document.createElement('a');
+    a.href = _inPages ? '../' : './';
+    return a.href; // ex: 'http://127.0.0.1:5500/'
+  })();
+
+  // Atualiza hrefs do nav para URLs absolutas — imune a history.replaceState
+  function _syncNavCtx() {
+    document.querySelectorAll('.nav-drop-item').forEach(function(a) {
+      var target = a.getAttribute('data-target');
+      for (var i = 0; i < PAGES.length; i++) {
+        if (PAGES[i].num === target) {
+          a.setAttribute('href', PAGES[i].fetchHref);
+          break;
+        }
+      }
+    });
+  }
+
   var PAGES = [
-    { num: 'cover', href: _rb + 'index.html',              title: 'Capa'          },
-    { num: '01',    href: _pb + '01-logo.html',            title: '01 Logo'       },
-    { num: '02',    href: _pb + '02-tipografia.html',      title: '02 Tipografia' },
-    { num: '03',    href: _pb + '03-paleta.html',          title: '03 Paleta'     },
-    { num: '04',    href: _pb + '04-grid.html',            title: '04 Grid'       },
-    { num: '05',    href: _pb + '05-imagetica.html',       title: '05 Imagetica'  },
-    { num: '06',    href: _pb + '06-impressos.html',       title: '06 Impressos'  },
-    { num: '07',    href: _pb + '07-motion.html',          title: '07 Motion'     },
-    { num: '08',    href: _pb + '08-redes.html',           title: '08 Redes'      },
-    { num: '09',    href: _pb + '09-voz.html',             title: '09 Voz'        },
-    { num: '10',    href: _pb + '10-merch.html',           title: '10 Merch'      },
+    { num: 'cover', href: _rb + 'index.html',         fetchHref: _siteRoot + 'index.html',              title: 'Capa'          },
+    { num: '01',    href: _pb + '01-logo.html',        fetchHref: _siteRoot + 'pages/01-logo.html',      title: '01 Logo'       },
+    { num: '02',    href: _pb + '02-tipografia.html',  fetchHref: _siteRoot + 'pages/02-tipografia.html',title: '02 Tipografia' },
+    { num: '03',    href: _pb + '03-paleta.html',      fetchHref: _siteRoot + 'pages/03-paleta.html',    title: '03 Paleta'     },
+    { num: '04',    href: _pb + '04-grid.html',        fetchHref: _siteRoot + 'pages/04-grid.html',      title: '04 Grid'       },
+    { num: '05',    href: _pb + '05-voz.html',          fetchHref: _siteRoot + 'pages/05-voz.html',       title: '05 Voz'        },
+    { num: '06',    href: _pb + '06-imagetica.html',   fetchHref: _siteRoot + 'pages/06-imagetica.html', title: '06 Imagetica'  },
+    { num: '07',    href: _pb + '07-impressos.html',   fetchHref: _siteRoot + 'pages/07-impressos.html', title: '07 Impressos'  },
+    { num: '08',    href: _pb + '08-motion.html',      fetchHref: _siteRoot + 'pages/08-motion.html',    title: '08 Motion'     },
+    { num: '09',    href: _pb + '09-redes.html',       fetchHref: _siteRoot + 'pages/09-redes.html',     title: '09 Redes'      },
+    { num: '10',    href: _pb + '10-merch.html',       fetchHref: _siteRoot + 'pages/10-merch.html',     title: '10 Merch'      },
   ];
 
   // Determinar pagina atual pelo nome do arquivo na URL (sem caminho)
@@ -566,8 +591,11 @@ function mbDownload() {
     }
     if (!page) return;
 
-    if (window.location.pathname.indexOf(page.href) < 0) {
-      history.replaceState(null, '', page.href);
+    // Sincronizar nav para URLs absolutas (imune a replaceState acumulado)
+    _syncNavCtx();
+
+    if (window.location.href !== page.fetchHref) {
+      history.replaceState(null, '', page.fetchHref);
     }
     document.querySelectorAll('.nav-drop-item').forEach(function(a) {
       a.classList.toggle('active', a.getAttribute('data-target') === sec);
@@ -582,7 +610,22 @@ function mbDownload() {
   // ── Helper: injetar section e ativar funcionalidades dependentes ──
   function activateSection(section, page) {
     spyObs.observe(section);
-    if (section.querySelector('.tagline-cycle')) startTagCycle(6);
+    if (section.querySelector('.tagline-cycle')) startTagCycle(3);
+    if (page.num === '06') {
+      if (!document.getElementById('pattern-canvas')) {
+        var canvas = document.createElement('canvas');
+        canvas.id = 'pattern-canvas';
+        canvas.style.display = 'none';
+        document.body.appendChild(canvas);
+      }
+      if (!document.querySelector('script[src$="js/patterns.js"]')) {
+        var s = document.createElement('script');
+        s.src = _rb + 'js/patterns.js';
+        document.body.appendChild(s);
+      } else if (typeof _runPatterns === 'function') {
+        setTimeout(_runPatterns, 100);
+      }
+    }
     if (page.num === '10') {
       if (!document.getElementById('render-canvas')) {
         var canvas = document.createElement('canvas');
@@ -616,7 +659,7 @@ function mbDownload() {
     loadingDown = true;
     var page = PAGES[nextIdx];
 
-    fetchSection(page.href, function(section) {
+    fetchSection(page.fetchHref, function(section) {
       if (!section) { loadingDown = false; return; }
       footer.parentNode.insertBefore(section, sentBottom);
       activateSection(section, page);
@@ -633,7 +676,7 @@ function mbDownload() {
     loadingUp = true;
     var page = PAGES[prevIdx];
 
-    fetchSection(page.href, function(section) {
+    fetchSection(page.fetchHref, function(section) {
       if (!section) { loadingUp = false; return; }
 
       // Quando a capa (index.html) e injetada em pages/, seus links internos
@@ -652,9 +695,11 @@ function mbDownload() {
       // Mover o sentinel de topo para ficar antes da secao recem inserida
       section.parentNode.insertBefore(sentTop, section);
 
-      // Compensar deslocamento: manter o usuario na mesma posicao visual
+      // Compensar deslocamento: manter o usuario na mesma posicao visual.
+      // IMPORTANTE: behavior:'instant' ignora o scroll-behavior:smooth do CSS —
+      // a compensacao de posicao deve ser atomica, nao animada.
       var added = document.body.scrollHeight - heightBefore;
-      window.scrollTo(0, scrollBefore + added);
+      window.scrollTo({ top: scrollBefore + added, behavior: 'instant' });
 
       activateSection(section, page);
       prevIdx--;
@@ -670,13 +715,37 @@ function mbDownload() {
   }, { rootMargin: '800px' });
   obsDown.observe(sentBottom);
 
+  // Fallback: IntersectionObserver nao re-dispara se sentBottom nao sair do rootMargin.
+  // O scroll listener garante que loadDown continua sendo chamado ao rolar.
+  window.addEventListener('scroll', function() {
+    if (!loadingDown && nextIdx < PAGES.length) {
+      var rect = sentBottom.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 800) loadDown();
+    }
+  }, { passive: true });
+
   var obsUp = new IntersectionObserver(function(entries) {
     for (var i = 0; i < entries.length; i++) {
       if (entries[i].isIntersecting) { loadUp(); break; }
     }
-  }, { rootMargin: '800px' });
+  }, { rootMargin: '400px' });
 
-  // Observar topo se ha paginas anteriores (prevIdx >= 0 inclui a capa)
-  if (prevIdx >= 0) obsUp.observe(sentTop);
+  // Só começa a observar sentTop quando o usuário scrollar PARA CIMA.
+  // Isso evita o disparo espúrio: ao scrollar pra baixo numa página recém-carregada,
+  // sentTop fica dentro dos 400px de rootMargin e o observer dispararia imediatamente,
+  // injetando a seção anterior e causando um salto visual indesejado.
+  if (prevIdx >= 0) {
+    var _prevScrollY = window.scrollY;
+    function _maybeStartObsUp() {
+      var y = window.scrollY;
+      if (y < _prevScrollY) {
+        // Usuário scrollou para cima — agora é seguro registrar o observer
+        window.removeEventListener('scroll', _maybeStartObsUp);
+        obsUp.observe(sentTop);
+      }
+      _prevScrollY = y;
+    }
+    window.addEventListener('scroll', _maybeStartObsUp, { passive: true });
+  }
 
 })();

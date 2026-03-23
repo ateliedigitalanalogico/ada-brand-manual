@@ -33,11 +33,11 @@ ada-manual/
 │   ├── 02-tipografia.html
 │   ├── 03-paleta.html
 │   ├── 04-grid.html
-│   ├── 05-imagetica.html
-│   ├── 06-impressos.html
-│   ├── 07-motion.html
-│   ├── 08-redes.html
-│   ├── 09-voz.html
+│   ├── 05-voz.html
+│   ├── 06-imagetica.html
+│   ├── 07-impressos.html
+│   ├── 08-motion.html
+│   ├── 09-redes.html
 │   └── 10-merch.html
 ├── build/                  ← Ferramentas de build
 │   ├── _source.html        ← FONTE MESTRE com todas as 10 <section> — editar aqui
@@ -197,11 +197,11 @@ const TAGS = [
 | 02 | 02-tipografia.html | Tipografia | ✅ |
 | 03 | 03-paleta.html | Paleta de Cores | ✅ |
 | 04 | 04-grid.html | Grid e Espaçamento | ✅ |
-| 05 | 05-imagetica.html | Linguagem Imagética | ✅ |
-| 06 | 06-impressos.html | Usos Impressos | ✅ |
-| 07 | 07-motion.html | Motion e Vídeo | ✅ |
-| 08 | 08-redes.html | Redes Sociais | ✅ |
-| 09 | 09-voz.html | Voz e Tom | ✅ |
+| 05 | 05-voz.html | Voz e Tom | ✅ |
+| 06 | 06-imagetica.html | Linguagem Imagética | ✅ |
+| 07 | 07-impressos.html | Usos Impressos | ✅ |
+| 08 | 08-motion.html | Motion e Vídeo | ✅ |
+| 09 | 09-redes.html | Redes Sociais | ✅ |
 | 10 | 10-merch.html | Merchandise | ✅ |
 | 11 | — | Aplicações Especiais | ⏳ Adiada |
 
@@ -281,6 +281,45 @@ Plataforma criativa fundada em 2015 por Caio Fazolin e Tatiane Gonzalez.
 - **Imersivo dourado** (pr-g09): 4 imagens ADA_imersivo_01-04.png
 - **Imersivo meia-noite** (pr-g09b): 4 imagens ADA_imersivo_05-08.png
 - **Bios**: Instagram, LinkedIn, GitHub (seção 09)
+- **Merch lightbox**: `.merch-photo` com hover zoom + `merchLightbox()` — clique abre fullscreen, clique fecha
+
+---
+
+## Seção 10 — Merchandise (estado Mar 2026)
+
+Três itens implementados. Estrutura padrão: `item-header` → grid de fotos `.merch-photo` → `assets-section` com canvas download.
+
+### Camiseta (kit01)
+- **Fotos**: flat lay frente, flat lay costas, homem vestindo, mulher costas, cena conjunta — grid 5 colunas
+- **Assets (4K)**: Frente · Símbolo A (4000×4000px) · Costas · Logo+URL (4000×3040px)
+- **Imagens**: `freepik__black-oversized-cotton-tshirt-front-view-flat-lay-__89311.png` / `..._back_...__89312.png` / homem `__89314.png` / mulher `__89313.png` / conjunto `__89315.png`
+
+### Boné Five Panel (kit02)
+- **Estilo**: trail runner, North Face/Arc'teryx, preto, logo off-center esquerdo (como visto na imagem = direita de quem usa)
+- **Fotos**: flat lay boné, diretora de arte vestindo — grid 3 colunas com 1 placeholder "Modelo + Camiseta"
+- **Asset (4K)**: Frente · Símbolo A (4000×4000px) — 1 arquivo só
+- **Imagens**: flat lay `__89316.png` / diretora `__89317.png`
+- **Placeholder pendente**: foto da diretora no festival Rio (cena sendo gerada com Freepik)
+
+### Adesivo (kit03)
+- **Specs**: Logo + URL · fundo amarelo #FFD600 · invertido · impressão digital
+- **Fotos**: placeholder "Foto em breve" + preview HTML do adesivo (renderizado no próprio grid)
+- **Asset (4K)**: Adesivo · Logo+URL · Invertido (4000×4000px) — fundo #FFD600, símbolo+hairline+ada.art.br em preto
+- **Placeholder pendente**: foto do hardcase Pelican com adesivo colado, numa house mix de festival
+
+### merch.js — funções globais
+| Função | Uso |
+|---|---|
+| `merchLightbox(el)` | Abre lightbox com a foto do `.merch-photo` clicado |
+| `buildAssets(num, name, data, gridId)` | Renderiza grid de assets via canvas |
+| `dlAsset(num, name, asset, btn)` | Download de asset individual como PNG |
+| `downloadAll(num, name, assets)` | Download de todos os assets do kit |
+| `drawSym(ctx, ox, oy, size, color)` | Desenha símbolo A no canvas |
+
+### Padrão de assets — todos em 4K (300 DPI)
+- Canvas sempre com `s` hardcoded (não `min(w,h)`) quando `w ≠ h`
+- `lineWidth` escalado proporcionalmente: `Math.round(S*.002)`
+- Nomes de arquivo com sufixo `_4k`
 
 ## Specs de redes sociais (verificados Mar 2026)
 
@@ -298,6 +337,79 @@ Plataforma criativa fundada em 2015 por Caio Fazolin e Tatiane Gonzalez.
 2. Otimizar: minificar, meta tags OG com imagem, favicon
 3. Seção 11 quando houver imagens reais dos projetos autorais
 4. Revisar responsividade mobile
+
+---
+
+## Princípio: o manual é auto-referencial
+
+O Manual de Marca da ADA não descreve o sistema — ele **é** o sistema.
+
+Toda decisão de design definida no documento deve ser válida dentro do próprio documento. Isso significa:
+
+- O símbolo A e o wordmark aparecem no manual exatamente como a seção 01 define — tamanho mínimo respeitado, sempre SVG inline via `<use href="#ada-sym">`, nunca como `<img>`, nunca abaixo de 32px para o símbolo ou 240px para o wordmark
+- As variações de cor (Padrão, Invertido, Meia-noite, Monocromático) definidas na seção 01 devem aparecer aplicadas corretamente em todo o manual
+- A hierarquia tipográfica definida na seção 02 deve ser a mesma usada em títulos, labels, descrições e UI do manual
+- O sistema de grid e espaçamento da seção 04 deve governar o layout de todas as seções
+- A linguagem imagética da seção 06 deve orientar qualquer imagem usada no próprio manual
+- A voz e tom da seção 05 devem ser os mesmos usados nos textos do manual
+
+**Quando o usuário modificar qualquer regra do sistema** (logo, wordmark, tipografia, cor, grid), verificar proativamente se essa mudança precisa se refletir nas outras seções do manual — e aplicar sem precisar ser solicitado.
+
+**Antes de qualquer alteração visual em qualquer seção, perguntar:** isso está coerente com o que as outras seções definem? O manual falha se descreve uma coisa e faz outra.
+
+---
+
+## Regras de consistência interna — extraídas da auditoria (Mar 2026)
+
+Resultado da leitura completa das 6 seções REGRAS (01–06) em 23/03/2026.
+
+### SVG — símbolo A e wordmark
+
+| Contexto | Regra |
+|---|---|
+| UI, nav, headers, footers | `<use href="#ada-sym">` com `currentColor` — sempre |
+| Wordmark em texto/link | `<use href="#ada-wm">` com `currentColor` — sempre |
+| Blocos especimen/demonstração | Inline `<polygon fill="#FFD600">` permitido — contexto didático, não UI |
+| Tamanho mínimo símbolo | 32px |
+| Tamanho mínimo wordmark | 240px / 60mm |
+
+**Exceções documentadas:** SEC 03 tem 6 polígonos inline nos cards "Modo Amarelo / Meia-noite" (demonstração dos uniformes). SEC 04 tem 9 polígonos inline nos especimens de escala mínima (64px / 48px / 34px). Ambas são demonstrações intencionais, não violações.
+
+### Tipografia — regras aplicadas
+
+- **font-family:** sempre via CSS var (`var(--mono)`, `var(--syne)`, `var(--serif)`) — nunca hardcoded
+- **Mono (DM Mono):** labels, tags, UI, números, código — usado em todas as 6 seções
+- **Syne:** corpo de texto, subtítulos, parágrafos explicativos — SEC 02, 05, 06
+- **Cormorant (serif):** manifesto, citações — SEC 02 (especimen), SEC 05 (manifesto) — uso restrito
+- **font-size inline:** permitido apenas em blocos especimen (SEC 02); corpo de texto usa `clamp()` para responsividade
+- **Escala tipográfica confirmada SEC 02:** 42px display / 26px h1 / 22px h2 / 20px h3 / 15px corpo / 11px label / 10px micro
+
+### Cor — regras aplicadas
+
+- **Hex direto na UI:** proibido. Usar CSS vars (`var(--y)`, `var(--void)`, `var(--blade)` etc.)
+- **Hex direto em SVG atributos:** permitido quando `currentColor` não é viável (ex.: `stroke` em SVG de diagrama)
+- **Hex direto em blocos especimen:** permitido — SEC 03 exibe toda a paleta como swatches
+- **Cor proibida:** `#050505` — não pertence ao sistema. Substituir por `#000000` (var --void) ou `#111111` (var --bg)
+- **Modos de cor válidos:** Padrão (`#000` + `#FFD600`), Inversão (`#FFD600` + `#000`), Monocromático (`#FFF` + `#000`), Meia-noite (`#0A0F1E` + `#4A7FD4`)
+
+### Letter-spacing — escala canônica
+
+Definida a partir do uso real nas 6 seções:
+
+| Valor | Uso |
+|---|---|
+| `.18em` | Labels UI padrão, tags, micro-texto |
+| `.2em` | Subtítulos de seção, cabeçalhos secundários |
+| `.34em` | Taglines, destaques, display (esparso) |
+| `-.02em` | Corpo de texto longo (Syne) — tracking negativo suave |
+
+Valores `.12em`, `.15em`, `.22em`, `.25em` foram encontrados isoladamente — evitar para manter coerência.
+
+### Espaçamento
+
+- Gaps padronizados: `8px` (micro), `16px` (padrão), `24px` (confortável), `32px` (seção)
+- `clamp()` para font-size em texto de corpo: padrão confirmado em SEC 05
+- Border-radius: não definido uniformemente entre seções — usar `2px` para elementos UI, `0` para cards e grids
 
 ---
 

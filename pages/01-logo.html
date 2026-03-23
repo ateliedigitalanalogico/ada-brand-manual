@@ -50,15 +50,17 @@
   </div>
   <div class="nav-dropdown" id="nav-dropdown">
     <a href="../index.html" class="nav-drop-item" data-target="cover">Capa</a>
+    <div class="nav-group-label">Regras do Sistema</div>
     <a href="01-logo.html" class="nav-drop-item active" data-target="01">01 Logo</a>
     <a href="02-tipografia.html" class="nav-drop-item" data-target="02">02 Tipografia</a>
     <a href="03-paleta.html" class="nav-drop-item" data-target="03">03 Paleta</a>
     <a href="04-grid.html" class="nav-drop-item" data-target="04">04 Grid</a>
-    <a href="05-imagetica.html" class="nav-drop-item" data-target="05">05 Imagetica</a>
-    <a href="06-impressos.html" class="nav-drop-item" data-target="06">06 Impressos</a>
-    <a href="07-motion.html" class="nav-drop-item" data-target="07">07 Motion</a>
-    <a href="08-redes.html" class="nav-drop-item" data-target="08">08 Redes</a>
-    <a href="09-voz.html" class="nav-drop-item" data-target="09">09 Voz</a>
+    <a href="05-voz.html" class="nav-drop-item" data-target="05">05 Voz</a>
+    <a href="06-imagetica.html" class="nav-drop-item" data-target="06">06 Imagetica</a>
+    <div class="nav-group-label nav-group-usos">Aplicações</div>
+    <a href="07-impressos.html" class="nav-drop-item" data-target="07">07 Impressos</a>
+    <a href="08-motion.html" class="nav-drop-item" data-target="08">08 Motion</a>
+    <a href="09-redes.html" class="nav-drop-item" data-target="09">09 Redes</a>
     <a href="10-merch.html" class="nav-drop-item" data-target="10">10 Merch</a>
   </div>
 </nav>
@@ -67,44 +69,228 @@
 <div class="page">
 
 <div class="hdr">
+  <span class="hdr-group">Regras do Sistema</span>
   <span class="hdr-num">01</span>
   <div class="hdr-title">Logo e Wordmark</div>
-  <div class="hdr-sub">Símbolo A · Wordmark ADA · Variações · Área de proteção · Modos de cor</div>
+  <div class="hdr-sub">Símbolo A · Lock-up · Logo + URL · Wordmark · Taglines</div>
 </div>
 
-    <!-- Símbolo isolado -->
-    <div class="blk ac">
-      <div class="blk-inner" style="padding-bottom:0;">
-        <span class="sec-label">01 — Símbolo isolado · o Logo</span>
-        <div class="sec-desc">O A extraído do wordmark. Principal elemento de identidade no dia a dia — avatar, merch, projeção, favicon, stage design.</div>
+    <!-- 01 — Logo -->
+    <div class="blk">
+      <div class="blk-inner">
+        <span class="sec-label">Logo</span>
+        <div class="sec-desc">O símbolo A extraído do wordmark. Principal elemento de identidade — avatar, merch, projeção, favicon, stage design.</div>
       </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px;margin-top:2px;border-top:1px solid var(--border-dim);">
-        <div style="background:#000;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:1px solid var(--border-dim);">
-          <svg width="72" style="color:#FFD600;"><use href="#ada-sym"/></svg>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,214,0,.4);">Padrão</span>
+      <div class="logo-var-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px;border-top:1px solid var(--border-dim);">
+        <div>
+          <div style="background:#000;padding:48px 32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-dim);">
+            <svg width="72" style="color:#FFD600;"><use href="#ada-sym"/></svg>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Padrão</div>
         </div>
-        <div style="background:#FFD600;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:1px solid rgba(0,0,0,.08);">
-          <svg width="72" style="color:#000;"><use href="#ada-sym"/></svg>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.45);">Inversão</span>
+        <div>
+          <div style="background:#FFD600;padding:48px 32px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,0,0,.08);">
+            <svg width="72" style="color:#000;"><use href="#ada-sym"/></svg>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Invertido</div>
         </div>
-        <div style="background:#ffffff;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:1px solid rgba(0,0,0,.08);">
-          <svg width="72" style="color:#000;"><use href="#ada-sym"/></svg>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.4);">Monocromático</span>
-          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.4);opacity:.5;font-size:8px;margin-top:-4px;">Só impressão</div>
+        <div>
+          <div style="background:#0A0F1E;padding:48px 32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-dim);">
+            <svg width="72" style="color:#4A7FD4;"><use href="#ada-sym"/></svg>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Meia-noite</div>
         </div>
-        <div style="background:#0A0F1E;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:1px solid var(--border-dim);">
-          <svg width="72" style="color:#4A7FD4;"><use href="#ada-sym"/></svg>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(74,127,212,.45);">Meia-noite</span>
+        <div>
+          <div style="background:#ffffff;padding:48px 32px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,0,0,.08);">
+            <svg width="72" style="color:#000;"><use href="#ada-sym"/></svg>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Monocromático</div>
         </div>
+      </div>
+      <div class="blk-inner" style="border-top:1px solid var(--border-dim);">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;">
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Quando usar</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Espaços reduzidos — favicon, avatar, merch</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Marca já reconhecida pelo público</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Projeções, stage design e sinalização</span></div>
+          </div>
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Tamanho mínimo</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>32px em digital</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>8mm em impresso</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Abaixo disso os ângulos se fecham</span></div>
+          </div>
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Restrições</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Proporção intocável — nunca deformar</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Sem efeitos fora do KV (sombra, gradiente)</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Nunca como imagem rasterizada — sempre SVG</span></div>
+          </div>
         </div>
-
+      </div>
     </div>
 
-    <!-- Wordmark completo -->
+    <!-- 02 — Lock-up -->
     <div class="blk">
-      <div class="blk-inner" style="padding-bottom:0;">
-        <span class="sec-label">02 — Wordmark completo · A · D · A</span>
+      <div class="blk-inner">
+        <span class="sec-label">Lock-up · logo + hairline + tagline</span>
+        <div class="sec-desc">Em digital e vídeo a tagline é sempre dinâmica — cicla conforme o mercado inventa novas palavras para coisas que a ADA já fazia.</div>
+      </div>
+      <div class="logo-var-grid" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;border-top:1px solid var(--border-dim);">
+        <div style="min-width:0;overflow:hidden;">
+          <div style="background:#000;padding:48px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border-dim);">
+            <svg width="80" height="80" style="color:#FFD600;display:block;"><use href="#ada-sym"/></svg>
+            <div style="width:80px;height:1px;background:rgba(255,214,0,.22);"></div>
+            <div class="tagline-cycle" style="font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,214,0,.48);white-space:nowrap;">ANTES DO HYPE.</div>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Padrão</div>
+        </div>
+        <div style="min-width:0;overflow:hidden;">
+          <div style="background:#FFD600;padding:48px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(0,0,0,.08);">
+            <svg width="80" height="80" style="color:#000;display:block;"><use href="#ada-sym"/></svg>
+            <div style="width:80px;height:1px;background:rgba(0,0,0,.2);"></div>
+            <div class="tagline-cycle" style="font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:.34em;text-transform:uppercase;color:rgba(0,0,0,.4);white-space:nowrap;">ANTES DO HYPE.</div>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Invertido</div>
+        </div>
+        <div style="min-width:0;overflow:hidden;">
+          <div style="background:#0A0F1E;padding:48px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border-dim);">
+            <svg width="80" height="80" style="color:#4A7FD4;display:block;"><use href="#ada-sym"/></svg>
+            <div style="width:80px;height:1px;background:rgba(74,127,212,.22);"></div>
+            <div class="tagline-cycle" style="font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:.34em;text-transform:uppercase;color:rgba(74,127,212,.55);white-space:nowrap;">ANTES DO HYPE.</div>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Meia-noite</div>
+        </div>
+        <div style="min-width:0;overflow:hidden;">
+          <div style="background:#ffffff;padding:48px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(0,0,0,.08);">
+            <svg width="80" height="80" style="color:#000;display:block;"><use href="#ada-sym"/></svg>
+            <div style="width:80px;height:1px;background:rgba(0,0,0,.15);"></div>
+            <div class="tagline-cycle" style="font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:.34em;text-transform:uppercase;color:rgba(0,0,0,.35);white-space:nowrap;">ANTES DO HYPE.</div>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Monocromático</div>
+        </div>
+      </div>
+      <div class="blk-inner" style="border-top:1px solid var(--border-dim);">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;">
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Quando usar</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>KV de projeto, cartaz e slide master</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Abertura de vídeo e motion</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Assinatura de painel de LED em shows</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Assinatura de mapping e projeções</span></div>
+          </div>
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Tamanho mínimo</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Símbolo: mínimo 32px</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Tagline legível — mínimo 8px</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Não escalar abaixo do ponto de legibilidade</span></div>
+          </div>
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Restrições</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Tagline fixa em digital — sempre dinâmica</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Outra família tipográfica na tagline</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Tagline em caixa baixa</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 — Logo + URL -->
+    <div class="blk">
+      <div class="blk-inner">
+        <span class="sec-label">Logo + URL</span>
+        <div class="sec-desc">Composição com símbolo, hairline e endereço web. Uso em rodapés, créditos e materiais institucionais.</div>
+      </div>
+      <div class="logo-var-grid" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;border-top:1px solid var(--border-dim);">
+        <div style="min-width:0;overflow:hidden;">
+          <div style="background:#000;padding:48px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border-dim);">
+            <svg width="80" height="80" style="color:#FFD600;display:block;"><use href="#ada-sym"/></svg>
+            <div style="width:80px;height:1px;background:rgba(255,214,0,.22);"></div>
+            <span style="font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,214,0,.5);">ada.art.br</span>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Padrão</div>
+        </div>
+        <div style="min-width:0;overflow:hidden;">
+          <div style="background:#FFD600;padding:48px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(0,0,0,.08);">
+            <svg width="80" height="80" style="color:#000;display:block;"><use href="#ada-sym"/></svg>
+            <div style="width:80px;height:1px;background:rgba(0,0,0,.2);"></div>
+            <span style="font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:.34em;text-transform:uppercase;color:rgba(0,0,0,.5);">ada.art.br</span>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Invertido</div>
+        </div>
+        <div style="min-width:0;overflow:hidden;">
+          <div style="background:#0A0F1E;padding:48px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border-dim);">
+            <svg width="80" height="80" style="color:#4A7FD4;display:block;"><use href="#ada-sym"/></svg>
+            <div style="width:80px;height:1px;background:rgba(74,127,212,.22);"></div>
+            <span style="font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:.34em;text-transform:uppercase;color:rgba(74,127,212,.5);">ada.art.br</span>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Meia-noite</div>
+        </div>
+        <div style="min-width:0;overflow:hidden;">
+          <div style="background:#ffffff;padding:48px 32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(0,0,0,.08);">
+            <svg width="80" height="80" style="color:#000;display:block;"><use href="#ada-sym"/></svg>
+            <div style="width:80px;height:1px;background:rgba(0,0,0,.15);"></div>
+            <span style="font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:.34em;text-transform:uppercase;color:rgba(0,0,0,.45);">ada.art.br</span>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Monocromático</div>
+        </div>
+      </div>
+      <div class="blk-inner" style="border-top:1px solid var(--border-dim);">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;">
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Quando usar</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Rodapé de documentos e apresentações</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Crédito em material impresso</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Assinatura institucional discreta</span></div>
+          </div>
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Tamanho mínimo</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Símbolo: mínimo 20px</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>URL legível — mínimo 8px</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Composição abaixo do ponto de leitura</span></div>
+          </div>
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Restrições</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Substituir URL por outro texto</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Outra família tipográfica na URL</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Hairline com outra espessura ou cor</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 — Wordmark -->
+    <div class="blk">
+      <div class="blk-inner">
+        <span class="sec-label">Wordmark</span>
         <div class="sec-desc">Três glifos geométricos desenhados. Não é uma fonte — é arquitetura própria. Uso quando a marca precisa ser lida por quem ainda não a conhece.</div>
+      </div>
+      <div class="logo-var-grid" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px;border-top:1px solid var(--border-dim);">
+        <div>
+          <div style="background:#000;padding:48px 32px;border:1px solid var(--border-dim);display:flex;align-items:center;justify-content:center;">
+            <svg style="width:100%;max-width:180px;height:auto;color:#FFD600;"><use href="#ada-wm"/></svg>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Padrão</div>
+        </div>
+        <div>
+          <div style="background:#FFD600;padding:48px 32px;border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;">
+            <svg style="width:100%;max-width:180px;height:auto;color:#000;"><use href="#ada-wm"/></svg>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Invertido</div>
+        </div>
+        <div>
+          <div style="background:#0A0F1E;padding:48px 32px;border:1px solid var(--border-dim);display:flex;align-items:center;justify-content:center;">
+            <svg style="width:100%;max-width:180px;height:auto;color:#4A7FD4;"><use href="#ada-wm"/></svg>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Meia-noite</div>
+        </div>
+        <div>
+          <div style="background:#ffffff;padding:48px 32px;border:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;">
+            <svg style="width:100%;max-width:180px;height:auto;color:#000;"><use href="#ada-wm"/></svg>
+          </div>
+          <div style="padding:10px 4px 6px;text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);">Monocromático</div>
+        </div>
       </div>
       <div class="blk-inner" style="border-top:1px solid var(--border-dim);">
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;">
@@ -122,70 +308,19 @@
           </div>
           <div>
             <span class="sec-label" style="margin-bottom:10px;">Restrições</span>
-            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Geometria intocável — nunca deformar</span></div>
             <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Nunca recriar com fonte tipográfica</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Geometria intocável — sem deformações</span></div>
             <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Sem variações de peso ou estilo</span></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Variações do Wordmark -->
+    <!-- 05 — Taglines -->
     <div class="blk">
-      <div class="blk-inner" style="padding-bottom:0;">
-        <span class="sec-label">03 — Variações do Wordmark</span>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px;margin-top:2px;border-top:1px solid var(--border-dim);">
-        <div style="background:#000;padding:28px 20px;border:1px solid var(--border-dim);display:flex;flex-direction:column;align-items:center;gap:14px;">
-          <svg style="width:100%;max-width:220px;height:auto;color:#FFD600;"><use href="#ada-wm"/></svg>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:10px;letter-spacing:.18em;color:rgba(255,214,0,.4);">Padrão</span>
-        </div>
-        <div style="background:#FFD600;padding:28px 20px;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;gap:14px;">
-          <svg style="width:100%;max-width:220px;height:auto;color:#000;"><use href="#ada-wm"/></svg>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:10px;letter-spacing:.18em;color:rgba(0,0,0,.45);">Inversão</span>
-        </div>
-        <div style="background:#ffffff;padding:28px 20px;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;gap:14px;">
-          <svg style="width:100%;max-width:220px;height:auto;color:#000;"><use href="#ada-wm"/></svg>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:10px;letter-spacing:.18em;color:rgba(0,0,0,.4);">Monocromático</span>
-        </div>
-        <div style="background:#0A0F1E;padding:28px 20px;border:1px solid var(--border-dim);display:flex;flex-direction:column;align-items:center;gap:14px;">
-          <svg style="width:100%;max-width:220px;height:auto;color:#4A7FD4;"><use href="#ada-wm"/></svg>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:10px;letter-spacing:.18em;color:rgba(74,127,212,.5);">Meia-noite</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Lock-up -->
-    <div class="blk">
-      <div class="blk-inner" style="padding-bottom:0;">
-        <span class="sec-label">04 — Lock-up · símbolo + hairline + tagline</span>
-        <div class="sec-desc">Composição do KV aprovado. A tagline é generativa — cresce conforme o mercado inventa novas palavras para coisas que a ADA já fazia.</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px;margin-top:2px;border-top:1px solid var(--border-dim);">
-        <div style="background:#000;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid var(--border-dim);">
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,214,0,.3);margin-bottom:4px;">Padrão</span>
-          <svg width="72" style="color:#FFD600;filter:drop-shadow(0 0 5px rgba(255,214,0,.5)) drop-shadow(0 0 16px rgba(255,214,0,.5));"><use href="#ada-sym"/></svg>
-          <div style="width:72px;height:1px;background:rgba(255,214,0,.22);"></div>
-          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:8px;letter-spacing:.32em;color:rgba(255,214,0,.48);white-space:nowrap;">ANTES DO HYPE.</div>
-        </div>
-        <div style="background:#FFD600;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid rgba(0,0,0,.08);">
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:4px;">Inversão</span>
-          <svg width="72" style="color:#000;"><use href="#ada-sym"/></svg>
-          <div style="width:72px;height:1px;background:rgba(0,0,0,.2);"></div>
-          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:8px;letter-spacing:.32em;color:rgba(0,0,0,.4);white-space:nowrap;">ANTES DO HYPE.</div>
-        </div>
-        <div style="background:#ffffff;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid rgba(0,0,0,.08);">
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,0,0,.4);margin-bottom:4px;">Monocromático</span>
-          <svg width="72" style="color:#000;"><use href="#ada-sym"/></svg>
-          <div style="width:72px;height:1px;background:rgba(0,0,0,.15);"></div>
-          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:8px;letter-spacing:.32em;color:rgba(0,0,0,.35);white-space:nowrap;">ANTES DO HYPE.</div>
-        </div>
-        <div style="background:#0A0F1E;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid var(--border-dim);">
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(74,127,212,.35);margin-bottom:4px;">Meia-noite</span>
-          <svg width="72" style="color:#4A7FD4;"><use href="#ada-sym"/></svg>
-          <div style="width:72px;height:1px;background:rgba(74,127,212,.22);"></div>
-          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:8px;letter-spacing:.32em;color:rgba(74,127,212,.55);white-space:nowrap;">ANTES DO HYPE.</div>
-        </div>
+      <div class="blk-inner">
+        <span class="sec-label">Taglines</span>
+        <div class="sec-desc">Generativas — crescem conforme o mercado inventa novas palavras para coisas que a ADA já fazia. Em digital e vídeo ciclam em loop. Em impresso, escolha uma do banco ativo.</div>
       </div>
       <div class="blk-inner" style="border-top:1px solid var(--border-dim);">
         <span class="sec-label" style="margin-bottom:14px;">Banco de taglines ativo</span>
@@ -201,43 +336,31 @@
           <span class="tag-chip ghost">+ novas entram conforme o mercado</span>
         </div>
       </div>
-    </div>
-
-    <!-- Logo + site -->
-    <div class="blk">
-      <div class="blk-inner" style="padding-bottom:0;">
-        <span class="sec-label">05 — Aplicação · Logo + URL</span>
-        <div class="sec-desc">Composição com o símbolo, hairline e endereço web. Uso em rodapés, créditos e materiais institucionais.</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2px;margin-top:2px;border-top:1px solid var(--border-dim);">
-        <div style="background:#000;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:1px solid var(--border-dim);">
-          <svg width="56" style="color:#FFD600;"><use href="#ada-sym"/></svg>
-          <div style="width:40px;height:1px;background:rgba(255,214,0,.22);"></div>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:10px;letter-spacing:.28em;color:rgba(255,214,0,.5);">ada.art.br</span>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:8px;color:Padrão;opacity:.5;margin-top:-6px;">rgba(255,214,0,.28)</span>
-        </div>
-        <div style="background:#FFD600;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:1px solid rgba(0,0,0,.08);">
-          <svg width="56" style="color:#000;"><use href="#ada-sym"/></svg>
-          <div style="width:40px;height:1px;background:rgba(0,0,0,.2);"></div>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:10px;letter-spacing:.28em;color:rgba(0,0,0,.5);">ada.art.br</span>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:8px;color:Inversão;opacity:.5;margin-top:-6px;">rgba(0,0,0,.28)</span>
-        </div>
-        <div style="background:#ffffff;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:1px solid rgba(0,0,0,.08);">
-          <svg width="56" style="color:#000;"><use href="#ada-sym"/></svg>
-          <div style="width:40px;height:1px;background:rgba(0,0,0,.15);"></div>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:10px;letter-spacing:.28em;color:rgba(0,0,0,.45);">ada.art.br</span>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:8px;color:Monocromático;opacity:.5;margin-top:-6px;">rgba(0,0,0,.25)</span>
-        </div>
-        <div style="background:#0A0F1E;padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:1px solid var(--border-dim);">
-          <svg width="56" style="color:#4A7FD4;"><use href="#ada-sym"/></svg>
-          <div style="width:40px;height:1px;background:rgba(74,127,212,.22);"></div>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:10px;letter-spacing:.28em;color:rgba(74,127,212,.5);">ada.art.br</span>
-          <span style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-size:8px;color:Meia-noite;opacity:.5;margin-top:-6px;">rgba(74,127,212,.28)</span>
+      <div class="blk-inner" style="border-top:1px solid var(--border-dim);">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;">
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Comportamento digital</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Ciclo automático em loop</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Crossfade suave entre frases</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Sincronizado entre todas as instâncias</span></div>
+          </div>
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Tipografia</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>DM Mono, caixa alta</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Letter-spacing: .32–.36em</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet ok">→</span><span>Sempre termina com ponto final</span></div>
+          </div>
+          <div>
+            <span class="sec-label" style="margin-bottom:10px;">Restrições</span>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Tagline fixa em digital ou vídeo</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Caixa baixa ou sem ponto final</span></div>
+            <div class="rule-item" style="padding:3px 0;"><span class="bullet no">×</span><span>Outra família tipográfica</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Regras logo -->
+    <!-- Regras gerais -->
     <div class="blk">
       <div class="rules-grid">
         <div class="rule-col">

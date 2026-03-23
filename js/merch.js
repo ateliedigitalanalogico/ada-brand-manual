@@ -5,66 +5,49 @@
 var min = Math.min;
 var _rc; // canvas de render - inicializado quando DOM pronto
 
-/* kit01 */
-var kit01_data = [{name:'Símbolo · Transparente',bg:'transparent',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");},fname:'símbolo_transparente'},
-{name:'Símbolo · Fundo Preto',bg:'#000000',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");},fname:'símbolo_fundo_preto'},
-{name:'Símbolo · Off-white',bg:'#F2F2F2',pbg:'#F2F2F2',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#000000");},fname:'símbolo_off-white'},
-{name:'"ANTES." · Transparente',bg:'transparent',pbg:'#000',w:2000,h:500,s:min(2000,500),draw:function(ctx,S){
-    var W=ctx.canvas.width;
-    ctx.font="300 "+Math.round(S*.3)+"px DM Mono,monospace";
-    ctx.fillStyle="#FFD600"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("ANTES.",W/2,ctx.canvas.height/2);
-  },fname:'antes_transparente'},
-{name:'Lock-up · Fundo Preto',bg:'#000000',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){
-    var sz=S*.38,x=S/2-sz/2,y=S/2-sz/2-S*.06;
-    drawSym(ctx,x,y,sz,"#FFD600");
-    var ly=y+sz+S*.04;
-    ctx.strokeStyle="rgba(255,214,0,.35)"; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(S/2-sz/2,ly); ctx.lineTo(S/2+sz/2,ly); ctx.stroke();
-    ctx.font="300 "+Math.round(S*.028)+"px DM Mono,monospace";
+/* kit01 — arquivos de arte para produção (300 DPI / fornecedor) */
+var kit01_data = [
+{name:'Frente · Símbolo A · Peito Esquerdo',bg:'transparent',pbg:'#111',w:4000,h:4000,s:4000,draw:function(ctx,S){
+    // 4000×4000px transparente — ~34×34cm a 300 DPI — serigrafia/bordado peito esquerdo
+    drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");
+  },fname:'camiseta_frente_simbolo_peito_esquerdo_4k'},
+{name:'Costas · Logo + URL · Centralizado',bg:'transparent',pbg:'#111',w:4000,h:3040,s:4000,draw:function(ctx,S){
+    // 4000×3040px transparente — ~34×26cm a 300 DPI — serigrafia/digital costas
+    var sym=S*.42,x=S/2-sym/2,y=S*.1;
+    drawSym(ctx,x,y,sym,"#FFD600");
+    var ly=y+sym+S*.06;
+    ctx.strokeStyle="rgba(255,214,0,.4)"; ctx.lineWidth=Math.round(S*.002);
+    ctx.beginPath(); ctx.moveTo(S/2-sym/2,ly); ctx.lineTo(S/2+sym/2,ly); ctx.stroke();
+    ctx.font="300 "+Math.round(S*.042)+"px DM Mono,monospace";
     ctx.fillStyle="rgba(255,214,0,.55)"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("ANTES DO HYPE.",S/2,ly+S*.065);
-  },fname:'lock-up_fundo_preto'},
-{name:'Lock-up · Transparente',bg:'transparent',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){
-    var sz=S*.38,x=S/2-sz/2,y=S/2-sz/2-S*.06;
-    drawSym(ctx,x,y,sz,"#FFD600");
-    var ly=y+sz+S*.04;
-    ctx.strokeStyle="rgba(255,214,0,.35)"; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(S/2-sz/2,ly); ctx.lineTo(S/2+sz/2,ly); ctx.stroke();
-    ctx.font="300 "+Math.round(S*.028)+"px DM Mono,monospace";
-    ctx.fillStyle="rgba(255,214,0,.55)"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("ANTES DO HYPE.",S/2,ly+S*.065);
-  },fname:'lock-up_transparente'},
-{name:'Lock-up · Off-white',bg:'#F2F2F2',pbg:'#F2F2F2',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){
-    var sz=S*.38,x=S/2-sz/2,y=S/2-sz/2-S*.06;
-    drawSym(ctx,x,y,sz,"#000000");
-    var ly=y+sz+S*.04;
-    ctx.strokeStyle="rgba(0,0,0,.3)"; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(S/2-sz/2,ly); ctx.lineTo(S/2+sz/2,ly); ctx.stroke();
-    ctx.font="300 "+Math.round(S*.028)+"px DM Mono,monospace";
-    ctx.fillStyle="rgba(0,0,0,.55)"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("ANTES DO HYPE.",S/2,ly+S*.065);
-  },fname:'lock-up_off-white'},
-{name:'Gola Interna · Easter egg',bg:'#000000',pbg:'#000',w:2000,h:400,s:min(2000,400),draw:function(ctx,S){
-    var W=ctx.canvas.width,H=ctx.canvas.height;
-    ctx.font="300 "+Math.round(H*.22)+"px DM Mono,monospace";
-    ctx.fillStyle="rgba(255,214,0,.6)"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("ADA · SÃO PAULO · 2015",W/2,H/2);
-  },fname:'gola_interna_easter_egg'}];
+    ctx.fillText("ada.art.br",S/2,ly+S*.1);
+  },fname:'camiseta_costas_logo_url_4k'}];
 
-/* kit02 */
-var kit02_data = [{name:'Símbolo · Dourado',bg:'transparent',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");},fname:'símbolo_dourado'},
-{name:'Símbolo · Branco',bg:'transparent',pbg:'#222',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFFFFF");},fname:'símbolo_branco'},
-{name:'Símbolo · Preto',bg:'transparent',pbg:'#F2F2F2',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#000000");},fname:'símbolo_preto'},
-{name:'"ADA · 2015" · Aba Interna',bg:'#000000',pbg:'#000',w:2000,h:400,s:min(2000,400),draw:function(ctx,S){
-    var W=ctx.canvas.width,H=ctx.canvas.height;
-    ctx.font="300 "+Math.round(H*.22)+"px DM Mono,monospace";
-    ctx.fillStyle="rgba(255,214,0,.6)"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("ADA · SÃO PAULO · 2015",W/2,H/2);
-  },fname:'ada_2015_aba_interna'}];
+/* kit02 — arquivos de arte para produção (300 DPI / fornecedor) */
+var kit02_data = [
+{name:'Frente · Símbolo A',bg:'transparent',pbg:'#000',w:4000,h:4000,s:4000,draw:function(ctx,S){
+    drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");
+  },fname:'bone_frente_simbolo_4k'}];
 
-/* kit03 */
-var kit03_data = [{name:'A1 · Símbolo Amarelo',bg:'transparent',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");},fname:'a1_símbolo_amarelo'},
+/* kit03 — adesivo horizontal 3200×1000: símbolo + hairline + tagline + cantos */
+var kit03_data = [
+{name:'Adesivo · Antes do Algoritmo',bg:'#FFD600',pbg:'#FFD600',w:3200,h:1000,s:1000,draw:function(ctx,S){
+    // S=1000 (=h). W total = S*3.2 — usar S como referência para preservar escala no preview
+    var H=S, W=S*3.2;
+    // Símbolo A à esquerda
+    var sym=H*.64, sy=(H-sym)/2;
+    drawSym(ctx, H*.1, sy, sym, "#000000");
+    // Hairline vertical
+    ctx.strokeStyle="rgba(0,0,0,.22)"; ctx.lineWidth=Math.round(H*.0025);
+    ctx.beginPath(); ctx.moveTo(H*.84, H*.1); ctx.lineTo(H*.84, H*.9); ctx.stroke();
+    // Tagline
+    ctx.font="300 "+Math.round(H*.175)+"px DM Mono,monospace";
+    ctx.fillStyle="rgba(0,0,0,.78)"; ctx.textAlign="left"; ctx.textBaseline="middle";
+    ctx.fillText("ANTES DO ALGORITMO.", H*.94, H/2);
+  },fname:'adesivo_antes_algoritmo_4k'}];
+
+/* kit03_original */
+var kit03_original_data = [{name:'A1 · Símbolo Amarelo',bg:'transparent',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");},fname:'a1_símbolo_amarelo'},
 {name:'A2 · Símbolo Branco',bg:'transparent',pbg:'#333',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFFFFF");},fname:'a2_símbolo_branco'},
 {name:'A3 · "ANTES." Amarelo',bg:'transparent',pbg:'#000',w:2000,h:600,s:min(2000,600),draw:function(ctx,S){
     var W=ctx.canvas.width;
@@ -107,31 +90,18 @@ var kit03_data = [{name:'A1 · Símbolo Amarelo',bg:'transparent',pbg:'#000',w:1
     ctx.fillText("ANTES DO HYPE.",S/2,ly+S*.065);
   },fname:'lock-up_preto'}];
 
-/* kit04 */
-var kit04_data = [{name:'Símbolo · Dourado',bg:'transparent',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");},fname:'símbolo_dourado'},
-{name:'Lock-up · Fundo Preto',bg:'#000000',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){
-    var sz=S*.38,x=S/2-sz/2,y=S/2-sz/2-S*.06;
-    drawSym(ctx,x,y,sz,"#FFD600");
-    var ly=y+sz+S*.04;
-    ctx.strokeStyle="rgba(255,214,0,.35)"; ctx.lineWidth=2;
-    ctx.beginPath(); ctx.moveTo(S/2-sz/2,ly); ctx.lineTo(S/2+sz/2,ly); ctx.stroke();
-    ctx.font="300 "+Math.round(S*.028)+"px DM Mono,monospace";
-    ctx.fillStyle="rgba(255,214,0,.55)"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("ANTES DO HYPE.",S/2,ly+S*.065);
-  },fname:'lock-up_fundo_preto'},
-{name:'"ada.art.br" · Base',bg:'transparent',pbg:'#000',w:1500,h:300,s:min(1500,300),draw:function(ctx,S){
-    var W=ctx.canvas.width,H=ctx.canvas.height;
-    ctx.font="300 "+Math.round(H*.24)+"px DM Mono,monospace";
-    ctx.fillStyle="rgba(255,214,0,.45)"; ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.fillText("ada.art.br",W/2,H/2);
-  },fname:'adaartbr_base'},
-{name:'Wrap 360° · Fundo Preto',bg:'#000000',pbg:'#000',w:3000,h:1000,s:min(3000,1000),draw:function(ctx,S){
-    var W=ctx.canvas.width,sym=S*.52;
-    [0.5,1.5,2.5].forEach(function(fx,i){
-      ctx.globalAlpha=i===1?1:.14;
-      drawSym(ctx,fx*W/3-sym/2+S*.05,S/2-sym/2,sym,"#FFD600");
-    }); ctx.globalAlpha=1;
-  },fname:'wrap_360°_fundo_preto'}];
+/* kit04 — caneca: silk faixa inferior, símbolo + hairline + ada.art.br, fundo transparente */
+var kit04_data = [
+{name:'Caneca · Silk Inferior · Amarelo',bg:'transparent',pbg:'#111',w:2000,h:1000,s:1000,draw:function(ctx,S){
+    var H=S, W=S*2;
+    var sym=H*.64, sy=(H-sym)/2;
+    drawSym(ctx, H*.1, sy, sym, "#FFD600");
+    ctx.strokeStyle="rgba(255,214,0,.4)"; ctx.lineWidth=Math.round(H*.0025);
+    ctx.beginPath(); ctx.moveTo(H*.84, H*.1); ctx.lineTo(H*.84, H*.9); ctx.stroke();
+    ctx.font="300 "+Math.round(H*.175)+"px DM Mono,monospace";
+    ctx.fillStyle="#FFD600"; ctx.textAlign="left"; ctx.textBaseline="middle";
+    ctx.fillText("ada.art.br", H*.94, H/2);
+  },fname:'caneca_silk_inferior_amarelo_4k'}];
 
 /* kit05 */
 var kit05_data = [{name:'Símbolo Grande · Amarelo',bg:'transparent',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.1,S*.1,S*.8,"#FFD600");},fname:'símbolo_grande_amarelo'},
@@ -224,6 +194,75 @@ var kit07_data = [{name:'Símbolo · Bordado',bg:'transparent',pbg:'#000',w:1000
     ctx.fillText("ANTES DO HYPE.",S/2,ly+S*.065);
   },fname:'lock-up_para_forro'}];
 
+/* == SVG Context — mesma API do canvas, emite SVG == */
+
+function makeSvgCtx(W,H){
+  var els=[], path=[], stack=[];
+  var st={fillStyle:'#000',strokeStyle:'#000',lineWidth:1,globalAlpha:1,
+          font:'300 16px DM Mono,monospace',textAlign:'left',textBaseline:'alphabetic'};
+
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  function parseFont(f){
+    var m=f.match(/(\d+)\s+([\d.]+)px\s+(.+)/);
+    return m?{w:m[1],sz:parseFloat(m[2]),fam:m[3]}:{w:'300',sz:16,fam:'DM Mono,monospace'};
+  }
+
+  var ctx={
+    canvas:{width:W,height:H},
+    get fillStyle(){return st.fillStyle;},   set fillStyle(v){st.fillStyle=v;},
+    get strokeStyle(){return st.strokeStyle;},set strokeStyle(v){st.strokeStyle=v;},
+    get lineWidth(){return st.lineWidth;},    set lineWidth(v){st.lineWidth=v;},
+    get globalAlpha(){return st.globalAlpha;},set globalAlpha(v){st.globalAlpha=v;},
+    get font(){return st.font;},             set font(v){st.font=v;},
+    get textAlign(){return st.textAlign;},   set textAlign(v){st.textAlign=v;},
+    get textBaseline(){return st.textBaseline;},set textBaseline(v){st.textBaseline=v;},
+
+    save:function(){stack.push(Object.assign({},st));},
+    restore:function(){if(stack.length)st=stack.pop();},
+    scale:function(){/* no-op — SVG é vetorial */},
+    clearRect:function(){/* no-op */},
+
+    fillRect:function(x,y,w,h){
+      var a=st.globalAlpha!==1?' opacity="'+st.globalAlpha+'"':'';
+      els.push('<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+esc(st.fillStyle)+'"'+a+'/>');
+    },
+
+    beginPath:function(){path=[];},
+    moveTo:function(x,y){path.push('M'+x+','+y);},
+    lineTo:function(x,y){path.push('L'+x+','+y);},
+    closePath:function(){path.push('Z');},
+
+    fill:function(){
+      var a=st.globalAlpha!==1?' opacity="'+st.globalAlpha+'"':'';
+      els.push('<path d="'+path.join(' ')+'" fill="'+esc(st.fillStyle)+'"'+a+'/>');
+      path=[];
+    },
+    stroke:function(){
+      var a=st.globalAlpha!==1?' opacity="'+st.globalAlpha+'"':'';
+      els.push('<path d="'+path.join(' ')+'" fill="none" stroke="'+esc(st.strokeStyle)+'" stroke-width="'+st.lineWidth+'"'+a+'/>');
+      path=[];
+    },
+
+    fillText:function(text,x,y){
+      var f=parseFont(st.font);
+      var anchor=st.textAlign==='center'?'middle':st.textAlign==='right'?'end':'start';
+      var base=st.textBaseline==='middle'?'central':st.textBaseline==='top'?'hanging':'auto';
+      var a=st.globalAlpha!==1?' opacity="'+st.globalAlpha+'"':'';
+      els.push('<text x="'+x+'" y="'+y+'" font-family="\'DM Mono\',monospace" font-size="'+f.sz+'" font-weight="'+f.w+'" fill="'+esc(st.fillStyle)+'" text-anchor="'+anchor+'" dominant-baseline="'+base+'"'+a+'>'+esc(text)+'</text>');
+    },
+
+    toSVG:function(bg){
+      var bgEl=(bg&&bg!=='transparent')?'<rect width="'+W+'" height="'+H+'" fill="'+esc(bg)+'"/>\n':'';
+      return '<?xml version="1.0" encoding="UTF-8"?>\n'
+        +'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'">\n'
+        +bgEl+els.join('\n')+'\n</svg>';
+    }
+  };
+  return ctx;
+}
+
+
 /* == Funcoes de canvas e download == */
 
 function drawSym(ctx,ox,oy,size,color){
@@ -306,6 +345,24 @@ function dlAsset(num,name,asset,btn){
   }
 }
 
+function dlAssetSVG(num,name,asset,btn){
+  var svgCtx=makeSvgCtx(asset.w,asset.h);
+  asset.draw(svgCtx,asset.s);
+  var svgStr=svgCtx.toSVG(asset.bg);
+  var blob=new Blob([svgStr],{type:'image/svg+xml'});
+  var blobUrl=URL.createObjectURL(blob);
+  var fname='ada_'+num+'_'+name.toLowerCase().replace(/[^a-z0-9]/g,'_')+'_'+asset.fname+'.svg';
+  var a=document.createElement('a');
+  a.href=blobUrl; a.download=fname; a.style.display='none';
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(blobUrl);},300);
+  if(btn){
+    btn.textContent='Baixado';
+    btn.classList.add('done');
+    setTimeout(function(){btn.textContent='↓ SVG';btn.classList.remove('done');},2000);
+  }
+}
+
 function downloadAll(num,name,assets){
   // Intervalo maior (600ms) para nao ser bloqueado como popup
   assets.forEach(function(a,i){
@@ -327,7 +384,10 @@ function buildAssets(num,name,assets,gridId){
       +'<div class="asset-info">'
       +'<span class="asset-name">'+asset.name+'</span>'
       +'<span class="asset-spec">'+asset.w+'×'+asset.h+'</span>'
-      +'<button class="asset-dl-btn">↓ PNG</button>'
+      +'<div style="display:flex;gap:3px;margin-top:4px;">'
+      +'<button class="asset-dl-btn" style="flex:1;">↓ PNG</button>'
+      +'<button class="asset-dl-btn asset-svg-btn" style="flex:1;">↓ SVG</button>'
+      +'</div>'
       +'</div>';
     card.querySelector('.asset-thumb').addEventListener('click',function(){
       dlAsset(num,name,asset,card.querySelector('.asset-dl-btn'));
@@ -335,8 +395,27 @@ function buildAssets(num,name,assets,gridId){
     card.querySelector('.asset-dl-btn').addEventListener('click',function(){
       dlAsset(num,name,asset,this);
     });
+    card.querySelector('.asset-svg-btn').addEventListener('click',function(){
+      dlAssetSVG(num,name,asset,this);
+    });
     grid.appendChild(card);
   });
+}
+
+/* == Lightbox de fotos de merch == */
+
+function merchLightbox(el) {
+  var src = el.querySelector('img').src;
+  var lb = document.getElementById('merch-lb');
+  if (!lb) {
+    lb = document.createElement('div');
+    lb.id = 'merch-lb';
+    lb.innerHTML = '<img>';
+    lb.addEventListener('click', function() { lb.classList.remove('open'); });
+    document.body.appendChild(lb);
+  }
+  lb.querySelector('img').src = src;
+  lb.classList.add('open');
 }
 
 /* == Inicializacao == */
