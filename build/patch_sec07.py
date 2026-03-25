@@ -1,77 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#000000">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/system.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-<title>ADA — Usos Impressos · Manual de Marca</title>
-<meta name="description" content="ADA Manual de Marca — Usos Impressos">
-</head>
-<body>
-<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
-  <defs>
-    <symbol id="ada-sym" viewBox="225 225 126 126">
-      <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
-      <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
-      <polygon fill="currentColor" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
-    </symbol>
-    <symbol id="ada-wm" viewBox="225 225 414 126">
-      <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
-      <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
-      <polygon fill="currentColor" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
-      <path fill="currentColor" d="M387,297v-54h45c24.81,0,45,20.19,45,45,0,3.08-.31,6.09-.91,9h18.26c.42-2.94.65-5.94.65-9,0-34.79-28.21-63-63-63h-63v72h18Z"/>
-      <path fill="currentColor" d="M458.97,324c-7.52,5.65-16.86,9-26.97,9h-45v-9h-18v27h63c21.4,0,40.3-10.68,51.69-27h-24.72Z"/>
-      <polygon fill="currentColor" points="609.49 324 613.99 333 622.99 351 639 351 625.5 324 609.49 324"/>
-      <polygon fill="currentColor" points="556.01 297 576 257.02 595.99 297 612 297 576 225 540 297 556.01 297"/>
-      <polygon fill="currentColor" points="526.5 324 513 351 529.01 351 538.01 333 542.51 324 526.5 324"/>
-    </symbol>
-  </defs>
-</svg>
-<nav class="manual-nav">
-  <div class="nav-inner">
-    <div class="nav-logo">
-      <svg width="18" style="color:#FFD600"><use href="#ada-sym"/></svg>
-      <span>Manual de Marca</span>
-    </div>
-    <div class="nav-current" id="nav-current">07 Impressos</div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu de secoes">
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </button>
-  </div>
-  <div class="nav-dropdown" id="nav-dropdown">
-    <a href="../index.html" class="nav-drop-item" data-target="cover">Capa</a>
-    <div class="nav-group-label">Regras do Sistema</div>
-    <a href="01-logo.html" class="nav-drop-item" data-target="01">01 Logo</a>
-    <a href="02-tipografia.html" class="nav-drop-item" data-target="02">02 Tipografia</a>
-    <a href="03-paleta.html" class="nav-drop-item" data-target="03">03 Paleta</a>
-    <a href="04-grid.html" class="nav-drop-item" data-target="04">04 Grid</a>
-    <a href="05-voz.html" class="nav-drop-item" data-target="05">05 Voz</a>
-    <a href="06-imagetica.html" class="nav-drop-item" data-target="06">06 Imagetica</a>
-    <div class="nav-group-label nav-group-usos">Aplicações</div>
-    <a href="07-impressos.html" class="nav-drop-item active" data-target="07">07 Impressos</a>
-    <a href="08-motion.html" class="nav-drop-item" data-target="08">08 Motion</a>
-    <a href="09-redes.html" class="nav-drop-item" data-target="09">09 Redes</a>
-    <a href="10-merch.html" class="nav-drop-item" data-target="10">10 Merch</a>
-  </div>
-</nav>
+import sys
 
-<section data-sec="07" class="manual-section">
-<div class="page">
+content = open('build/_source.html', encoding='utf-8').read()
 
-<div class="hdr">
-  <span class="hdr-group">Aplicações</span>
-  <span class="hdr-num">07</span>
-  <div class="hdr-title">Papelaria</div>
-  <div class="hdr-sub">Papel Timbrado · Proposta Comercial</div>
-</div>
+t_start = content.find('<!-- ══ 02 PAPEL TIMBRADO ══ -->')
+sec08_start = content.find('<!-- ══════ SEÇÃO 08 ══════ -->')
 
-<!-- ══ 02 PAPEL TIMBRADO ══ -->
+btn_dark  = 'position:absolute;top:8px;right:8px;z-index:10;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.55);font-family:var(--mono);font-size:9px;letter-spacing:.1em;padding:5px 9px;cursor:pointer;line-height:1;'
+btn_light = 'position:absolute;top:8px;right:8px;z-index:10;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.15);color:rgba(0,0,0,.4);font-family:var(--mono);font-size:9px;letter-spacing:.1em;padding:5px 9px;cursor:pointer;line-height:1;'
+
+new_blocks = f'''<!-- ══ 02 PAPEL TIMBRADO ══ -->
 <div class="blk">
   <div class="blk-inner">
     <span class="sec-label">Papel Timbrado A4</span>
@@ -82,7 +19,8 @@
 
     <!-- Escuro vertical -->
     <div>
-      <div style="aspect-ratio:210/297;position:relative;overflow:hidden;background:#0D0D0D;border:1px solid rgba(255,214,0,.1);display:flex;flex-direction:column;cursor:pointer;" onclick="expandMock(this)">
+      <div style="aspect-ratio:210/297;position:relative;overflow:hidden;background:#0D0D0D;border:1px solid rgba(255,214,0,.1);display:flex;flex-direction:column;">
+        <button class="expand-btn" onclick="expandMock(this.parentElement)" style="{btn_dark}">&#x2197;</button>
         <div style="padding:6% 8% 4%;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid rgba(255,214,0,.08);">
           <svg width="24" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
           <div style="font-family:var(--mono);font-size:clamp(4px,.85vw,6px);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.18);text-align:right;line-height:1.7;">ada.art.br<br>contato@ada.art.br</div>
@@ -104,7 +42,8 @@
 
     <!-- Claro vertical -->
     <div>
-      <div style="aspect-ratio:210/297;position:relative;overflow:hidden;background:#F2F2F2;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;cursor:pointer;" onclick="expandMock(this)">
+      <div style="aspect-ratio:210/297;position:relative;overflow:hidden;background:#F2F2F2;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;">
+        <button class="expand-btn" onclick="expandMock(this.parentElement)" style="{btn_light}">&#x2197;</button>
         <div style="padding:6% 8% 4%;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid rgba(0,0,0,.07);">
           <svg width="24" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#000" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#000" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#000" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
           <div style="font-family:var(--mono);font-size:clamp(4px,.85vw,6px);letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.3);text-align:right;line-height:1.7;">ada.art.br<br>contato@ada.art.br</div>
@@ -126,7 +65,8 @@
 
     <!-- Escuro horizontal -->
     <div>
-      <div style="aspect-ratio:297/210;position:relative;overflow:hidden;background:#0D0D0D;border:1px solid rgba(255,214,0,.1);display:flex;flex-direction:column;cursor:pointer;" onclick="expandMock(this)">
+      <div style="aspect-ratio:297/210;position:relative;overflow:hidden;background:#0D0D0D;border:1px solid rgba(255,214,0,.1);display:flex;flex-direction:column;">
+        <button class="expand-btn" onclick="expandMock(this.parentElement)" style="{btn_dark}">&#x2197;</button>
         <div style="padding:5% 7% 3%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,214,0,.08);">
           <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
           <div style="font-family:var(--mono);font-size:clamp(3px,.75vw,5px);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.18);">ada.art.br · contato@ada.art.br</div>
@@ -145,7 +85,8 @@
 
     <!-- Claro horizontal -->
     <div>
-      <div style="aspect-ratio:297/210;position:relative;overflow:hidden;background:#F2F2F2;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;cursor:pointer;" onclick="expandMock(this)">
+      <div style="aspect-ratio:297/210;position:relative;overflow:hidden;background:#F2F2F2;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;">
+        <button class="expand-btn" onclick="expandMock(this.parentElement)" style="{btn_light}">&#x2197;</button>
         <div style="padding:5% 7% 3%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,.07);">
           <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#000" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#000" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#000" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
           <div style="font-family:var(--mono);font-size:clamp(3px,.75vw,5px);letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.3);">ada.art.br · contato@ada.art.br</div>
@@ -176,9 +117,10 @@
 
     <!-- Capa vertical -->
     <div>
-      <div style="aspect-ratio:210/297;position:relative;overflow:hidden;background:#000;border:1px solid rgba(255,214,0,.12);display:flex;flex-direction:column;cursor:pointer;" onclick="expandMock(this)">
+      <div style="aspect-ratio:210/297;position:relative;overflow:hidden;background:#000;border:1px solid rgba(255,214,0,.12);display:flex;flex-direction:column;">
+        <button class="expand-btn" onclick="expandMock(this.parentElement)" style="{btn_dark}">&#x2197;</button>
         <div style="height:50%;position:relative;border-bottom:1px solid rgba(255,214,0,.08);">
-          <img src="../assets/ADA_performance_04.jpg" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" loading="lazy">
+          <img src="assets/ADA_performance_04.jpg" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" loading="lazy">
           <svg style="position:absolute;top:6%;left:6%;z-index:2;" width="16%" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
         </div>
         <div style="flex:1;padding:6% 8%;display:flex;flex-direction:column;justify-content:flex-end;gap:4%;">
@@ -201,7 +143,8 @@
 
     <!-- Interna vertical -->
     <div>
-      <div style="aspect-ratio:210/297;position:relative;overflow:hidden;background:#F2F2F2;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;cursor:pointer;" onclick="expandMock(this)">
+      <div style="aspect-ratio:210/297;position:relative;overflow:hidden;background:#F2F2F2;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;">
+        <button class="expand-btn" onclick="expandMock(this.parentElement)" style="{btn_light}">&#x2197;</button>
         <div style="padding:5% 8% 3%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,.07);">
           <svg width="16" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#000" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#000" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#000" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
           <div style="font-family:var(--mono);font-size:clamp(3px,.7vw,5px);letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.28);">Nome do Projeto · ADA</div>
@@ -221,9 +164,10 @@
 
     <!-- Capa horizontal -->
     <div>
-      <div style="aspect-ratio:297/210;position:relative;overflow:hidden;background:#000;border:1px solid rgba(255,214,0,.12);display:grid;grid-template-columns:1fr 1fr;cursor:pointer;" onclick="expandMock(this)">
+      <div style="aspect-ratio:297/210;position:relative;overflow:hidden;background:#000;border:1px solid rgba(255,214,0,.12);display:grid;grid-template-columns:1fr 1fr;">
+        <button class="expand-btn" onclick="expandMock(this.parentElement)" style="{btn_dark}">&#x2197;</button>
         <div style="position:relative;border-right:1px solid rgba(255,214,0,.08);">
-          <img src="../assets/ADA_abstrato_particulas_02.jpg" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" loading="lazy">
+          <img src="assets/ADA_abstrato_particulas_02.jpg" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" loading="lazy">
           <svg style="position:absolute;top:8%;left:8%;z-index:2;" width="20%" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
         </div>
         <div style="display:flex;flex-direction:column;justify-content:flex-end;padding:8%;">
@@ -246,7 +190,8 @@
 
     <!-- Interna horizontal -->
     <div>
-      <div style="aspect-ratio:297/210;position:relative;overflow:hidden;background:#F2F2F2;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;cursor:pointer;" onclick="expandMock(this)">
+      <div style="aspect-ratio:297/210;position:relative;overflow:hidden;background:#F2F2F2;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;">
+        <button class="expand-btn" onclick="expandMock(this.parentElement)" style="{btn_light}">&#x2197;</button>
         <div style="padding:4% 7% 3%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,.07);">
           <svg width="14" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#000" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#000" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#000" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
           <div style="font-family:var(--mono);font-size:clamp(3px,.7vw,5px);letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.28);">Nome do Projeto · ADA</div>
@@ -272,14 +217,8 @@
   </div>
 </div>
 
+'''
 
-</div>
-</section>
-
-<div id="page-footer" style="background:#0A0A0A;padding:32px 40px;text-align:center;border-top:1px solid rgba(255,214,0,.06);">
-  <div style="font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.12);">ADA - Manual de Marca - v1.0 - Marco 2026 - ada.art.br</div>
-</div>
-
-<script src="../js/ada.js"></script>
-</body>
-</html>
+content = content[:t_start] + new_blocks + content[sec08_start:]
+open('build/_source.html', 'w', encoding='utf-8').write(content)
+print('done, new len:', len(content))

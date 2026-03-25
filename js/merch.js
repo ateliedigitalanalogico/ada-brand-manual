@@ -7,7 +7,7 @@ var _rc; // canvas de render - inicializado quando DOM pronto
 
 /* kit01 — arquivos de arte para produção (300 DPI / fornecedor) */
 var kit01_data = [
-{name:'Frente · Símbolo A · Peito Esquerdo',bg:'transparent',pbg:'#111',w:4000,h:4000,s:4000,draw:function(ctx,S){
+{name:'Frente · Alfa · Peito Esquerdo',bg:'transparent',pbg:'#111',w:4000,h:4000,s:4000,draw:function(ctx,S){
     // 4000×4000px transparente — ~34×34cm a 300 DPI — serigrafia/bordado peito esquerdo
     drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");
   },fname:'camiseta_frente_simbolo_peito_esquerdo_4k'},
@@ -25,7 +25,7 @@ var kit01_data = [
 
 /* kit02 — arquivos de arte para produção (300 DPI / fornecedor) */
 var kit02_data = [
-{name:'Frente · Símbolo A',bg:'transparent',pbg:'#000',w:4000,h:4000,s:4000,draw:function(ctx,S){
+{name:'Frente · Alfa',bg:'transparent',pbg:'#000',w:4000,h:4000,s:4000,draw:function(ctx,S){
     drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");
   },fname:'bone_frente_simbolo_4k'}];
 
@@ -34,7 +34,7 @@ var kit03_data = [
 {name:'Adesivo · Antes do Algoritmo',bg:'#FFD600',pbg:'#FFD600',w:3200,h:1000,s:1000,draw:function(ctx,S){
     // S=1000 (=h). W total = S*3.2 — usar S como referência para preservar escala no preview
     var H=S, W=S*3.2;
-    // Símbolo A à esquerda
+    // Alfa à esquerda
     var sym=H*.64, sy=(H-sym)/2;
     drawSym(ctx, H*.1, sy, sym, "#000000");
     // Hairline vertical
@@ -47,7 +47,7 @@ var kit03_data = [
   },fname:'adesivo_antes_algoritmo_4k'}];
 
 /* kit03_original */
-var kit03_original_data = [{name:'A1 · Símbolo Amarelo',bg:'transparent',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");},fname:'a1_símbolo_amarelo'},
+var kit03_original_data = [{name:'A1 · Alfamarelo',bg:'transparent',pbg:'#000',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFD600");},fname:'a1_símbolo_amarelo'},
 {name:'A2 · Símbolo Branco',bg:'transparent',pbg:'#333',w:1000,h:1000,s:min(1000,1000),draw:function(ctx,S){drawSym(ctx,S*.21,S*.21,S*.58,"#FFFFFF");},fname:'a2_símbolo_branco'},
 {name:'A3 · "ANTES." Amarelo',bg:'transparent',pbg:'#000',w:2000,h:600,s:min(2000,600),draw:function(ctx,S){
     var W=ctx.canvas.width;

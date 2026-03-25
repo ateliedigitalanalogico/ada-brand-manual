@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/system.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-<title>ADA — 04 Grid e Espacamento · Manual de Marca</title>
-<meta name="description" content="ADA Manual de Marca — 04 Grid e Espacamento">
+<title>ADA — Grid e Espacamento · Manual de Marca</title>
+<meta name="description" content="ADA Manual de Marca — Grid e Espacamento">
 </head>
 <body>
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
@@ -35,11 +35,7 @@
 <nav class="manual-nav">
   <div class="nav-inner">
     <div class="nav-logo">
-      <svg width="18" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
-        <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
-        <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
-        <polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
-      </svg>
+      <svg width="18" style="color:#FFD600"><use href="#ada-sym"/></svg>
       <span>Manual de Marca</span>
     </div>
     <div class="nav-current" id="nav-current">04 Grid</div>
@@ -72,157 +68,74 @@
   <span class="hdr-group">Regras do Sistema</span>
   <span class="hdr-num">04</span>
   <div class="hdr-title">Grid e Espaçamento</div>
-  <div class="hdr-sub">Estrutura base · Margens · Respiros · Alinhamento</div>
+  <div class="hdr-sub">Unidade · Vertical · Horizontal · Correto e proibido</div>
 </div>
 
-    <div class="blk ac">
-      <div class="blk-inner">
-        <span class="sec-label">Unidade base — 8px</span>
-        <div class="sec-desc" style="margin-bottom:24px;">Todo espaçamento no sistema da ADA é múltiplo de 8px. Não existe valor arbitrário.</div>
-        <div style="display:flex;align-items:center;margin-bottom:20px;">
-          <div style="width:8px;height:8px;background:var(--y);flex-shrink:0;"></div>
-          <div style="flex:1;height:1px;background:rgba(255,214,0,.15);"></div>
-          <span style="font-family:var(--mono);font-size:13px;color:rgba(255,214,0,.6);margin-left:12px;white-space:nowrap;">1 unidade = 8px</span>
-        </div>
-        <div class="scale-row"><span class="scale-name">XS</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:8px;"></div></div><span class="scale-px">8px</span><span class="scale-use">Gap interno mínimo</span></div>
-        <div class="scale-row"><span class="scale-name">S</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:16px;"></div></div><span class="scale-px">16px</span><span class="scale-use">Padding de tags e chips</span></div>
-        <div class="scale-row"><span class="scale-name">M</span><div class="scale-bar-wrap"><div class="scale-bar hl" style="width:24px;"></div></div><span class="scale-px">24px</span><span class="scale-use">Gap entre elementos em linha · uso mais frequente</span></div>
-        <div class="scale-row"><span class="scale-name">L</span><div class="scale-bar-wrap"><div class="scale-bar hl" style="width:40px;"></div></div><span class="scale-px">40px</span><span class="scale-use">Padding de cards e blocos</span></div>
-        <div class="scale-row"><span class="scale-name">XL</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:64px;"></div></div><span class="scale-px">64px</span><span class="scale-use">Espaçamento entre seções</span></div>
-        <div class="scale-row"><span class="scale-name">2XL</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:96px;"></div></div><span class="scale-px">96px</span><span class="scale-use">Margens laterais em desktop</span></div>
-        <div class="scale-row"><span class="scale-name">3XL</span><div class="scale-bar-wrap"><div class="scale-bar" style="width:128px;"></div></div><span class="scale-px">128px</span><span class="scale-use">Padding de hero sections</span></div>
-      </div>
-    </div>
-
-    <div class="blk">
-      <div class="blk-inner" style="padding-bottom:14px;">
-        <span class="sec-label">Anatomia do grid — desktop 1440px</span>
-        <div class="sec-desc">Estrutura pura: margem, colunas e gutters. Nenhum conteúdo.</div>
-      </div>
-      <div class="legend">
-        <div class="legend-item"><svg width="24" height="12"><line x1="0" y1="6" x2="24" y2="6" stroke="rgba(220,60,60,.6)" stroke-width="1.5" stroke-dasharray="3 2"/></svg>Margem — área de respiro</div>
-        <div class="legend-item"><svg width="24" height="12"><rect x="0" y="1" width="24" height="10" fill="rgba(255,214,0,.15)" stroke="rgba(255,214,0,.3)" stroke-width="1"/></svg>Coluna — área de conteúdo</div>
-        <div class="legend-item"><svg width="24" height="12"><line x1="0" y1="6" x2="24" y2="6" stroke="rgba(255,214,0,.5)" stroke-width="1" stroke-dasharray="2 2"/></svg>Gutter — 16px entre colunas</div>
-      </div>
-      <div style="background:#000000;overflow:hidden;">
-        <svg width="100%" height="100" viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-          <rect x="0" y="0" width="96" height="100" fill="rgba(200,40,40,0.09)"/>
-          <rect x="1344" y="0" width="96" height="100" fill="rgba(200,40,40,0.09)"/>
-          <line x1="96" y1="0" x2="96" y2="100" stroke="rgba(220,60,60,0.55)" stroke-width="1.5" stroke-dasharray="6 4"/>
-          <line x1="1344" y1="0" x2="1344" y2="100" stroke="rgba(220,60,60,0.55)" stroke-width="1.5" stroke-dasharray="6 4"/>
-          <rect x="96"   y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="201"  y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="306"  y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="411"  y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="516"  y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="621"  y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="726"  y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="831"  y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="936"  y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="1041" y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="1146" y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="1251" y="8" width="89" height="84" fill="rgba(255,214,0,0.07)" stroke="rgba(255,214,0,0.2)" stroke-width="0.5"/>
-          <rect x="185" y="8" width="16" height="84" fill="rgba(255,214,0,0.13)"/>
-          <line x1="185" y1="8" x2="185" y2="92" stroke="rgba(255,214,0,0.45)" stroke-width="1" stroke-dasharray="4 3"/>
-          <line x1="201" y1="8" x2="201" y2="92" stroke="rgba(255,214,0,0.45)" stroke-width="1" stroke-dasharray="4 3"/>
-          <text x="193" y="86" font-family="monospace" font-size="10" fill="rgba(255,214,0,0.55)" text-anchor="middle">16px</text>
-          <text x="193" y="22" font-family="monospace" font-size="9" fill="rgba(255,214,0,0.4)" text-anchor="middle">GUTTER</text>
-          <rect x="290"  y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <rect x="395"  y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <rect x="500"  y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <rect x="605"  y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <rect x="710"  y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <rect x="815"  y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <rect x="920"  y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <rect x="1025" y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <rect x="1130" y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <rect x="1235" y="8" width="16" height="84" fill="rgba(255,214,0,0.04)"/>
-          <text x="48" y="54" font-family="monospace" font-size="11" fill="rgba(220,60,60,0.5)" text-anchor="middle" transform="rotate(-90,48,54)">MARGEM 96px</text>
-          <text x="1392" y="54" font-family="monospace" font-size="11" fill="rgba(220,60,60,0.5)" text-anchor="middle" transform="rotate(90,1392,54)">MARGEM 96px</text>
-          <text x="720" y="54" font-family="monospace" font-size="11" fill="rgba(255,255,255,0.12)" text-anchor="middle">12 COLUNAS · ÁREA DE CONTEÚDO · MÁX. 1248PX</text>
-        </svg>
-        <div style="padding:8px 6.67% 12px;text-align:center;">
-          <span style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.1);">Desktop 1440px · 12 colunas · gutter 16px · margem 96px</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="blk">
-      <div class="blk-inner" style="padding-bottom:14px;">
-        <span class="sec-label">Especificações por formato</span>
-        <div class="sec-desc">Logo sempre dentro da área segura — nunca cruzando as margens.</div>
-      </div>
-      <div class="formats-grid">
-        <div class="fmt">
-          <div class="fmt-preview">
-            <div class="fm-l" style="width:20px;"></div><div class="fm-r" style="width:20px;"></div>
-            <div class="fmt-safe" style="left:20px;right:20px;">
-              <div class="fmt-lockup">
-                <svg width="64" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
-                <div class="fmt-rule-line" style="width:64px;"></div>
-                <div class="fmt-tagline-sm" style="font-size:7px;">ANTES DO HYPE.</div>
-              </div>
-            </div>
-            <div class="fmt-margin-ann" style="left:0;width:20px;">96px</div>
-          </div>
-          <div class="fmt-info"><span class="fmt-name">Desktop · 1440px</span><div class="fmt-spec">Col: <span>12</span> · Gutter: <span>16px</span> · Margem: <span>96px</span><br>Logo: <span>lock-up completo</span></div></div>
-        </div>
-        <div class="fmt">
-          <div class="fmt-preview">
-            <div class="fm-l" style="width:16px;"></div><div class="fm-r" style="width:16px;"></div>
-            <div class="fmt-safe" style="left:16px;right:16px;">
-              <div class="fmt-lockup">
-                <svg width="48" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
-                <div class="fmt-rule-line" style="width:48px;"></div>
-                <div class="fmt-tagline-sm" style="font-size:6px;letter-spacing:.2em;">ANTES DO HYPE.</div>
-              </div>
-            </div>
-            <div class="fmt-margin-ann" style="left:0;width:16px;">40px</div>
-          </div>
-          <div class="fmt-info"><span class="fmt-name">Tablet · 768px</span><div class="fmt-spec">Col: <span>8</span> · Gutter: <span>16px</span> · Margem: <span>40px</span><br>Logo: <span>lock-up ou símbolo</span></div></div>
-        </div>
-        <div class="fmt">
-          <div class="fmt-preview">
-            <div class="fm-l" style="width:18px;"></div><div class="fm-r" style="width:18px;"></div>
-            <div class="fmt-safe" style="left:18px;right:18px;">
-              <div class="fmt-lockup">
-                <svg width="34" xmlns="http://www.w3.org/2000/svg" viewBox="225 225 126 126"><polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>
-              </div>
-            </div>
-            <div class="fmt-margin-ann" style="left:0;width:18px;">24px</div>
-          </div>
-          <div class="fmt-info"><span class="fmt-name">Mobile · 390px</span><div class="fmt-spec">Col: <span>4</span> · Gutter: <span>16px</span> · Margem: <span>24px</span><br>Logo: <span>símbolo isolado</span></div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="blk">
-      <div class="blk-inner" style="padding-bottom:0;"><span class="sec-label">Ritmo vertical</span></div>
-      <div style="border-top:1px solid rgba(255,214,0,.05);margin-top:16px;">
-        <div class="rhy-row"><div class="rhy-meta"><span class="rhy-code">H1</span><span class="rhy-spec">DM Mono 300 · 48px<br>leading 1.0 · −0.02em</span></div><div class="rhy-sample"><div class="s-h1">Antes.</div></div></div>
-        <div class="rhy-row"><div class="rhy-meta"><span class="rhy-code">H2</span><span class="rhy-spec">DM Mono 300 · 28px<br>leading 1.2 · −0.01em</span></div><div class="rhy-sample"><div class="s-h2">Antes do algoritmo.</div></div></div>
-        <div class="rhy-row"><div class="rhy-meta"><span class="rhy-code">H3</span><span class="rhy-spec">Syne 600 · 15px<br>UC · +0.07em</span></div><div class="rhy-sample"><div class="s-h3">Portfólio</div></div></div>
-        <div class="rhy-row"><div class="rhy-meta"><span class="rhy-code">Body</span><span class="rhy-spec">Syne 400 · 15px<br>leading 1.65 · máx. 640px</span></div><div class="rhy-sample"><div class="s-body">Plataforma criativa fundada por Caio Fazolin e Tatiane Gonzalez. Tecnologia como linguagem.</div></div></div>
-        <div class="rhy-row"><div class="rhy-meta"><span class="rhy-code">Caption</span><span class="rhy-spec">DM Mono 400 · 11px<br>UC · +0.22em</span></div><div class="rhy-sample"><div class="s-caption">São Paulo · 2015 · ada.art.br</div></div></div>
-      </div>
-    </div>
-
     <div class="blk">
       <div class="blk-inner">
-        <span class="sec-label">Referência rápida</span>
-        <table class="specs-table">
-          <tr><td>Unidade base</td><td>Todo espaçamento é múltiplo de 8px</td><td>8 · 16 · 24 · 40 · 64 · 96 · 128</td></tr>
-          <tr><td>Grid desktop</td><td>12 col · gutter 16px · margem 96px</td><td>máx. 1248px</td></tr>
-          <tr><td>Grid tablet</td><td>8 col · gutter 16px · margem 40px</td><td>máx. 688px</td></tr>
-          <tr><td>Grid mobile</td><td>4 col · gutter 16px · margem 24px</td><td>máx. 342px</td></tr>
-          <tr><td>Logo desktop</td><td>Lock-up completo · símbolo + hairline + tagline</td><td>mín. 64px</td></tr>
-          <tr><td>Logo mobile</td><td>Símbolo isolado — tagline suprimida</td><td>mín. 32px</td></tr>
-          <tr><td>Texto máx-width</td><td>Corpo corrido nunca ultrapassa 8 colunas</td><td>≈ 640px desktop</td></tr>
-          <tr><td>Apresentações</td><td>Margem interna mínima 64px todos os lados</td><td>16:9 · 1920×1080px</td></tr>
-        </table>
+        <span class="sec-label">Sistema de proporção</span>
+        <div class="sec-desc">Uma única unidade governa todas as relações do lock-up: <strong style="color:var(--y);font-weight:400;">1a</strong> = altura do Alfa. A hairline e a tagline obedecem essa escala — em qualquer tamanho de aplicação.</div>
+      </div>
+
+      <div style="background:#000;padding:80px;display:flex;justify-content:center;">
+
+        <div style="position:relative;display:inline-flex;flex-direction:column;align-items:center;">
+
+          <!-- ALFA + anotação 1a à esquerda + label à direita -->
+          <div style="position:relative;">
+            <svg width="80" height="80" style="color:var(--y);display:block;"><use href="#ada-sym"/></svg>
+            <div style="position:absolute;right:calc(100% + 12px);top:0;bottom:0;display:flex;align-items:center;gap:5px;pointer-events:none;">
+              <span style="font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:rgba(255,214,0,.5);">1a</span>
+              <div style="width:1px;height:80px;background:rgba(255,214,0,.18);"></div>
+            </div>
+            <span style="position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,214,0,.38);white-space:nowrap;">Alfa</span>
+          </div>
+
+          <!-- GAP ¼a -->
+          <div style="height:20px;width:80px;position:relative;">
+            <span style="position:absolute;right:calc(100% + 12px);top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,.2);white-space:nowrap;">¼a</span>
+          </div>
+
+          <!-- HAIRLINE + label à direita -->
+          <div style="position:relative;width:80px;">
+            <div style="width:80px;height:1px;background:rgba(255,214,0,.38);"></div>
+            <span style="position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,214,0,.38);white-space:nowrap;">Hairline</span>
+          </div>
+
+          <!-- GAP ¼a -->
+          <div style="height:20px;width:80px;position:relative;">
+            <span style="position:absolute;right:calc(100% + 12px);top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,.2);white-space:nowrap;">¼a</span>
+          </div>
+
+          <!-- TAGLINE + label à direita -->
+          <div style="position:relative;">
+            <span style="font-family:var(--mono);font-weight:300;font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,214,0,.58);white-space:nowrap;">ANTES DA IA.</span>
+            <span style="position:absolute;left:calc(100% + 12px);top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,214,0,.38);white-space:nowrap;">Tagline</span>
+          </div>
+
+        </div>
+
       </div>
     </div>
-  </div>
+
+    <div class="blk">
+      <div class="rules-grid">
+        <div class="rule-col">
+          <span class="rule-head ok">— Correto</span>
+          <div class="rule-item"><span class="bullet ok">→</span><span>Hairline com largura = Alfa (vertical) ou altura = Alfa (horizontal)</span></div>
+          <div class="rule-item"><span class="bullet ok">→</span><span>Espaço entre elementos sempre ¼a — a mesma regra em qualquer escala</span></div>
+          <div class="rule-item"><span class="bullet ok">→</span><span>Tagline em DM Mono 300 · .34em · uppercase</span></div>
+          <div class="rule-item"><span class="bullet ok">→</span><span>URL ada.art.br como alternativa à tagline — nunca os dois juntos</span></div>
+        </div>
+        <div class="rule-col">
+          <span class="rule-head no">× Proibido</span>
+          <div class="rule-item"><span class="bullet no">×</span><span>Hairline com dimensão diferente do Alfa</span></div>
+          <div class="rule-item"><span class="bullet no">×</span><span>Espaçamento arbitrário — todos os gaps derivam de ¼a</span></div>
+          <div class="rule-item"><span class="bullet no">×</span><span>Alfa abaixo de 32px em qualquer aplicação</span></div>
+          <div class="rule-item"><span class="bullet no">×</span><span>Tagline em outra fonte, peso ou caixa</span></div>
+        </div>
+      </div>
+    </div>
 
 
 </div>

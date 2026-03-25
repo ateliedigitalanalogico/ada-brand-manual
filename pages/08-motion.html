@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/system.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-<title>ADA — 08 Motion e Video · Manual de Marca</title>
-<meta name="description" content="ADA Manual de Marca — 08 Motion e Video">
+<title>ADA — Motion e Video · Manual de Marca</title>
+<meta name="description" content="ADA Manual de Marca — Motion e Video">
 </head>
 <body>
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
@@ -35,11 +35,7 @@
 <nav class="manual-nav">
   <div class="nav-inner">
     <div class="nav-logo">
-      <svg width="18" viewBox="225 225 126 126" xmlns="http://www.w3.org/2000/svg">
-        <polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
-        <polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
-        <polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
-      </svg>
+      <svg width="18" style="color:#FFD600"><use href="#ada-sym"/></svg>
       <span>Manual de Marca</span>
     </div>
     <div class="nav-current" id="nav-current">08 Motion</div>
@@ -72,11 +68,11 @@
   <span class="hdr-group usos">Aplicações</span>
   <span class="hdr-num">08</span>
   <div class="hdr-title">Motion e Vídeo</div>
-  <div class="hdr-sub">Animações do logo · Lower thirds · Prompts de vídeo e frame estático</div>
+  <div class="hdr-sub">Animações do logo · Assinatura de vídeo</div>
 </div>
 
 <!-- ══ 01 PRINCÍPIOS ══ -->
-<div class="blk ac">
+<div class="blk">
   <div class="blk-inner">
     <span class="sec-label">Princípios de animação</span>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
@@ -89,7 +85,7 @@
         <div class="rule-item"><span class="bullet ok">→</span><span>Tagline entra com letter-spacing comprimindo</span></div>
       </div>
       <div>
-        <div class="rule-item"><span class="bullet no">×</span><span>Rotação ou deformação do símbolo A</span></div>
+        <div class="rule-item"><span class="bullet no">×</span><span>Rotação ou deformação do Alfa</span></div>
         <div class="rule-item"><span class="bullet no">×</span><span>Bounce, spring ou qualquer easing elástico</span></div>
         <div class="rule-item"><span class="bullet no">×</span><span>Glitch ou distorção digital estética</span></div>
         <div class="rule-item"><span class="bullet no">×</span><span>Dois elementos entrando ao mesmo tempo</span></div>
@@ -111,7 +107,7 @@
 </div>
 
 <!-- ══ 02 ANIMAÇÕES DO LOGO ══ -->
-<div class="blk ac">
+<div class="blk">
   <div class="blk-inner" style="padding-bottom:0;">
     <span class="sec-label">Animações do logo · 4 variações em loop</span>
     <div class="sec-desc">Cada variação completa um ciclo: entra → hold → sai → pausa → repete. Nos dois modos de cor do sistema.</div>
@@ -429,78 +425,6 @@
       <div class="piece-label">URL · Meia-noite · Linha Animada</div>
     </div>
 
-  </div>
-</div>
-
-<!-- ══ 04 PROMPTS DE VÍDEO ══ -->
-<div class="blk ac">
-  <div class="blk-inner">
-    <span class="sec-label">Prompts · Freepik</span>
-    <div class="sec-desc" style="margin-bottom:20px;">Cada aplicação tem dois prompts: um para o <strong style="color:rgba(255,214,0,.6);">frame estático</strong> (imagem, capa, cartaz) e um para a <strong style="color:rgba(255,214,0,.6);">animação</strong> (vídeo de background). O lock-up entra no After Effects sobre o vídeo gerado.</div>
-
-    <div style="display:flex;flex-direction:column;gap:2px;">
-
-      <!-- Prompt 1: Partículas -->
-      <div style="border:1px solid var(--border);overflow:hidden;">
-        <div style="background:var(--bg3);padding:14px 20px;border-bottom:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center;">
-          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.6);">Background · Partículas de luz</div>
-          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--text-faint);">Reel · Abertura</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:16px 20px;gap:16px;">
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Frame estático</div>
-            <div id="p1s" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Sparse golden yellow light particles suspended in deep black void space, ultra high contrast, asymmetric composition, some particles in sharp focus with light trails, cinematic grain, meditative atmosphere, no objects, pure light field, dark negative space on upper third for logo</div>
-            <button onclick="cp('p1s',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Animação (vídeo)</div>
-            <div id="p1v" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Abstract slow motion video of golden light particles drifting through deep black void space, ultra slow movement, sparse bright yellow points of light floating asymmetrically, subtle light trails, deep black background dominates 85% of frame, cinematic grain, no fast movement, meditative pace, seamless loop suitable</div>
-            <button onclick="cp('p1v',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Prompt 2: São Paulo -->
-      <div style="border:1px solid var(--border-dim);overflow:hidden;">
-        <div style="background:var(--bg3);padding:14px 20px;border-bottom:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center;">
-          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.5);">Urbano · São Paulo noturno</div>
-          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--text-faint);">Cartaz · Reel · Capa</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;padding:16px 20px;gap:16px;">
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Frame estático</div>
-            <div id="p2s" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Aerial night photography of São Paulo megacity, brutalist concrete towers casting geometric shadows, a single vertical beam of intense golden yellow light rising from city center pointing straight up, low fog settling between skyscrapers, deep black sky, cinematic grain, extreme high contrast, muted desaturated palette with only one intense yellow light beam, vast dark negative space in upper corners</div>
-            <button onclick="cp('p2s',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Animação (vídeo)</div>
-            <div id="p2v" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Slow cinematic aerial video of São Paulo megacity at night, camera slowly drifting forward over urban grid, brutalist towers in darkness, single vertical golden light beam visible at center of city, low fog between buildings, very slow camera movement, cinematic grain, high contrast, muted palette with only golden yellow accent, no fast cuts, meditative pace</div>
-            <button onclick="cp('p2v',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Prompt 3: Abstrato / Geometria -->
-      <div style="border:1px solid var(--border-dim);overflow:hidden;">
-        <div style="background:var(--bg3);padding:14px 20px;border-bottom:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center;">
-          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.5);">Abstrato · Geometria dissolvendo</div>
-          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--text-faint);">Reel · Background imersivo</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;padding:16px 20px;gap:16px;">
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Frame estático</div>
-            <div id="p3s" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Abstract light painting photography of triangular geometric forms dissolving into particles, deep black void background, fragments of intense golden yellow and deep navy blue light, long exposure capturing geometric shapes breaking apart, the letter A geometry deconstructed into light trails, ultra high contrast, minimal composition, no objects or people</div>
-            <button onclick="cp('p3s',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
-          </div>
-          <div>
-            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,214,0,.35);margin-bottom:8px;">Animação (vídeo)</div>
-            <div id="p3v" style="font-family:var(--mono);font-size:12px;font-weight:300;color:rgba(255,255,255,.6);line-height:1.7;background:rgba(0,0,0,.3);border:1px solid rgba(255,214,0,.06);padding:10px 12px;margin-bottom:8px;">Abstract slow motion video of geometric triangular light forms slowly dissolving into particles in deep black void, golden yellow light gradually fragmenting into thousands of floating points, disintegration extremely slow and graceful, particles drift outward and fade, high contrast, cinematic grain, the geometry of the letter A deconstructing into light, seamless loop</div>
-            <button onclick="cp('p3v',this)" style="font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.18);padding:5px 12px;cursor:pointer;">Copiar</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
   </div>
 </div>
 

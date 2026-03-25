@@ -104,8 +104,7 @@ function cpPrompt(id, btn) {
 (function() {
   var TAGS = [
     'ANTES DA IA.', 'ANTES DO PROMPT.', 'ANTES DO IMERSIVO.',
-    'ANTES DO MAPPING.', 'ANTES DO HYPE.', 'ANTES DO ALGORITMO.',
-    'ANTES DA EXPERIENCIA.', 'ANTES DO FUTURO.'
+    'ANTES DO MAPPING.', 'ANTES DO ALGORITMO.', 'ANTES DA EXPERIÊNCIA.'
   ];
 
   /* -- Capa: crossfade entre dois slots -- */
@@ -151,8 +150,7 @@ function cpPrompt(id, btn) {
 var _tagIdx = 0;
 var _TAGS = [
   'ANTES DA IA.', 'ANTES DO PROMPT.', 'ANTES DO IMERSIVO.',
-  'ANTES DO MAPPING.', 'ANTES DO HYPE.', 'ANTES DO ALGORITMO.',
-  'ANTES DA EXPERIENCIA.', 'ANTES DO FUTURO.'
+  'ANTES DO MAPPING.', 'ANTES DO ALGORITMO.', 'ANTES DA EXPERIÊNCIA.'
 ];
 
 /** Inicia (ou reinicia) o ciclo de troca de taglines com a duracao dada em segundos.
@@ -394,6 +392,85 @@ function showEmail(v, btn) {
  * @param {string} filename - Nome do arquivo (sem extensao)
  * @param {number} w        - Largura alvo em pixels (define a escala de renderizacao)
  */
+/* updateSigs — atualiza todas as assinaturas com os dados do formulário */
+function updateSigs() {
+  var name  = (document.getElementById('f-name')  || {value:''}).value;
+  var role  = (document.getElementById('f-role')  || {value:''}).value;
+  var email = (document.getElementById('f-email') || {value:''}).value;
+  var phone = (document.getElementById('f-phone') || {value:''}).value;
+  document.querySelectorAll('.s-name').forEach(function(el)  { el.textContent = name; });
+  document.querySelectorAll('.s-role').forEach(function(el)  { el.textContent = role; });
+  document.querySelectorAll('.s-email').forEach(function(el) { el.textContent = email; });
+  document.querySelectorAll('.s-phone').forEach(function(el) { el.textContent = phone; });
+  ['padrao','invertido','midnight','mono'].forEach(function(slug) {
+    var tbl = document.querySelector('#sig-' + slug + ' table');
+    var hid = document.getElementById('sig-' + slug + '-html');
+    if (!tbl || !hid) return;
+    hid.innerHTML = tbl.outerHTML
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  });
+}
+
+/* openSigHTML — abre assinatura em nova aba com SVG→PNG para Gmail */
+function openSigHTML(hiddenId) {
+  var el = document.getElementById(hiddenId);
+  if (!el) return;
+  var raw = el.innerHTML
+    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+    .replace(/&middot;/g, '\u00b7').replace(/&atilde;/g, '\u00e3');
+  var tmp = document.createElement('div');
+  tmp.innerHTML = raw;
+  var svgs = Array.from(tmp.querySelectorAll('svg'));
+  var pending = svgs.length;
+  function open() {
+    var doc = '<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{margin:40px;font-family:sans-serif;}</style></head><body>' + tmp.innerHTML + '</body></html>';
+    window.open(URL.createObjectURL(new Blob([doc], {type:'text/html'})), '_blank');
+  }
+  if (!pending) { open(); return; }
+  svgs.forEach(function(svg) {
+    var w = parseInt(svg.getAttribute('width') || '32');
+    var h = parseInt(svg.getAttribute('height') || w);
+    var svgData = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(svg));
+    var img = new Image();
+    img.onload = function() {
+      var c = document.createElement('canvas');
+      c.width = w * 2; c.height = h * 2;
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      var p = document.createElement('img');
+      p.src = c.toDataURL('image/png');
+      p.width = w; p.height = h;
+      svg.parentNode.replaceChild(p, svg);
+      if (!--pending) open();
+    };
+    img.onerror = function() { if (!--pending) open(); };
+    img.src = svgData;
+  });
+}
+
+/* expandMock — amplia mockup HTML em overlay fullscreen */
+function expandMock(el) {
+  var ov = document.createElement('div');
+  ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.93);display:flex;align-items:center;justify-content:center;padding:32px;cursor:zoom-out;';
+  var inner = document.createElement('div');
+  inner.style.position = 'relative';
+  var clone = el.cloneNode(true);
+  clone.querySelectorAll('.expand-btn').forEach(function(b){b.remove();});
+  var rect = el.getBoundingClientRect();
+  var scale = Math.min(window.innerHeight * 0.88 / rect.height, window.innerWidth * 0.9 / rect.width);
+  clone.style.transform = 'scale(' + scale + ')';
+  clone.style.transformOrigin = 'top left';
+  clone.style.width = rect.width + 'px';
+  clone.style.height = rect.height + 'px';
+  clone.style.cursor = 'default';
+  inner.style.width  = (rect.width  * scale) + 'px';
+  inner.style.height = (rect.height * scale) + 'px';
+  inner.appendChild(clone);
+  ov.appendChild(inner);
+  ov.onclick = function(){ ov.remove(); };
+  document.body.appendChild(ov);
+}
+
 function dlMock(elId, filename, w) {
   var el = document.getElementById(elId);
   if (!el || typeof html2canvas === 'undefined') {

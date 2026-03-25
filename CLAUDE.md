@@ -97,7 +97,7 @@ Isso regenera `index.html` (capa+índice) e todos os `pages/XX-slug.html`.
 
 ## SVG reutilizável — `<symbol>/<use>`
 
-Todos os `<svg>` do símbolo A e wordmark usam o padrão `<use href="#ada-sym">` com `currentColor`:
+Todos os `<svg>` do Alfa e wordmark usam o padrão `<use href="#ada-sym">` com `currentColor`:
 
 ```html
 <!-- Símbolo amarelo padrão -->
@@ -139,7 +139,7 @@ Os `<defs>` estão inline no início do `<body>` de cada página.
 
 ---
 
-## Símbolo A — geometria intocável
+## Alfa — geometria intocável
 
 ```html
 <symbol id="ada-sym" viewBox="225 225 126 126">
@@ -181,8 +181,7 @@ Grid de 4 colunas simétricas: `grid-template-columns: 1fr 1fr 1fr 1fr`
 ```javascript
 const TAGS = [
   'ANTES DA IA.', 'ANTES DO PROMPT.', 'ANTES DO IMERSIVO.',
-  'ANTES DO MAPPING.', 'ANTES DO HYPE.', 'ANTES DO ALGORITMO.',
-  'ANTES DA EXPERIÊNCIA.', 'ANTES DO FUTURO.',
+  'ANTES DO MAPPING.', 'ANTES DO ALGORITMO.', 'ANTES DA EXPERIÊNCIA.',
 ];
 ```
 
@@ -254,7 +253,7 @@ Funções globais disponíveis em todas as páginas:
 
 2. **Nomes dos fundadores em bios curtas** — não aparecem em bios de 150 caracteres (Instagram). Aparecem em: site/about, proposta, press release, créditos.
 
-3. **Wordmark em peças pequenas** — nunca abaixo de 240px / 60mm. Usar o símbolo A isolado.
+3. **Wordmark em peças pequenas** — nunca abaixo de 240px / 60mm. Usar o Alfa isolado.
 
 4. **Arquivos gerados** — nunca editar `pages/*.html` ou `index.html` diretamente. Sempre editar `build/_source.html` e rodar `python build/split_pages.py`.
 
@@ -269,7 +268,7 @@ Plataforma criativa fundada em 2015 por Caio Fazolin e Tatiane Gonzalez.
 
 **Posicionamento:** Tecnologia como linguagem. Brasil como ponto de vista.
 
-**Manifesto:** A ADA esteve aqui antes. Opera na borda — na fronteira entre o que existe e o que ainda não tem nome.
+**Manifesto:** A ADA chegou antes. Opera na borda — onde as coisas ainda não têm nome, antes das categorias. Desde 2015, tem nome: ADA. E vai continuar sendo antes.
 
 **O que a ADA não é:** empresa de AV, agência genérica, fornecedora de projeção, executora de ideias de outros.
 
@@ -293,13 +292,13 @@ Três itens implementados. Estrutura padrão: `item-header` → grid de fotos `.
 
 ### Camiseta (kit01)
 - **Fotos**: flat lay frente, flat lay costas, homem vestindo, mulher costas, cena conjunta — grid 5 colunas
-- **Assets (4K)**: Frente · Símbolo A (4000×4000px) · Costas · Logo+URL (4000×3040px)
+- **Assets (4K)**: Frente · Alfa (4000×4000px) · Costas · Logo+URL (4000×3040px)
 - **Imagens**: `freepik__black-oversized-cotton-tshirt-front-view-flat-lay-__89311.png` / `..._back_...__89312.png` / homem `__89314.png` / mulher `__89313.png` / conjunto `__89315.png`
 
 ### Boné Five Panel (kit02)
 - **Estilo**: trail runner, North Face/Arc'teryx, preto, logo off-center esquerdo (como visto na imagem = direita de quem usa)
 - **Fotos**: flat lay boné, diretora de arte vestindo — grid 3 colunas com 1 placeholder "Modelo + Camiseta"
-- **Asset (4K)**: Frente · Símbolo A (4000×4000px) — 1 arquivo só
+- **Asset (4K)**: Frente · Alfa (4000×4000px) — 1 arquivo só
 - **Imagens**: flat lay `__89316.png` / diretora `__89317.png`
 - **Placeholder pendente**: foto da diretora no festival Rio (cena sendo gerada com Freepik)
 
@@ -316,7 +315,7 @@ Três itens implementados. Estrutura padrão: `item-header` → grid de fotos `.
 | `buildAssets(num, name, data, gridId)` | Renderiza grid de assets via canvas |
 | `dlAsset(num, name, asset, btn)` | Download de asset individual como PNG |
 | `downloadAll(num, name, assets)` | Download de todos os assets do kit |
-| `drawSym(ctx, ox, oy, size, color)` | Desenha símbolo A no canvas |
+| `drawSym(ctx, ox, oy, size, color)` | Desenha Alfa no canvas |
 
 ### Padrão de assets — todos em 4K (300 DPI)
 - Canvas sempre com `s` hardcoded (não `min(w,h)`) quando `w ≠ h`
@@ -342,13 +341,54 @@ Três itens implementados. Estrutura padrão: `item-header` → grid de fotos `.
 
 ---
 
+## ⚠️ INÍCIO DA PRÓXIMA SESSÃO — ler antes de qualquer coisa
+
+**Primeira tarefa:** ✅ concluída — nome oficial do símbolo definido: **Alfa**.
+
+### Review em andamento (sessão 23/03/2026)
+
+Revisão seção por seção em progresso. Status:
+
+| Seção | Status | Observações |
+|---|---|---|
+| Nav | ✅ corrigido | Logo via `<use href="#ada-sym">` · letter-spacing `.18em` · group label padding reduzido |
+| Capa | ✅ simplificada | Removidos: field, gradiente, tagline, linha, cantos, glow |
+| 01 Logo | ✅ hdr-sub | `Logo · Lock-up · Logo + URL · Wordmark · Taglines · Uso correto e proibido` |
+| 02 Tipografia | ✅ hdr-sub | `DM Mono · Syne · Cormorant Garamond · Hierarquia Tipográfica · Uso correto e proibido · Aplicação editorial` |
+| 03 Paleta | ✅ reescrita | 4 identidades · Paleta em 3 grupos · Correto e proibido |
+| 04 Grid e Espaçamento | ✅ reescrita | Unidade 1a · diagrama vertical + horizontal com anotações · Correto e proibido |
+| 05 Voz e Tom | ⏳ pendente | — |
+| 06 Imagetica | ⏳ pendente | — |
+| 07 Impressos | ⏳ pendente | — |
+| 08 Motion | ⏳ pendente | — |
+| 09 Redes | ⏳ pendente | — |
+| 10 Merch | ⏳ pendente | — |
+
+### Regras estabelecidas nessa sessão
+
+**Bordas de divs — padrão definitivo:**
+- `.hdr` (div com número da página) → `border: 1px solid var(--border)` — única com borda amarela por seção
+- Todos os `.blk` de conteúdo → `border: 1px solid var(--border-dim)` — cinza/dim, sem exceção
+- `.blk.ac` eliminado do CSS e HTML
+- Classes afetadas já corrigidas: `.font-block.primary`, `.trait.hi`, `.template-card.hi`, `.item-header`
+
+**Nome do símbolo:** ✅ **Alfa** — substituído em `_source.html`, `merch.js` e `CLAUDE.md` (25/03/2026)
+
+### Alterações técnicas aplicadas
+
+- `system.css`: 162 regras duplicadas removidas · vars adicionadas · letter-spacing canonizado
+- `split_pages.py`: nav logo usa `<use href="#ada-sym">`
+- `_source.html`: capa simplificada · SEC 03 reescrita · SEC 04 reescrita como Lock-up · todas as `blk ac` → `blk`
+
+---
+
 ## Princípio: o manual é auto-referencial
 
 O Manual de Marca da ADA não descreve o sistema — ele **é** o sistema.
 
 Toda decisão de design definida no documento deve ser válida dentro do próprio documento. Isso significa:
 
-- O símbolo A e o wordmark aparecem no manual exatamente como a seção 01 define — tamanho mínimo respeitado, sempre SVG inline via `<use href="#ada-sym">`, nunca como `<img>`, nunca abaixo de 32px para o símbolo ou 240px para o wordmark
+- O Alfa e o wordmark aparecem no manual exatamente como a seção 01 define — tamanho mínimo respeitado, sempre SVG inline via `<use href="#ada-sym">`, nunca como `<img>`, nunca abaixo de 32px para o símbolo ou 240px para o wordmark
 - As variações de cor (Padrão, Invertido, Meia-noite, Monocromático) definidas na seção 01 devem aparecer aplicadas corretamente em todo o manual
 - A hierarquia tipográfica definida na seção 02 deve ser a mesma usada em títulos, labels, descrições e UI do manual
 - O sistema de grid e espaçamento da seção 04 deve governar o layout de todas as seções
@@ -365,7 +405,7 @@ Toda decisão de design definida no documento deve ser válida dentro do própri
 
 Resultado da leitura completa das 6 seções REGRAS (01–06) em 23/03/2026.
 
-### SVG — símbolo A e wordmark
+### SVG — Alfa e wordmark
 
 | Contexto | Regra |
 |---|---|
@@ -412,6 +452,22 @@ Valores `.12em`, `.15em`, `.22em`, `.25em` foram encontrados isoladamente — ev
 - Gaps padronizados: `8px` (micro), `16px` (padrão), `24px` (confortável), `32px` (seção)
 - `clamp()` para font-size em texto de corpo: padrão confirmado em SEC 05
 - Border-radius: não definido uniformemente entre seções — usar `2px` para elementos UI, `0` para cards e grids
+
+---
+
+## Limpeza de arquivos temporários
+
+O editor (Claude Code) deixa arquivos `.tmp.*` espalhados pelas pastas do projeto a cada edição. Eles acumulam dezenas ou centenas de arquivos inúteis.
+
+**Ao final de cada sessão**, perguntar ao usuário:
+
+> "Quer que eu limpe os arquivos temporários `.tmp.*` do projeto?"
+
+Se confirmado, rodar:
+
+```bash
+find "E:/ADA Dropbox/ADA (1)/2026/ADA/ada-manual" -name "*.tmp.*" -type f -delete
+```
 
 ---
 
