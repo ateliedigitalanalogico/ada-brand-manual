@@ -447,6 +447,352 @@ Se alguma decisão contradizer o sistema documentado aqui, sinalize antes de exe
 
 ---
 
+## Artes do Sistema — Sistema Generativo
+
+**Arquivo:** `js/patterns.js`
+**Onde aparece no manual:** Seção 06 — Linguagem Imagética, bloco "Artes do Sistema"
+**Output:** 8 composições abstratas · canvas 2D · exportável PNG 4K (4000×4000px) ou SVG vetorial
+
+---
+
+### Conceito
+
+As Artes do Sistema são composições abstratas geradas **exclusivamente a partir do Alfa** — o símbolo fundacional da ADA. Nenhum elemento externo: apenas os 3 polígonos do símbolo, a paleta ADA e algoritmos determinísticos com seed randomizável.
+
+O sistema é **generativo e não-destrutivo**: o mesmo seed sempre produz o mesmo resultado, qualquer seed diferente produz uma variação única. A linguagem visual é sempre reconhecidamente ADA — o Alfa é o DNA de cada composição.
+
+---
+
+### Infraestrutura do código
+
+#### Variável global de seed
+
+```js
+var _SEED_OFFSET = 0;
+```
+
+Controla qual variação é gerada. Mude antes de renderizar e restaure para 0 depois.
+Para gerar uma variação aleatória: `_SEED_OFFSET = Math.floor(Math.random()*99991)*13+1`
+
+#### Função pseudo-aleatória com seed
+
+```js
+function pr(s){ var x=Math.sin((s+_SEED_OFFSET)*9301+49297)*233280; return x-Math.floor(x); }
+```
+
+Retorna `[0,1)`. Determinística: o mesmo `s` + mesmo `_SEED_OFFSET` → mesmo valor sempre. É a base de toda aleatoriedade controlada do sistema.
+
+#### Geometria do Alfa — 3 polígonos
+
+```js
+var _POLYS = [
+  [[268.01,297],[288,257.02],[307.99,297],[324,297],[288,225],[252,297]],  // triângulo principal (corpo do A)
+  [[238.5,324],[225,351],[241.01,351],[250.01,333],[254.51,324]],          // pé esquerdo
+  [[321.49,324],[325.99,333],[334.99,351],[351,351],[337.5,324]]           // pé direito
+];
+```
+
+Coordenadas brutas do Alfa. Normalizadas em runtime para o centro `(cx,cy)` e escala `size`.
+
+#### Funções primitivas de renderização
+
+```js
+symAt(ctx, cx, cy, size, color, angle)
+```
+Desenha o Alfa **preenchido** (`fill`) no canvas. `angle` em radianos — rotaciona os 3 polígonos em torno de `(cx,cy)`.
+
+```js
+symStroke(ctx, cx, cy, size, color, angle, lw)
+```
+Desenha o Alfa como **outline** (`stroke`). `lw` = espessura da linha. Cria o efeito "fantasma" / etéreo.
+
+```js
+symDyn(ctx, cx, cy, size, palette, seed, angle)
+```
+Versão dinâmica — escolhe fill ou stroke, cor e rotação via `pr(seed)`. Usado nas composições onde o Alfa aparece em quantidade variada.
+
+```js
+addGrain(ctx, S, color, opacity, density)
+```
+Adiciona ruído fotográfico (grain) ao canvas. Pixels 1×1 distribuídos pseudo-aleatoriamente. Âncora as composições à textura analógica — mesmo geradas digitalmente.
+
+---
+
+### As 4 paletas — `ART_PALETTES`
+
+Cada paleta tem: `bg` (fundo), `grad1/grad2` (degradê radial), `primary`, `secondary`, `dim`, `faint`, `accent`, `grain`.
+
+| Index | Label | Fundo | Primary | Uso |
+|---|---|---|---|---|
+| `0` | **Padrão** | `#111111` | `#FFD600` | identidade base, preto com amarelo |
+| `1` | **Meia-noite** | `#0A0F1E` | `#4A7FD4` | digital noturno, palco, imersivo |
+| `2` | **Invertido** | `#FFD600` | `#111111` | destaque máximo, capas, eventos |
+| `3` | **Monocromático** | `#F4F4F0` | `#0A0A0A` | impressão, paper, editorial |
+
+Valores exatos das paletas:
+
+```js
+// Padrão
+{ bg:'#111111', grad1:'#1E1E1A', grad2:'#080808',
+  primary:'#FFD600', secondary:'rgba(255,214,0,0.42)', dim:'rgba(255,214,0,0.15)',
+  faint:'rgba(255,214,0,0.05)', accent:'rgba(255,255,255,0.7)', grain:'#ffffff' }
+
+// Meia-noite
+{ bg:'#0A0F1E', grad1:'#12213A', grad2:'#05080F',
+  primary:'#4A7FD4', secondary:'rgba(74,127,212,0.42)', dim:'rgba(74,127,212,0.15)',
+  faint:'rgba(74,127,212,0.06)', accent:'rgba(180,210,255,0.55)', grain:'#8ab0ff' }
+
+// Invertido
+{ bg:'#FFD600', grad1:'#FFE033', grad2:'#D4AA00',
+  primary:'#111111', secondary:'rgba(17,17,17,0.45)', dim:'rgba(17,17,17,0.18)',
+  faint:'rgba(17,17,17,0.06)', accent:'rgba(40,40,40,0.8)', grain:'#000000' }
+
+// Monocromático
+{ bg:'#F4F4F0', grad1:'#FFFFFF', grad2:'#D8D8D4',
+  primary:'#0A0A0A', secondary:'rgba(10,10,10,0.38)', dim:'rgba(10,10,10,0.13)',
+  faint:'rgba(10,10,10,0.04)', accent:'rgba(30,30,30,0.72)', grain:'#000000' }
+```
+
+---
+
+### As 8 composições — `pattern_data`
+
+Cada composição é um objeto `{ name, w, h, s, draw(ctx, S, palette), fname }`.
+- `S` = tamanho do canvas (4000 em 4K, menor em preview)
+- `draw()` escreve no canvas usando as primitivas acima
+- `fname` = nome do arquivo ao exportar
+
+---
+
+#### 1. Radiância — `ada_radiancia`
+
+**Visual:** Degradê radial do centro para as bordas. Três anéis concêntricos de Alfas: externo (20 instâncias), médio (12), interno (7 micro). Centro limpo — apenas um outline fantasma tênue (`opacity .08`). Sem grain.
+
+**Algoritmo:**
+- Fundo com `createRadialGradient` de `grad1` (centro) a `grad2` (borda)
+- Anel externo: raio `S*(.3 a .43)`, tamanho `S*(.038 a .148)` — Alfas grandes e espalhados
+- Anel médio: raio `S*(.18 a .25)` — Alfas menores, mais densos
+- Anel interno: raio `S*(.08 a .14)` — micro-Alfas, quase pontos
+- Cada instância via `symDyn()` — fill ou stroke decidido por `pr(seed+50)`
+- Centro: `symStroke()` a `opacity .08`, tamanho `S*.18`
+
+**Tom:** radiante, solar, expansão a partir do centro. Usar em capas, fundos de apresentação, momentos de abertura.
+
+---
+
+#### 2. Espiral — `ada_espiral`
+
+**Visual:** 44 Alfas dispostos em espiral logarítmica do centro para a borda. Degradê radial **invertido** — mais escuro no centro, mais claro nas bordas. Grain mínimo.
+
+**Algoritmo:**
+- Fundo degradê radial: `grad2` no centro (escuro), `grad1` nas bordas (mais claro) — inversão de Radiância
+- 44 pontos em espiral: `angle = t * PI * 5.8 + jitter`, `raio = S*.025 + t*S*.46`
+- Tamanho cresce com `t`: do micro ao grande ao longo da espiral
+- `opacity` cresce com `t` — começa etéreo no centro, sólido na borda
+- ~38% fill, ~62% stroke — mais outline que Radiância
+- Grain leve: `density .004`, `opacity .18`
+
+**Tom:** movimento, tempo, processo. Espiral como metáfora de evolução. Usar em motion, transições, contextos de trajetória.
+
+---
+
+#### 3. Campo de Força — `ada_campo_de_forca`
+
+**Visual:** Grade 11×11 de Alfas distorcida por um campo vetorial radial. Cada Alfa é atraído para o centro e desviado 90° pela curvatura do campo — efeito de magnetismo ou gravidade.
+
+**Algoritmo:**
+- Grade uniforme `11×11` com jitter `±10%` por célula
+- Para cada ponto `(bx, by)`: calcula distância ao centro → aplica `pull = S*.08 * (1 - dist/S*.65)` na direção perpendicular ao vetor radial
+- Resultado: Alfas se curvam ao redor do centro, como linhas de campo magnético
+- Tamanho decresce com distância ao centro
+- `opacity` máxima no centro, mínima nas bordas
+- ~42% fill, ~58% stroke
+
+**Tom:** física, campo, força invisível. Sistemas que se organizam em torno de um ponto gravitacional. Usar em contextos de liderança, centralidade, influência.
+
+---
+
+#### 4. Pulso — `ada_pulso`
+
+**Visual:** Osciloscópio / visualizador de áudio. Linha central horizontal. 88 eventos distribuídos ao longo do eixo X — cada um pode ser um Alfa isolado ou um cluster de barras verticais. 25% das barras tem um Alfa na ponta, rotacionado ±90°.
+
+**Algoritmo:**
+- Linhas horizontais de fundo: traços leves de `dim`, espaçados aleatoriamente
+- Linha central: `strokeStyle secondary`, muito sutil
+- 88 eventos: posição X pseudo-aleatória ao longo de `S*.03` a `S*.97`
+- Cada evento: isolado (`nBars=1`) ou cluster (`nBars 2–6`, com 45% de probabilidade)
+- Cada barra: largura (fina micro, normal, larga) e altura por `pr()` — simula amplitude de sinal
+- Direção: centralizado, subindo ou descendo (simétrico em relação à linha central)
+- 25% das barras: Alfa na ponta, rotacionado `+PI/2` ou `-PI/2` (horizontal)
+- Grain: `density .012`, `opacity .2`
+
+**Tom:** frequência, sinal, som, presença. ADA na borda entre analógico e digital. Usar para música ao vivo, audiovisual, qualquer contexto onde o tempo é o eixo.
+
+---
+
+#### 5. Constelação — `ada_constelacao`
+
+**Visual:** Mapa estelar. Fundo com Alfas fantasmas grandes (5 instâncias, `opacity .03–.07`). 6 "constelações" formadas por shapes poligonais pré-definidos, cada uma com Alfas nos vértices e linhas de conexão. 240 pontos dispersos (estrelas) com ligações se distância < threshold.
+
+**Algoritmo:**
+- 5 Alfas de fundo enormes (`S*.18 a .56`), quase invisíveis — dão textura ao campo
+- 6 constelações: shapes geométricos de 4–7 pontos, cada um com posição, escala e rotação aleatória pelo canvas
+- Para cada constelação: linhas entre pontos adjacentes (`opacity .55 * cAlpha`), Alfas nos vértices com tamanho `symSz * (0.7 a 1.3)`
+- 240 partículas dispersas: mix de círculos e quadrados, tamanhos em 3 classes (micro, pequeno, médio)
+- Conexões entre partículas próximas: `threshold S*.09`, linha muito fina com `opacity t² * .18`
+- Grain: `density .008`, `opacity .22`
+
+**Tom:** cartografia, navegação, orientação pelo céu. A ADA como ponto de referência em constelações de projetos. Usar para portfólio, mapas de colaboração, contextos de rede.
+
+---
+
+#### 6. Nuvem — `ada_nuvem`
+
+**Visual:** Partículas densas que formam a silhueta implícita do Alfa. 2200 partículas distribuídas ao longo das arestas dos polígonos do símbolo, com dispersão controlada. A forma emerge do caos.
+
+**Algoritmo:**
+- 6 Alfas de fundo grandes (`S*.28 a .70`), quase invisíveis, levemente deslocados do centro
+- 2200 partículas: para cada uma, sorteia aleatoriamente um dos 3 polígonos (`_POLYS[pi]`) e uma aresta dentro dele, então interpola um ponto na aresta (`t = pr(i+200)`)
+- Dispersão radial: cada ponto sai do contorno com `sc = S*(pr(i+300)*.1+.003)`, resultando na nuvem ao redor da forma
+- Tamanhos em 4 classes (micro `S*.0004`, pequeno `S*.001–.003`, médio `S*.003–.008`, grande `S*.01–.032`) — 5% grandes, 22% médios, 23% pequenos, 50% micro
+- `opacity` pseudo-aleatória, mix de 3 cores (primary, secondary, accent)
+- ~30% círculos, ~70% quadrados (`arc` vs `fillRect`)
+- Grain: `density .009`, `opacity .2`
+
+**Tom:** matéria, emergência, forma surgindo do ruído. A ADA como estrutura que se revela. Usar em contextos de processo criativo, making-of, o que está por vir.
+
+---
+
+#### 7. Interferência — `ada_interferencia`
+
+**Visual:** 5 camadas de grades anguladas sobrepostas. Cada camada é uma grade de Alfas em ângulo diferente, criando padrão moiré / interferência óptica. Densidade dramática.
+
+**Algoritmo:**
+- 5 camadas com parâmetros fixos (não pseudo-aleatórios):
+
+```js
+{ ang:0,    sp:S*.118, sz:S*.055, alpha:.36, mode:'fill'   }  // horizontal, grandes
+{ ang:.148, sp:S*.082, sz:S*.038, alpha:.28, mode:'stroke' }  // 8.5°, médios
+{ ang:.308, sp:S*.055, sz:S*.025, alpha:.22, mode:'fill'   }  // 17.6°, pequenos
+{ ang:.534, sp:S*.1,   sz:S*.048, alpha:.26, mode:'stroke' }  // 30.6°, médios
+{ ang:.848, sp:S*.145, sz:S*.07,  alpha:.18, mode:'fill'   }  // 48.6°, grandes/esparsos
+```
+
+- Cada camada: grade em ângulo `ang`, espaçamento `sp`, preenchendo todo o canvas com rotação
+- 20% de células puladas aleatoriamente (`pr(seed) > .8`)
+- Tamanho varia dramaticamente: 8% micro (`sz*.12–.27`), 84% normal (`sz*.4–1.6`), 8% grande (`sz*1.7–2.1`)
+- Jitter de posição: `±25%` do espaçamento
+- Grain: `density .013`, `opacity .32` — mais grain que as outras composições
+
+**Tom:** tecnologia, sinal cruzado, densidade de informação. Interferência como beleza do sistema. Usar em contextos técnicos, shows de alta densidade visual, cenários imersivos.
+
+---
+
+#### 8. Silêncio — `ada_silencio`
+
+**Visual:** Um único Alfa outline dominando o centro (`S*.54`). Linhas horizontais de fundo — como papel milimetrado ou scanner. Glitch: nos pontos característicos do símbolo (topo, meio, base), linhas horizontais "vazam" para fora do contorno, como artefato digital. Composição mais minimalista do sistema.
+
+**Algoritmo:**
+- Linhas horizontais de fundo: traços finos de `dim`, alturas variáveis (`step S*.018–.040`), cruzando todo o canvas
+- Alfa fantasma enorme: `S*.88`, `opacity .05` — campo de fundo
+- Alfa principal: `S*.54`, `opacity .88`, `strokeWidth S*.0022` — o símbolo dominante
+- Alfa secundário deslocado: `S*.42`, `opacity .14`, `+S*.012 / +S*.008` de offset — sombra sutil
+- Alfa terciário: `S*.32`, `opacity .06` — eco fantasma
+- **Glitch:** 5 alturas características do símbolo (`cy ± offsets`) — em cada altura, 2–4 linhas horizontais que traversam o símbolo. Cada linha tem um segmento "cortado" deslocado verticalmente (`gshift ±S*.012`) — simula compressão/descompressão digital
+- Micro-segmentos extras (`pr > .6`): traços muito finos, quase invisíveis
+- 42 micro-pontos dispersos: `opacity .04–.18`
+- Grain mínimo: `density .006`, `opacity .16`
+
+**Tom:** precisão, silêncio antes do barulho, o símbolo como presença. Glitch como assinatura tecnológica. Usar para identidade institucional, créditos, contexts de alta formalidade onde o sistema se afirma com contenção.
+
+---
+
+### Como invocar — API do sistema
+
+#### Setup obrigatório
+
+```html
+<!-- Canvas oculto — compartilhado entre todas as composições -->
+<canvas id="pattern-canvas" style="display:none;"></canvas>
+<script src="js/patterns.js"></script>
+```
+
+#### Renderizar preview (baixa resolução, para exibir na UI)
+
+```js
+// Retorna data URL (PNG) para usar em <img src="...">
+_SEED_OFFSET = 0; // ou qualquer seed
+var dataUrl = renderPatPrev(pattern_data[0], 260, ART_PALETTES[0]);
+// pattern_data[0] = Radiância, ART_PALETTES[0] = Padrão
+_SEED_OFFSET = 0;
+```
+
+#### Download PNG 4K
+
+```js
+_SEED_OFFSET = seedOff;
+dlPattern(pattern_data[idx], ART_PALETTES[palIdx], buttonEl, seedOff);
+// Gera canvas 4000×4000, dispara download automático
+_SEED_OFFSET = 0;
+```
+
+#### Download SVG vetorial
+
+```js
+dlPatternSVG(pattern_data[idx], ART_PALETTES[palIdx], buttonEl, seedOff);
+// SVG gerado via makeSvgCtxPat() — contexto 2D falso que escreve SVG
+```
+
+#### Gerar nova variação aleatória
+
+```js
+_SEED_OFFSET = Math.floor(Math.random() * 99991) * 13 + 1;
+// renderizar...
+_SEED_OFFSET = 0;
+```
+
+#### Índice de composições em `pattern_data`
+
+| Index | Nome | `fname` |
+|---|---|---|
+| `0` | Radiância | `ada_radiancia` |
+| `1` | Espiral | `ada_espiral` |
+| `2` | Campo de Força | `ada_campo_de_forca` |
+| `3` | Pulso | `ada_pulso` |
+| `4` | Constelação | `ada_constelacao` |
+| `5` | Nuvem | `ada_nuvem` |
+| `6` | Interferência | `ada_interferencia` |
+| `7` | Silêncio | `ada_silencio` |
+
+---
+
+### Quando recomendar qual composição
+
+| Contexto | Composição recomendada |
+|---|---|
+| Capa de apresentação, abertura de show | Radiância ou Espiral |
+| Palco, cenário LED, digital noturno | Interferência + paleta Meia-noite |
+| Música ao vivo, audiovisual, som | Pulso |
+| Portfólio, rede de colaboradores, mapa | Constelação |
+| Making-of, processo criativo, emergência | Nuvem |
+| Identidade institucional, créditos, formal | Silêncio |
+| Alta densidade, show técnico, tecnologia | Interferência |
+| Movimento, tempo, trajetória, evolução | Espiral |
+| Fundo de apresentação neutro | Campo de Força + paleta Monocromático |
+| Evento de destaque máximo, capa | qualquer composição + paleta Invertido |
+
+---
+
+### Regras de uso
+
+1. **Nunca modificar a geometria dos polígonos** (`_POLYS`) — a forma é o Alfa, é intocável
+2. **Sempre usar as paletas do sistema** (`ART_PALETTES`) — nunca cores avulsas
+3. **O seed deve ser registrado** se a variação for aprovada para uso institucional — garante reprodutibilidade
+4. **PNG 4K para impressão e uso profissional** — o preview de 160px é só para UI
+5. **SVG é vetorial mas não tem degradê radial** (`createRadialGradient:null` no SVG context) — Radiância e Espiral perdem o gradiente no SVG
+
+---
+
 ## Contexto do cliente
 
 **ADA — Ateliê Digital Analógico**
