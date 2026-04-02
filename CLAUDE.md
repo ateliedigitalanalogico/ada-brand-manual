@@ -249,9 +249,7 @@ Funções globais disponíveis em todas as páginas:
 
 ## Restrições permanentes
 
-1. **Racionais MCs** — nunca como exemplo conceitual/poético ("Racionais como cenografia"). Apenas como item factual de portfólio.
-
-2. **Nomes dos fundadores em bios curtas** — não aparecem em bios de 150 caracteres (Instagram). Aparecem em: site/about, proposta, press release, créditos.
+1. **Nomes dos fundadores em bios curtas** — não aparecem em bios de 150 caracteres (Instagram). Aparecem em: site/about, proposta, press release, créditos.
 
 3. **Wordmark em peças pequenas** — nunca abaixo de 240px / 60mm. Usar o Alfa isolado.
 

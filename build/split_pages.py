@@ -107,8 +107,8 @@ SVG_DEFS = '''\
 </svg>'''
 
 FOOTER_HTML = '''\
-<div id="page-footer" style="background:#0A0A0A;padding:32px 40px;text-align:center;border-top:1px solid rgba(255,214,0,.06);">
-  <div style="font-family:var(--mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.12);">ADA - Manual de Marca - v1.0 - Marco 2026 - ada.art.br</div>
+<div id="page-footer" style="background:var(--void);padding:32px 40px;text-align:center;border-top:1px solid rgba(255,214,0,.06);">
+  <div style="font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.12);">ADA - Manual de Marca - v1.0 - Marco 2026 - ada.art.br</div>
 </div>'''
 
 # ---------------------------------------------------------------------------
@@ -147,7 +147,7 @@ def nav_html(active_num, context='root'):
         '<nav class="manual-nav">\n'
         '  <div class="nav-inner">\n'
         '    <div class="nav-logo">\n'
-        '      <svg width="18" style="color:#FFD600"><use href="#ada-sym"/></svg>\n'
+        '      <svg width="14" style="color:#FFD600"><use href="#ada-sym"/></svg>\n'
         '      <span>Manual de Marca</span>\n'
         '    </div>\n'
         f'    <div class="nav-current" id="nav-current">{current_text}</div>\n'
