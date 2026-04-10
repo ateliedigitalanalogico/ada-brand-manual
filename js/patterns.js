@@ -514,19 +514,50 @@ function makeSvgCtxPat(W,H){
 }
 
 /* ── Lightbox ── */
+/* ── Mapeia modo global → paleta ── */
+function _getGlobalPal(){
+  var cls=document.body.className||'';
+  if(cls.indexOf('mode-inversao')>=0)  return ART_PALETTES[2];
+  if(cls.indexOf('mode-meianoite')>=0) return ART_PALETTES[1];
+  if(cls.indexOf('mode-mono')>=0)      return ART_PALETTES[3];
+  return ART_PALETTES[0];
+}
+
+var _artCards=[]; /* {asset, seedOff, thumbDiv, img} */
+
+function _rerenderAll(){
+  var pal=_getGlobalPal();
+  _artCards.forEach(function(e){
+    e.thumbDiv.style.background=pal.bg;
+    _SEED_OFFSET=e.seedOff;
+    var src=renderPatPrev(e.asset,160,pal);
+    _SEED_OFFSET=0;
+    if(e.img) e.img.src=src||'';
+  });
+}
+
 function _initArtLightbox(){
   if(document.getElementById('art-lightbox')) return;
   var lb=document.createElement('div');
   lb.id='art-lightbox';
-  lb.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:9999;cursor:zoom-out;align-items:center;justify-content:center;flex-direction:column;gap:14px;';
-  lb.innerHTML='<img id="art-lb-img" style="max-width:90vw;max-height:85vh;object-fit:contain;display:block;">'
-    +'<div id="art-lb-name" style="font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,214,0,.4);"></div>';
-  lb.addEventListener('click',function(){lb.style.display='none';});
+  lb.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:16px;';
+  var _s='font-family:\'DM Mono\',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;background:transparent;border:1px solid rgba(255,214,0,.28);padding:7px 18px;color:rgba(255,214,0,.55);transition:color .15s,border-color .15s;';
+  lb.innerHTML=
+    '<img id="art-lb-img" style="max-width:90vw;max-height:78vh;object-fit:contain;display:block;cursor:zoom-out;">'+
+    '<div id="art-lb-name" style="font-family:\'DM Mono\',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,214,0,.35);"></div>'+
+    '<div style="display:flex;gap:8px;">'+
+      '<button id="art-lb-png" style="'+_s+'">↓ PNG</button>'+
+      '<button id="art-lb-svg" style="'+_s+'">↓ SVG</button>'+
+    '</div>';
+  lb.querySelector('#art-lb-img').addEventListener('click',function(){lb.style.display='none';});
+  lb.addEventListener('click',function(e){if(e.target===lb)lb.style.display='none';});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.style.display='none';});
   document.body.appendChild(lb);
 }
 
-function openArtLightbox(asset,palette){
+function openArtLightbox(asset,palette,seedOff){
   var c=_getPCanvas(); if(!c) return;
+  seedOff=seedOff||0;
   var lbSz=1200, scale=lbSz/asset.s;
   c.width=Math.round(asset.w*scale); c.height=Math.round(asset.h*scale);
   var ctx=c.getContext('2d');
@@ -539,15 +570,21 @@ function openArtLightbox(asset,palette){
     else{grd.addColorStop(0,palette.grad2);grd.addColorStop(1,palette.grad1);}
     ctx.fillStyle=grd; ctx.fillRect(0,0,c.width,c.height);
   }
+  _SEED_OFFSET=seedOff;
   ctx.save(); ctx.scale(scale,scale);
   asset.draw(ctx,asset.s,palette);
   ctx.restore();
+  _SEED_OFFSET=0;
+  var lb=document.getElementById('art-lightbox');
   var img=document.getElementById('art-lb-img');
   var lbname=document.getElementById('art-lb-name');
-  var lb=document.getElementById('art-lightbox');
-  if(!img||!lb) return;
+  var btnPng=document.getElementById('art-lb-png');
+  var btnSvg=document.getElementById('art-lb-svg');
+  if(!lb||!img) return;
   img.src=c.toDataURL('image/png');
-  if(lbname) lbname.textContent=asset.name+' · '+palette.label;
+  if(lbname) lbname.textContent=asset.name;
+  if(btnPng){ btnPng.onclick=function(){dlPattern(asset,palette,btnPng,seedOff);}; }
+  if(btnSvg){ btnSvg.onclick=function(){dlPatternSVG(asset,palette,btnSvg,seedOff);}; }
   lb.style.display='flex';
 }
 
@@ -622,14 +659,11 @@ function dlPatternSVG(asset,palette,btn,seedOff){
 /* ── Build grid ── */
 function buildPatternGrid(assets,gridId){
   var grid=document.getElementById(gridId); if(!grid) return;
-  assets.forEach(function(asset){
-    var pidx=0;
-    var seedOff=0;
+  _artCards=[];
 
-    var pal=ART_PALETTES[pidx];
-    _SEED_OFFSET=seedOff;
-    var prev=renderPatPrev(asset,160,pal);
-    _SEED_OFFSET=0;
+  assets.forEach(function(asset){
+    var seedOff=0;
+    var pal=_getGlobalPal();
 
     var card=document.createElement('div');
     card.className='asset-card';
@@ -637,75 +671,34 @@ function buildPatternGrid(assets,gridId){
     var thumbDiv=document.createElement('div');
     thumbDiv.className='asset-thumb';
     thumbDiv.style.background=pal.bg;
-    thumbDiv.innerHTML='<img src="'+(prev||'')+'" style="width:100%;height:100%;object-fit:contain;">'
-      +'<div class="asset-overlay"><span class="asset-overlay-text">⤢ ampliar</span></div>';
+
+    var imgEl=document.createElement('img');
+    imgEl.style.cssText='width:100%;height:100%;object-fit:contain;display:block;';
+    _SEED_OFFSET=seedOff;
+    imgEl.src=renderPatPrev(asset,160,pal)||'';
+    _SEED_OFFSET=0;
+
+    var overlay=document.createElement('div');
+    overlay.className='asset-overlay';
+    overlay.innerHTML='<span class="asset-overlay-text">⤢ ampliar</span>';
+
+    thumbDiv.appendChild(imgEl);
+    thumbDiv.appendChild(overlay);
     thumbDiv.addEventListener('click',function(){
-      _SEED_OFFSET=seedOff;
-      openArtLightbox(asset,ART_PALETTES[pidx]);
-      _SEED_OFFSET=0;
+      openArtLightbox(asset,_getGlobalPal(),seedOff);
     });
-
-    /* linha controles: paleta + regen */
-    var ctrlRow=document.createElement('div');
-    ctrlRow.style.cssText='display:flex;gap:3px;margin-top:6px;';
-
-    var _btnStyle='font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,214,0,.45);background:transparent;border:1px solid rgba(255,214,0,.22);padding:5px 10px;cursor:pointer;transition:all .2s;';
-
-    var palBtn=document.createElement('button');
-    palBtn.style.cssText=_btnStyle+'flex:1;text-align:left;';
-    palBtn.textContent='● '+pal.label;
-    palBtn.addEventListener('click',function(e){
-      e.stopPropagation();
-      pidx=(pidx+1)%ART_PALETTES.length;
-      var p=ART_PALETTES[pidx];
-      palBtn.textContent='● '+p.label;
-      thumbDiv.style.background=p.bg;
-      var img=thumbDiv.querySelector('img');
-      _SEED_OFFSET=seedOff;
-      if(img) img.src=renderPatPrev(asset,160,p)||'';
-      _SEED_OFFSET=0;
-    });
-
-    var regenBtn=document.createElement('button');
-    regenBtn.title='Gerar variação';
-    regenBtn.textContent='↺ Regen';
-    regenBtn.style.cssText=_btnStyle+'flex-shrink:0;';
-    regenBtn.addEventListener('click',function(e){
-      e.stopPropagation();
-      seedOff=Math.floor(Math.random()*99991)*13+1;
-      var p=ART_PALETTES[pidx];
-      thumbDiv.style.background=p.bg;
-      var img=thumbDiv.querySelector('img');
-      _SEED_OFFSET=seedOff;
-      if(img) img.src=renderPatPrev(asset,160,p)||'';
-      _SEED_OFFSET=0;
-    });
-
-    ctrlRow.appendChild(palBtn);
-    ctrlRow.appendChild(regenBtn);
-
-    var infoDiv=document.createElement('div');
-    infoDiv.className='asset-info';
-    infoDiv.innerHTML='<span class="asset-name">'+asset.name+'</span>'
-      +'<span class="asset-spec">4000×4000 · 4K</span>';
-    infoDiv.appendChild(ctrlRow);
-
-    var dlDiv=document.createElement('div');
-    dlDiv.style.cssText='display:flex;gap:3px;margin-top:4px;';
-    var dlPng=document.createElement('button');
-    dlPng.style.cssText=_btnStyle+'flex:1;'; dlPng.textContent='↓ PNG';
-    var dlSvg=document.createElement('button');
-    dlSvg.style.cssText=_btnStyle+'flex:1;'; dlSvg.textContent='↓ SVG';
-    dlDiv.appendChild(dlPng); dlDiv.appendChild(dlSvg);
-    infoDiv.appendChild(dlDiv);
-
-    dlPng.addEventListener('click',function(e){e.stopPropagation();dlPattern(asset,ART_PALETTES[pidx],dlPng,seedOff);});
-    dlSvg.addEventListener('click',function(e){e.stopPropagation();dlPatternSVG(asset,ART_PALETTES[pidx],dlSvg,seedOff);});
 
     card.appendChild(thumbDiv);
-    card.appendChild(infoDiv);
     grid.appendChild(card);
+
+    _artCards.push({asset:asset, seedOff:seedOff, thumbDiv:thumbDiv, img:imgEl});
   });
+
+  /* observa mudanças de modo no body */
+  if(window.MutationObserver && !grid._modeObserver){
+    grid._modeObserver=new MutationObserver(_rerenderAll);
+    grid._modeObserver.observe(document.body,{attributes:true,attributeFilter:['class']});
+  }
 }
 
 /* ── Init ── */

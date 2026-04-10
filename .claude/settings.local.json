@@ -42,7 +42,8 @@
       "Bash(powershell -NonInteractive -Command \"\n$path = 'E:\\\\ADA Dropbox\\\\ADA \\(1\\)\\\\2026\\\\ADA\\\\ada-manual\\\\.git\\\\objects\\\\5f'\n$acl = Get-Acl -Path $path\n$username = [System.Security.Principal.WindowsIdentity]::GetCurrent\\(\\).Name\n$rule = New-Object System.Security.AccessControl.FileSystemAccessRule\\($username, 'FullControl', 'ContainerInherit,ObjectInherit', 'None', 'Allow'\\)\n$acl.AddAccessRule\\($rule\\)\nSet-Acl -Path $path -AclObject $acl\nWrite-Output 'Permissao concedida'\n\")",
       "Bash(powershell -NonInteractive -File - << 'PSEOF'\n$path = \"E:\\\\ADA Dropbox\\\\ADA \\(1\\)\\\\2026\\\\ADA\\\\ada-manual\\\\.git\\\\objects\\\\5f\"\n$acl = Get-Acl -Path $path\n$username = [System.Security.Principal.WindowsIdentity]::GetCurrent\\(\\).Name\n$rule = New-Object System.Security.AccessControl.FileSystemAccessRule\\($username, \"FullControl\", \"ContainerInherit,ObjectInherit\", \"None\", \"Allow\"\\)\n$acl.AddAccessRule\\($rule\\)\nSet-Acl -Path $path -AclObject $acl\nWrite-Output \"Permissao concedida para $username\"\nPSEOF)",
       "Bash(touch \"E:/ADA Dropbox/ADA \\(1\\)/2026/ADA/ada-manual/.git/objects/5f/testfile\")",
-      "Bash(rm \"E:/ADA Dropbox/ADA \\(1\\)/2026/ADA/ada-manual/.git/objects/5f/testfile\")"
+      "Bash(rm \"E:/ADA Dropbox/ADA \\(1\\)/2026/ADA/ada-manual/.git/objects/5f/testfile\")",
+      "Bash(python3:*)"
     ]
   }
 }
