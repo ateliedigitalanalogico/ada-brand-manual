@@ -27,11 +27,17 @@ GitHub: `ateliedigitalanalogico/ada-brand-manual` (main)
 
 ```
 ada-manual/
-├── index.html     ← documento único — todas as divs aqui, editar diretamente
+├── index.html          ← documento único — todas as divs aqui, editar diretamente
 ├── css/
-│   └── system.css ← variáveis, layout, componentes
-└── js/
-    └── ada.js     ← modo switcher e utilitários
+│   └── system.css      ← variáveis, layout, componentes
+├── js/
+│   ├── ada.js          ← modo switcher (setMode) + tag cycling
+│   ├── downloads.js    ← loadHtml2Canvas · dlSvgPng · dlMock · dlIco · openImgLb
+│   └── sigs.js         ← SIG_CFG · makeSig · updateSigs · openSigHTML · cpSig
+└── assets/
+    ├── logo/           ← SVGs e PNGs para download
+    ├── imagetica/      ← 52 fotos em 11 sub-territórios
+    └── portfolio.json  ← portfólio completo estruturado (autorais, comerciais, mídia)
 ```
 
 ### Fluxo de edição
@@ -162,6 +168,9 @@ Todo texto pertence a um destes níveis. Peso pode ser ajustado para leitura.
 | 02 | Paleta de Cores | Paleta c1–c6, Uso — Modos |
 | 03 | Tipografia | Famílias: DM Mono · Syne · Cormorant · Hierarquia |
 | 04 | Voz e Tom | ANTES. display · taglines · corpo · 4 cards personalidade · vocabulário |
+| 05 | Elementos | Bloco vertical · Bloco horizontal · Artes Vetoriais · Imagens |
+| 06 | Merchandise | Conceito · Assets para download · Fotos de merch |
+| 07 | Materiais Digitais | Avatares · Favicon · Assinatura de email (4 variantes) |
 | — | Prompt | Sempre última div — documentação para agente AI |
 
 ---
@@ -186,7 +195,10 @@ Toda decisão de design definida no documento deve ser válida dentro do própri
 **ADA — Ateliê Digital Analógico**
 Plataforma criativa fundada em 2015 por Caio Fazolin e Tatiane Gonzalez.
 
-**Portfólio:** Anish Kapoor (Casa Bradesco), Racionais MCs 30 anos, Festival G20, ALL Amazônia em Times Square, COP28 Dubai, Liniker, Natiruts, Encontro dos Titãs, Netflix, Sony Pictures, Pinacoteca SP.
+**Portfólio completo:** `assets/portfolio.json` — também disponível em:
+`https://raw.githubusercontent.com/ateliedigitalanalogico/ada-brand-manual/main/assets/portfolio.json`
+
+**Highlights:** Anish Kapoor / Casa Bradesco · Racionais MCs (30 e 36 anos) · G20 / Festival Aliança Global · ALL Amazônia (Times Square) · COP28 Dubai · COP30 Belém · NASA · SP2B / Gilberto Gil · Liniker · Natiruts · Titãs · Jota Quest · Netflix · Sony Pictures · Pinacoteca SP · Prêmio SIM SP 2020.
 
 **Posicionamento:** Tecnologia como linguagem. Brasil como ponto de vista.
 
