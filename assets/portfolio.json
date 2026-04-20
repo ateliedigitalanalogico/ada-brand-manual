@@ -1,0 +1,210 @@
+{
+  "updated": "2026-04-20",
+  "autorais": [
+    {
+      "title": "pixel.data/cm²",
+      "year": 2015,
+      "type": "Performance audiovisual generativa",
+      "venue": "Festival Visualismo, Praça Mauá, RJ",
+      "credits": {
+        "visuais_programacao": "Caio Fazolin",
+        "pesquisa_dados": "Tatiane Gonzalez"
+      }
+    },
+    {
+      "title": "Protocolo",
+      "year": 2017,
+      "type": "Instalação audiovisual generativa",
+      "descricao": "Sobre controle e comunicação",
+      "colaboracao": "Henrique Roscoe",
+      "venue": "Residência AVXLab / CCSP + SPCine, São Paulo"
+    },
+    {
+      "title": "Color Blindness",
+      "year": 2019,
+      "type": "Videomapping",
+      "venue": "Festival Abstrata — Festival Internacional de Videomapping, Fortaleza"
+    },
+    {
+      "title": "O Invisível das Coisas",
+      "year": 2019,
+      "type": "Exposição individual",
+      "descricao": "Primeira exposição individual de Caio Fazolin",
+      "venue": "Residência artística, Galeria Digital O Sítio, Florianópolis"
+    },
+    {
+      "title": "ILHA do FAM",
+      "year": "2020–2023",
+      "type": "Instalação virtual 3D",
+      "descricao": "Ilha virtual em Unreal Engine. Desenvolvimento tecnológico para as edições 2020, 2021, 2022 e 2023 do Festival Amazônia Mapping",
+      "premio": "Prêmio SIM SP 2020 — Inovação: Música e Tecnologia"
+    },
+    {
+      "title": "SP Rock Mapping",
+      "year": "2020 + 2021",
+      "type": "Mini festival de videomapping e música ao vivo",
+      "descricao": "Idealizado pela ADA a convite da Secretaria Municipal de Cultura de SP",
+      "edicoes": [
+        { "ano": 2020, "local": "Rua Augusta" },
+        { "ano": 2021, "local": "Minhocão" }
+      ]
+    },
+    {
+      "title": "OUROByte",
+      "year": 2021,
+      "type": "Performance audiovisual",
+      "colaboracao": "Michelle Mattiuzzi",
+      "venue": "Marte Festival"
+    },
+    {
+      "title": "Laço",
+      "year": 2023,
+      "type": "Ocupação audiovisual",
+      "venue": "Sesc Ipiranga, São Paulo"
+    },
+    {
+      "title": "ALL Amazônia",
+      "year": 2023,
+      "type": "Intervenção urbana",
+      "venue": "Times Square, Nova York",
+      "contexto": "Semana da ONU, setembro 2023",
+      "direcao": "Batman Zavareze"
+    }
+  ],
+  "comerciais": [
+    { "ano": 2025, "tipo": "Jantar imersivo", "cliente": "COP 30 / Esfera de Belém" },
+    { "ano": 2025, "tipo": "Visuais ao vivo", "cliente": "Ludmilla" },
+    { "ano": 2025, "tipo": "Visuais ao vivo", "cliente": "MIC BR Fortaleza" },
+    { "ano": 2025, "tipo": "Desfiles", "cliente": "Nalimo" },
+    { "ano": 2025, "tipo": "Videomapping", "cliente": "NASA" },
+    { "ano": 2025, "tipo": "Videomapping / instalação", "cliente": "SESC com BT Mapping" },
+    { "ano": 2025, "tipo": "Direção técnica e visuais", "cliente": "SP2B — São Paulo Beyond Business", "detalhe": "Sessão inaugural com Gilberto Gil, Auditório Ibirapuera, agosto 2025" },
+    { "ano": 2025, "tipo": "Estande imersivo", "cliente": "XP Estande" },
+    { "ano": 2025, "tipo": "Instalação imersiva", "cliente": "Vivara", "detalhe": "dezembro 2025" },
+    { "ano": 2025, "tipo": "Stage design", "cliente": "Jota Quest", "detalhe": "The Town 2025" },
+    { "ano": 2025, "tipo": "Stage design", "cliente": "Racionais MCs", "detalhe": "Turnê 36 anos EUA — Newark, Boston, Miami, Los Angeles" },
+    { "ano": 2025, "tipo": "A confirmar", "cliente": "Casa Bradesco 2025" },
+    { "ano": 2024, "tipo": "Videomapping abertura exposição Inflamação", "cliente": "Anish Kapoor / Casa Bradesco / Cidade Matarazzo" },
+    { "ano": 2024, "tipo": "Stage design", "cliente": "Natiruts", "detalhe": "Turnê Leve com Você" },
+    { "ano": 2024, "tipo": "Coordenação visual e técnica", "cliente": "G20 / Festival Aliança Global, RJ" },
+    { "ano": 2024, "tipo": "Videomapping", "cliente": "Isa Energia", "detalhe": "Sala São Paulo · 25 anos" },
+    { "ano": 2024, "tipo": "Videomapping", "cliente": "Cerrado Mapping Festival, MG" },
+    { "ano": 2024, "tipo": "Sala imersiva", "cliente": "Space Lab" },
+    { "ano": 2024, "tipo": "Stage design", "cliente": "Nalimo", "detalhe": "Desfiles coleções Natureza Surreal e Capibaribe" },
+    { "ano": 2024, "tipo": "Stage design", "cliente": "Racionais MCs", "detalhe": "Shows 30 anos, Espaço Unimed SP" },
+    { "ano": 2023, "tipo": "Conteúdo em IA", "cliente": "iFood Arraial Estrelado", "detalhe": "Dueto João Gomes + Luiz Gonzaga (IA)" },
+    { "ano": 2023, "tipo": "Jantar imersivo", "cliente": "Amazon / COP28, Dubai" },
+    { "ano": 2023, "tipo": "Adaptação campanha", "cliente": "Luther — Netflix" },
+    { "ano": 2023, "tipo": "Adaptação campanha", "cliente": "Homem-Aranha — Sony Pictures" },
+    { "ano": 2023, "tipo": "Stage design", "cliente": "Titãs", "detalhe": "Turnê Encontro" },
+    { "ano": 2023, "tipo": "Stage design", "cliente": "Racionais MCs", "detalhe": "The Town" },
+    { "ano": 2023, "tipo": "Stage design", "cliente": "Ludmilla", "detalhe": "The Town" },
+    { "ano": 2023, "tipo": "Stage design", "cliente": "Jota Quest", "detalhe": "The Town" },
+    { "ano": 2023, "tipo": "Conteúdo DVD", "cliente": "Edi Rock" },
+    { "ano": 2023, "tipo": "Videomapping", "cliente": "Virada Cultural SP" },
+    { "ano": 2023, "tipo": "Videomapping", "cliente": "Vila Itororó", "detalhe": "Jornada do Patrimônio" },
+    { "ano": 2023, "tipo": "Evento", "cliente": "Sindicato dos Bancários", "detalhe": "100 anos" },
+    { "ano": 2022, "tipo": "Stage design", "cliente": "Racionais MCs", "detalhe": "Rock in Rio" },
+    { "ano": 2022, "tipo": "Sala imersiva", "cliente": "Mix Experience / MIS Ceará, Fortaleza" },
+    { "ano": 2022, "tipo": "Conteúdo", "cliente": "Festival do Futuro / Posse do Presidente Lula", "detalhe": "Equipe Batman Zavareze" },
+    { "ano": 2022, "tipo": "Sala imersiva", "cliente": "Casa NFT / Funarte" },
+    { "ano": 2022, "tipo": "Instalação expositiva", "cliente": "Pinacoteca SP", "detalhe": "Vivara 60 anos" },
+    { "ano": 2022, "tipo": "Stage design", "cliente": "Liniker", "detalhe": "Turnê Indigo Borboleta Anil" },
+    { "ano": 2022, "tipo": "Live visual", "cliente": "Jão", "detalhe": "Prêmio Multishow" },
+    { "ano": 2022, "tipo": "Videomapping", "cliente": "Virada Cultural SP / Shopping Light" },
+    { "ano": 2022, "tipo": "Instalação", "cliente": "Pinacoteca SP", "detalhe": "World Cities Culture Summit" },
+    { "ano": 2021, "tipo": "Videomapping", "cliente": "130 anos Avenida Paulista / Prefeitura SP" },
+    { "ano": 2021, "tipo": "Videomapping", "cliente": "SP Arte / Galeria Luciana Brito", "detalhe": "Fernando Zarif" },
+    { "ano": 2021, "tipo": "Instalação imersiva", "cliente": "Heineken", "detalhe": "Festa Heavy Love" },
+    { "ano": 2021, "tipo": "3 salas imersivas", "cliente": "Museu SICREDI", "detalhe": "Lucas do Rio Verde, MT" },
+    { "ano": 2021, "tipo": "Projeção", "cliente": "Itaú" },
+    { "ano": 2021, "tipo": "Projeções em 7 empenas", "cliente": "XP Investimentos" },
+    { "ano": 2021, "tipo": "Projeção urbana", "cliente": "Urban 95", "detalhe": "10 cidades / 8 estados · Primeira infância" },
+    { "ano": 2021, "tipo": "Videomapping", "cliente": "Instituto Butantã", "detalhe": "SP Cidade Ciência · 467 anos de SP" },
+    { "ano": 2021, "tipo": "Videomapping", "cliente": "Fundação Renascer", "detalhe": "Aniversário" },
+    { "ano": 2020, "tipo": "Videomapping", "cliente": "Anitta", "detalhe": "Tócame" },
+    { "ano": 2020, "tipo": "Projeção mapeada", "cliente": "Google", "detalhe": "Orgulho de Ser" },
+    { "ano": 2020, "tipo": "Projeção interativa", "cliente": "Ame Digital", "detalhe": "Ame Sem Moderação · 5 estados" },
+    { "ano": 2020, "tipo": "Projeção", "cliente": "Ambev", "detalhe": "Bud One Time Live · 2 estados" },
+    { "ano": 2020, "tipo": "Projeção", "cliente": "Hospital das Clínicas USP + Instituto Emílio Ribas", "detalhe": "Protagonistas de Máscaras" },
+    { "ano": 2020, "tipo": "Ambientes imersivos", "cliente": "Museu Monteiro Lobato, Taubaté" },
+    { "ano": 2019, "tipo": "Videomapping", "cliente": "Festival Abstrata, Fortaleza" },
+    { "ano": 2019, "tipo": "Projeção mapeada na floresta", "cliente": "Natura, Belém do Pará" },
+    { "ano": 2019, "tipo": "Stage design", "cliente": "Alok", "detalhe": "Rock in Rio" },
+    { "ano": 2019, "tipo": "Software interativo", "cliente": "Corona", "detalhe": "Sounds of Pollution" },
+    { "ano": 2019, "tipo": "Instalação audiovisual interativa", "cliente": "IBM / CIAB" },
+    { "ano": 2019, "tipo": "Sala imersiva", "cliente": "CCBB Brasília", "detalhe": "A Arte de Tim Burton" },
+    { "ano": 2019, "tipo": "Conteúdo 1h", "cliente": "Fundação Reviver", "detalhe": "25 anos" },
+    { "ano": 2019, "tipo": "Ambiente imersivo", "cliente": "Shopping Light, SP" }
+  ],
+  "premiacoes": [
+    {
+      "premio": "Prêmio SIM SP",
+      "categoria": "Inovação: Música e Tecnologia",
+      "ano": 2020,
+      "resultado": "Vencedor",
+      "projeto": "ILHA do FAM"
+    }
+  ],
+  "institucional": [
+    {
+      "papel": "Palestrante",
+      "evento": "Arte do Amanhã",
+      "local": "Museu do Amanhã + Instituto Ling, São Paulo",
+      "ano": 2023
+    },
+    {
+      "papel": "Artista residente",
+      "evento": "AVXLab",
+      "local": "CCSP + SPCine, São Paulo",
+      "ano": 2017
+    },
+    {
+      "papel": "Participação",
+      "evento": "Festivais",
+      "lista": ["On_Off", "Visualismo", "Eletronika", "Multiplicidade", "Abstrata", "Festival Amazônia Mapping"]
+    }
+  ],
+  "midia": [
+    {
+      "veiculo": "iFood News",
+      "formato": "Entrevista",
+      "assunto": "Caio Fazolin — projeto João Gomes + Luiz Gonzaga",
+      "data": "2023-07"
+    },
+    {
+      "veiculo": "Museu do Amanhã",
+      "formato": "Participação no programa Arte do Amanhã",
+      "data": "2023-05"
+    },
+    {
+      "veiculo": "Mad Sound",
+      "formato": "Entrevista",
+      "assunto": "Caio Fazolin — SP Rock Mapping",
+      "data": "2021-04"
+    },
+    {
+      "veiculo": "SPCine",
+      "formato": "Cobertura",
+      "assunto": "Mostra AVXLab"
+    },
+    {
+      "veiculo": "Dasartes",
+      "formato": "Cobertura",
+      "assunto": "Mostra AVXLab"
+    },
+    {
+      "veiculo": "Panasonic Brasil",
+      "formato": "Case institucional",
+      "assunto": "Videomapping Instituto Butantã"
+    },
+    {
+      "veiculo": "Revista seLecT",
+      "formato": "Arquivo a levantar"
+    },
+    {
+      "veiculo": "VICE Brasil",
+      "formato": "Arquivo a levantar"
+    }
+  ]
+}
