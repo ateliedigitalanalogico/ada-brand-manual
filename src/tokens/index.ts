@@ -1,5 +1,0 @@
-export * as colors from './colors'
-export * as typography from './typography'
-export * as spacing from './spacing'
-export * as motion from './motion'
-export * as relations from './relations'
