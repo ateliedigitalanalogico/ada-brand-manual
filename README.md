@@ -107,6 +107,27 @@ Em `public/assets/logo/` — 18 SVGs organizados por tipo e variante:
 `assets/portfolio.json` — dados estruturados (autorais, comerciais, mídia).
 URL raw: `https://raw.githubusercontent.com/ateliedigitalanalogico/ada-brand-manual/main/assets/portfolio.json`
 
+## Skill — ada-brand-director
+
+O repositório inclui a skill `ada-brand-director` para uso com **Claude Code** e **Claude Desktop** — contexto completo de marca, voz, design system e portfólio.
+
+```
+.claude/
+├── skills/ada-brand-director/
+│   ├── SKILL.md                   # núcleo lean (~300 tokens)
+│   └── references/
+│       ├── design-system.md       # tokens, tipografia, componentes, SVG
+│       ├── sections-index.md      # mapa das 9 seções
+│       └── portfolio-schema.md    # como consultar portfolio.json via WebFetch
+└── desktop/
+    └── ada-brand-director-project-instructions.md  # instruções para Claude Desktop Projects
+```
+
+**Claude Code:** `/ada-brand-director` em qualquer conversa.
+**Claude Desktop:** copie o conteúdo de `.claude/desktop/ada-brand-director-project-instructions.md` em **Projects → [Projeto ADA] → Project Instructions**.
+
+---
+
 ## Sobre a ADA
 
 **ADA — Ateliê Digital Analógico** · Fundada em 2015 por Caio Fazolin e Tatiane Gonzalez · São Paulo, Brasil
