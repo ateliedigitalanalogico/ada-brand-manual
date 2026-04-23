@@ -1,0 +1,29 @@
+---
+interface Props {
+  spacing?: 'normal' | 'tight' | 'none'
+}
+const { spacing = 'normal' } = Astro.props
+---
+<hr class={`hairline hairline--${spacing}`} aria-hidden="true" />
+
+<style>
+.hairline {
+  border: none;
+  height: var(--hairline-h);
+  background: var(--hairline-color);
+}
+
+.hairline--normal {
+  margin-top: var(--hairline-gap-before);
+  margin-bottom: var(--hairline-gap-after);
+}
+
+.hairline--tight {
+  margin-top: var(--sp-2);
+  margin-bottom: var(--sp-2);
+}
+
+.hairline--none {
+  margin: 0;
+}
+</style>

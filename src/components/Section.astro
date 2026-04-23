@@ -1,0 +1,33 @@
+---
+interface Props {
+  id?: string
+}
+const { id } = Astro.props
+---
+<section class="sec" id={id}>
+  <div class="sec-box">
+    <slot />
+  </div>
+</section>
+
+<style>
+.sec {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--sp-3);
+}
+
+.sec-box {
+  width: var(--content-w);
+  background: var(--sec-bg);
+  padding: var(--section-padding);
+  margin-bottom: var(--section-gap);
+  transition: background-color var(--dur-base) var(--ease-ui);
+}
+
+@media (max-width: 768px) {
+  .sec { padding: 0 var(--sp-2); }
+  .sec-box { padding: var(--sp-3); }
+}
+</style>

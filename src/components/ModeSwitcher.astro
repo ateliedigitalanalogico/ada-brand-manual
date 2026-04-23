@@ -1,0 +1,55 @@
+---
+// Nenhuma prop — estado gerenciado pelo lib/mode.ts
+---
+<nav class="mode-switcher" aria-label="Modo de cor">
+  {[
+    { id: 'padrao',   label: 'Padrão' },
+    { id: 'inversao', label: 'Inversão' },
+    { id: 'mono',     label: 'Mono' },
+  ].map(({ id, label }) => (
+    <button
+      class="mode-btn"
+      data-mode-btn={id}
+      data-active={id === 'padrao' ? 'true' : 'false'}
+      onclick={`setMode('${id}')`}
+    >
+      {label}
+    </button>
+  ))}
+</nav>
+
+<style>
+.mode-switcher {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  gap: var(--sp-1);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--page-bg);
+  border-bottom: var(--hairline-h) solid var(--hairline-color);
+}
+
+.mode-btn {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: var(--sp-1) var(--sp-2);
+  border: var(--hairline-h) solid transparent;
+  border-radius: var(--tag-radius);
+  transition: color var(--dur-fast) var(--ease-ui),
+              border-color var(--dur-fast) var(--ease-ui);
+}
+
+.mode-btn:hover {
+  color: var(--ink);
+}
+
+.mode-btn[data-active='true'] {
+  color: var(--accent);
+  border-color: var(--border);
+}
+</style>

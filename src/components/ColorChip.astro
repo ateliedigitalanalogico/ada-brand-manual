@@ -1,0 +1,65 @@
+---
+interface Props {
+  color: string       // hex ou css value
+  token?: string      // --accent, --page-bg...
+  label?: string      // nome legível
+  size?: 'lg' | 'md' | 'sm'
+  textColor?: string  // força cor do texto (para chips de fundo fixo)
+}
+const { color, token, label, size = 'md', textColor } = Astro.props
+---
+<div class={`chip chip--${size}`} style={`--chip-color:${color};${textColor ? `--chip-text:${textColor}` : ''}`}>
+  <div class="chip-block" />
+  <div class="chip-meta">
+    {token && <span class="chip-token">{token}</span>}
+    {label && <span class="chip-label">{label}</span>}
+    <span class="chip-value">{color}</span>
+  </div>
+</div>
+
+<style>
+.chip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.chip-block {
+  background: var(--chip-color);
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.chip--lg .chip-block { height: 120px; }
+.chip--md .chip-block { height: 72px; }
+.chip--sm .chip-block { height: 40px; }
+
+.chip-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chip-token {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: var(--ls-wide);
+  color: var(--accent);
+}
+
+.chip-label {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wider);
+  color: var(--ink-mid);
+}
+
+.chip-value {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+</style>

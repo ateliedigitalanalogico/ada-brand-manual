@@ -1,6 +1,16 @@
 # Proposta — repo separado
 proposta/
 
+# Astro build output
+dist/
+.astro/
+
+# Node
+node_modules/
+
+# Claude sessions
+.claude/sessions/
+
 # Temp files
 *.tmp.*
 *.bak

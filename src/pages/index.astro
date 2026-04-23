@@ -1,0 +1,52 @@
+---
+import Base from '@layouts/Base.astro'
+import ModeSwitcher from '@components/ModeSwitcher.astro'
+import LogoSection from '@components/sections/LogoSection.astro'
+import PaletteSection from '@components/sections/PaletteSection.astro'
+import TypographySection from '@components/sections/TypographySection.astro'
+import VozSection from '@components/sections/VozSection.astro'
+import ElementosSection from '@components/sections/ElementosSection.astro'
+import MerchandiseSection from '@components/sections/MerchandiseSection.astro'
+import MateriaisDigitaisSection from '@components/sections/MateriaisDigitaisSection.astro'
+import ComponentesSection from '@components/sections/ComponentesSection.astro'
+import PromptSection from '@components/sections/PromptSection.astro'
+---
+<Base>
+  <ModeSwitcher />
+
+  <main>
+    <!-- 01 — Logo e Wordmark -->
+    <LogoSection />
+
+    <!-- 02 — Paleta de Cores -->
+    <PaletteSection />
+
+    <!-- 03 — Tipografia -->
+    <TypographySection />
+
+    <!-- 04 — Voz e Tom -->
+    <VozSection />
+
+    <!-- 05 — Elementos -->
+    <ElementosSection />
+
+    <!-- 06 — Merchandise -->
+    <MerchandiseSection />
+
+    <!-- 07 — Materiais Digitais -->
+    <MateriaisDigitaisSection />
+
+    <!-- 08 — Componentes -->
+    <ComponentesSection />
+
+    <!-- 09 — Prompt de Sistema -->
+    <PromptSection />
+  </main>
+</Base>
+
+<style>
+main {
+  padding-top: var(--sp-4);
+  padding-bottom: var(--sp-8);
+}
+</style>

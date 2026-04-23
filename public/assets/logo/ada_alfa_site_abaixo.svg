@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <!-- Alfa — proporções idênticas ao bloco de marca do manual
+       .d05-alfa: 64px num card de ~300px → alfa = 21% do canvas = 214px
+       scale = 214/126 = 1.698 -->
+  <g transform="translate(500 432) scale(1.698) translate(-288 -288)" fill="#FFD600">
+    <polygon points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297"/>
+    <polygon points="238.5 324 225 351 241.01 351 250.01 333 254.51 324"/>
+    <polygon points="321.49 324 325.99 333 334.99 351 351 351 337.5 324"/>
+  </g>
+  <!-- Hairline horizontal — mesma largura do alfa (214px), gap de 53px abaixo do alfa -->
+  <line x1="393" y1="592" x2="607" y2="592" stroke="#FFD600" stroke-width="1.5" stroke-opacity="0.35"/>
+  <!-- ada.art.br — font-size proporcional à .d05-label -->
+  <text x="500" y="645" text-anchor="middle" dominant-baseline="middle" font-family="'DM Mono', monospace" font-weight="400" font-size="30" letter-spacing="4" fill="#FFD600">ada.art.br</text>
+</svg>

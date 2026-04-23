@@ -1,0 +1,271 @@
+---
+import Section from '@components/Section.astro'
+import SectionHeader from '@components/SectionHeader.astro'
+import Hairline from '@components/Hairline.astro'
+import ColorChip from '@components/ColorChip.astro'
+
+// Primitivas — a escala bruta
+const yellows = [
+  { color: '#FFD600', token: '--yellow-400', label: 'Primário' },
+  { color: '#FFE84D', token: '--yellow-300', label: 'Inversão' },
+  { color: '#E6C000', token: '--yellow-600', label: 'Hover / Border' },
+]
+
+const blacks = [
+  { color: '#000000', token: '--black-000', label: 'Void' },
+  { color: '#111111', token: '--black-100', label: 'Page bg' },
+  { color: '#1A1A1A', token: '--black-200', label: 'Sec bg' },
+  { color: '#222222', token: '--black-300', label: 'Card bg' },
+  { color: '#333333', token: '--black-400', label: '—' },
+]
+
+const neutrals = [
+  { color: '#FFFFFF', token: '--white',     label: 'White' },
+  { color: '#F2F2F2', token: '--gray-050',  label: 'Gray 050' },
+  { color: '#E6E6E6', token: '--gray-100',  label: 'Gray 100' },
+  { color: '#888888', token: '--gray-400',  label: 'Gray 400' },
+  { color: '#444444', token: '--gray-600',  label: 'Gray 600' },
+]
+
+// Tokens semânticos por modo
+const modes = [
+  {
+    id: 'padrao',
+    label: 'Padrão',
+    bg: '#111111',
+    fg: '#FFD600',
+    tokens: [
+      { token: '--page-bg',    color: '#111111' },
+      { token: '--sec-bg',     color: '#1A1A1A' },
+      { token: '--card-bg',    color: '#222222' },
+      { token: '--accent',     color: '#FFD600' },
+      { token: '--accent-cold', color: '#1400FF' },
+      { token: '--ink',        color: '#FFFFFF' },
+      { token: '--ink-mid',    color: 'rgba(255,255,255,.55)' },
+      { token: '--border',     color: 'rgba(255,214,0,.12)' },
+    ],
+  },
+  {
+    id: 'inversao',
+    label: 'Inversão',
+    bg: '#FFE84D',
+    fg: '#000000',
+    tokens: [
+      { token: '--page-bg',    color: '#FFE84D' },
+      { token: '--sec-bg',     color: 'rgba(255,255,255,.22)' },
+      { token: '--card-bg',    color: 'rgba(255,255,255,.35)' },
+      { token: '--accent',     color: '#000000' },
+      { token: '--accent-cold', color: '#1400FF' },
+      { token: '--ink',        color: '#000000' },
+      { token: '--ink-mid',    color: 'rgba(0,0,0,.55)' },
+      { token: '--border',     color: 'rgba(0,0,0,.12)' },
+    ],
+  },
+  {
+    id: 'mono',
+    label: 'Mono',
+    bg: '#FFFFFF',
+    fg: '#000000',
+    tokens: [
+      { token: '--page-bg',    color: '#FFFFFF' },
+      { token: '--sec-bg',     color: '#F2F2F2' },
+      { token: '--card-bg',    color: '#E6E6E6' },
+      { token: '--accent',     color: '#000000' },
+      { token: '--accent-cold', color: '#000000' },
+      { token: '--ink',        color: '#000000' },
+      { token: '--ink-mid',    color: 'rgba(0,0,0,.55)' },
+      { token: '--border',     color: 'rgba(0,0,0,.12)' },
+    ],
+  },
+]
+---
+
+<Section id="s02">
+  <SectionHeader num="02" title="Paleta de Cores" tag="Sistema" />
+  <Hairline />
+
+  <!-- Primitivas -->
+  <p class="sub-label">Primitivas</p>
+
+  <div class="prim-group">
+    <span class="prim-group-label">Amarelo</span>
+    <div class="prim-row">
+      {yellows.map(c => <ColorChip {...c} size="md" />)}
+    </div>
+  </div>
+
+  <div class="prim-group">
+    <span class="prim-group-label">Preto</span>
+    <div class="prim-row">
+      {blacks.map(c => <ColorChip {...c} size="md" />)}
+    </div>
+  </div>
+
+  <div class="prim-group">
+    <span class="prim-group-label">Azul — Secundário</span>
+    <div class="prim-row">
+      <ColorChip color="#1400FF" token="--blue-500" label="Accent Cold" size="md" />
+      <div class="tension-demo">
+        <div style="background:#FFD600; width:140px; height:34px;" />
+        <div style="background:#1400FF; width:140px; height:34px;" />
+        <span class="tension-label">quente / fria</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="prim-group">
+    <span class="prim-group-label">Neutros</span>
+    <div class="prim-row">
+      {neutrals.map(c => <ColorChip {...c} size="md" />)}
+    </div>
+  </div>
+
+  <Hairline />
+
+  <!-- Tokens semânticos por modo -->
+  <p class="sub-label">Tokens por Modo</p>
+
+  <div class="modes-grid">
+    {modes.map(mode => (
+      <div class="mode-col">
+        <div class="mode-header" style={`background:${mode.bg}; color:${mode.fg}`}>
+          <svg width="20" height="20" style={`color:${mode.fg}`}>
+            <use href="#ada-sym" />
+          </svg>
+          <span class="mode-header-label">{mode.label}</span>
+        </div>
+        <div class="mode-tokens">
+          {mode.tokens.map(t => (
+            <div class="token-row">
+              <div class="token-swatch" style={`background:${t.color}`} />
+              <span class="token-name">{t.token}</span>
+              <span class="token-val">{t.color}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<style>
+.sub-label {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: var(--sublabel-gap);
+}
+
+/* Primitivas */
+.prim-group {
+  margin-bottom: var(--sp-4);
+}
+
+.prim-group-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wider);
+  color: var(--ink-faint);
+  margin-bottom: var(--sp-2);
+}
+
+.prim-row {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.prim-row > :global(.chip) {
+  width: 140px;
+}
+
+.tension-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-0);
+  margin-left: var(--sp-4);
+  align-self: flex-start;
+}
+
+.tension-label {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wider);
+  color: var(--ink-faint);
+  margin-top: var(--sp-1);
+}
+
+/* Tokens por modo */
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+}
+
+.mode-col {
+  background: var(--card-bg);
+}
+
+.mode-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+}
+
+.mode-header-label {
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+}
+
+.mode-tokens {
+  padding: var(--sp-2) var(--sp-3) var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.token-row {
+  display: grid;
+  grid-template-columns: 16px 1fr auto;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.token-swatch {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  outline: 1px solid var(--border-dim);
+}
+
+.token-name {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  color: var(--ink-mid);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.token-val {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-normal);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .modes-grid { grid-template-columns: 1fr; }
+  .prim-row > :global(.chip) { width: 120px; }
+}
+</style>

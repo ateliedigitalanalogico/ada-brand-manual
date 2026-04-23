@@ -1,0 +1,370 @@
+---
+import Section from '@components/Section.astro'
+import SectionHeader from '@components/SectionHeader.astro'
+import Hairline from '@components/Hairline.astro'
+
+const comps = [
+  {
+    id: 'btn',
+    nome: 'Botão',
+    desc: 'Primary para ação principal, Ghost para secundária, Text para terciária ou inline.',
+    tokens: ['--mono', '--accent'],
+    code: `<button class="ada-btn ada-btn--primary">Saiba mais</button>
+<button class="ada-btn ada-btn--ghost">Explorar</button>
+<button class="ada-btn ada-btn--text">Ver todos →</button>
+
+<style>
+.ada-btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+.ada-btn--primary {
+  background: #FFD600;
+  color: #000000;
+  border: none;
+}
+.ada-btn--primary:hover { background: #ffffff; }
+.ada-btn--ghost {
+  background: none;
+  color: #FFD600;
+  border: 1px solid rgba(255,214,0,.35);
+}
+.ada-btn--ghost:hover { border-color: #FFD600; }
+.ada-btn--text {
+  background: none;
+  color: #FFD600;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+.ada-btn--text:hover { opacity: .65; }
+</style>`,
+  },
+  {
+    id: 'tag',
+    nome: 'Tag',
+    desc: 'Label de categoria ou classificação. Sempre uppercase DM Mono. Usar para territórios, tipos de projeto, tecnologias.',
+    tokens: ['--mono', '--ink-faint', '--border'],
+    code: `<span class="ada-tag">Videomapping</span>
+<span class="ada-tag">IA Generativa</span>
+<span class="ada-tag">Intervenção Urbana</span>
+
+<style>
+.ada-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  border: 1px solid rgba(255,214,0,.2);
+  padding: 3px 10px;
+  display: inline-block;
+  white-space: nowrap;
+}
+</style>`,
+  },
+  {
+    id: 'input',
+    nome: 'Input',
+    desc: 'Campo de texto padrão. Label em DM Mono uppercase. Foco acende borda com accent.',
+    tokens: ['--mono', '--accent', '--card-bg', '--border'],
+    code: `<div class="ada-field">
+  <label class="ada-field__label" for="nome">Nome</label>
+  <input class="ada-field__input" id="nome" type="text" placeholder="Ex: Ana Lima" />
+</div>
+
+<style>
+.ada-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ada-field__label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+}
+.ada-field__input {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  background: #222222;
+  border: 1px solid rgba(255,214,0,.18);
+  color: #ffffff;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color .15s;
+}
+.ada-field__input::placeholder { color: rgba(255,255,255,.25); }
+.ada-field__input:focus { border-color: #FFD600; }
+</style>`,
+  },
+  {
+    id: 'card',
+    nome: 'Card de Projeto',
+    desc: 'Unidade base do portfólio. Thumb 16:9, ano + título + descrição + tags. Hover revela mais info.',
+    tokens: ['--mono', '--sans', '--accent', '--card-bg', '--ink', '--ink-mid'],
+    code: `<div class="ada-card">
+  <div class="ada-card__thumb">
+    <img src="/path/to/imagem.jpg" alt="Título" />
+  </div>
+  <div class="ada-card__body">
+    <span class="ada-card__year">2024</span>
+    <h3 class="ada-card__title">Título do Projeto</h3>
+    <p class="ada-card__desc">Descrição curta do projeto — uma ou duas linhas no máximo.</p>
+    <div class="ada-card__tags">
+      <span class="ada-tag">Mapping</span>
+      <span class="ada-tag">Autoral</span>
+    </div>
+  </div>
+</div>
+
+<style>
+.ada-card {
+  background: #222222;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform .25s ease;
+}
+.ada-card:hover { transform: translateY(-4px); }
+.ada-card__thumb {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+.ada-card__thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+.ada-card:hover .ada-card__thumb img { transform: scale(1.05); }
+.ada-card__body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ada-card__year {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: rgba(255,255,255,.35);
+}
+.ada-card__title {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: -.01em;
+  color: #ffffff;
+  margin: 0;
+}
+.ada-card__desc {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  line-height: 1.6;
+  margin: 0;
+}
+.ada-card__tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+/* ada-tag — ver componente Tag */
+.ada-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  border: 1px solid rgba(255,214,0,.2);
+  padding: 3px 10px;
+  display: inline-block;
+}
+</style>`,
+  },
+  {
+    id: 'nav',
+    nome: 'Barra de Navegação',
+    desc: 'Logo à esquerda via SVG inline, links à direita em DM Mono. Fundo opaco ou translúcido.',
+    tokens: ['--mono', '--accent', '--page-bg', '--border'],
+    code: `<nav class="ada-nav">
+  <a class="ada-nav__logo" href="/" aria-label="ADA">
+    <svg width="24" height="24" viewBox="225 225 126 126" style="color:#FFD600">
+      <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+      <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+      <polygon fill="currentColor" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+    </svg>
+    <span class="ada-nav__site">ada.art.br</span>
+  </a>
+  <div class="ada-nav__links">
+    <a class="ada-nav__link" href="#">Trabalhos</a>
+    <a class="ada-nav__link" href="#">Sobre</a>
+    <a class="ada-nav__link" href="#">Contato</a>
+  </div>
+</nav>
+
+<style>
+.ada-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 56px;
+  background: #111111;
+  border-bottom: 1px solid rgba(255,214,0,.12);
+}
+.ada-nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.ada-nav__site {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: #FFD600;
+}
+.ada-nav__links {
+  display: flex;
+  gap: 32px;
+}
+.ada-nav__link {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  text-decoration: none;
+  transition: color .15s;
+}
+.ada-nav__link:hover { color: #FFD600; }
+</style>`,
+  },
+]
+---
+
+<Section id="s08">
+  <SectionHeader num="08" title="Componentes" tag="Sistema" />
+  <Hairline />
+
+  <p class="sub-label">Componentes Web — HTML + CSS copiável</p>
+
+  <div class="d08-list">
+    {comps.map(c => (
+      <div class="d08-comp" id={`comp-${c.id}`}>
+        <div class="d08-comp-hdr">
+          <div class="d08-comp-meta">
+            <span class="d08-comp-nome">{c.nome}</span>
+            <p class="d08-comp-desc">{c.desc}</p>
+          </div>
+          <div class="d08-comp-tokens">
+            {c.tokens.map(t => <span class="d08-token">{t}</span>)}
+          </div>
+        </div>
+
+        <!-- Preview -->
+        <div class="d08-preview" id={`preview-${c.id}`}>
+          {c.id === 'btn' && (
+            <div class="d08-preview-inner" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;">
+              <button class="ada-btn ada-btn--primary">Saiba mais</button>
+              <button class="ada-btn ada-btn--ghost">Explorar</button>
+              <button class="ada-btn ada-btn--text">Ver todos →</button>
+            </div>
+          )}
+          {c.id === 'tag' && (
+            <div class="d08-preview-inner" style="display:flex;gap:8px;flex-wrap:wrap;">
+              <span class="ada-tag">Videomapping</span>
+              <span class="ada-tag">IA Generativa</span>
+              <span class="ada-tag">Intervenção Urbana</span>
+              <span class="ada-tag">Autoral</span>
+            </div>
+          )}
+          {c.id === 'input' && (
+            <div class="d08-preview-inner" style="display:flex;gap:24px;flex-wrap:wrap;width:100%;max-width:480px;">
+              <div class="ada-field" style="flex:1;min-width:180px;">
+                <label class="ada-field__label" for="demo-nome">Nome</label>
+                <input class="ada-field__input" id="demo-nome" type="text" placeholder="Ex: Ana Lima" />
+              </div>
+              <div class="ada-field" style="flex:1;min-width:180px;">
+                <label class="ada-field__label" for="demo-email">E-mail</label>
+                <input class="ada-field__input" id="demo-email" type="email" placeholder="nome@ada.art.br" />
+              </div>
+            </div>
+          )}
+          {c.id === 'card' && (
+            <div class="d08-preview-inner" style="width:260px;">
+              <div class="ada-card">
+                <div class="ada-card__thumb" style="background:#1a1a1a;display:flex;align-items:center;justify-content:center;">
+                  <svg width="48" height="48" style="color:rgba(255,214,0,.12)"><use href="#ada-sym"/></svg>
+                </div>
+                <div class="ada-card__body">
+                  <span class="ada-card__year">2024</span>
+                  <h3 class="ada-card__title">Título do Projeto</h3>
+                  <p class="ada-card__desc">Descrição curta do projeto — uma ou duas linhas no máximo.</p>
+                  <div class="ada-card__tags">
+                    <span class="ada-tag">Mapping</span>
+                    <span class="ada-tag">Autoral</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {c.id === 'nav' && (
+            <div class="d08-preview-inner" style="width:100%;padding:0;">
+              <nav class="ada-nav" style="width:100%;">
+                <a class="ada-nav__logo" href="#" aria-label="ADA" onclick="return false">
+                  <svg width="24" height="24" viewBox="225 225 126 126" style="color:#FFD600"><use href="#ada-sym"/></svg>
+                  <span class="ada-nav__site">ada.art.br</span>
+                </a>
+                <div class="ada-nav__links">
+                  <a class="ada-nav__link" href="#" onclick="return false">Trabalhos</a>
+                  <a class="ada-nav__link" href="#" onclick="return false">Sobre</a>
+                  <a class="ada-nav__link" href="#" onclick="return false">Contato</a>
+                </div>
+              </nav>
+            </div>
+          )}
+        </div>
+
+        <!-- Code -->
+        <details class="d08-code-details">
+          <summary class="d08-code-hdr">
+            <div class="d08-code-hdr-left">
+              <span class="d08-code-toggle">HTML + CSS</span>
+            </div>
+            <button class="ada-btn ada-btn--ghost" data-copy-id={`code-${c.id}`} onclick="event.preventDefault();cpComp(this)">Copiar</button>
+          </summary>
+          <pre class="d08-code" id={`code-${c.id}`}>{c.code}</pre>
+        </details>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<script is:inline>
+function cpComp(btn) {
+  var id  = btn.dataset.copyId
+  var pre = document.getElementById(id)
+  if (!pre) return
+  var text = pre.textContent || ''
+  var orig = btn.textContent
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '✓ Copiado'
+    setTimeout(function() { btn.textContent = orig }, 2000)
+  })
+}
+</script>
