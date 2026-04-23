@@ -229,6 +229,35 @@ URL raw: `https://raw.githubusercontent.com/ateliedigitalanalogico/ada-brand-man
 
 ---
 
+## Skill — ada-brand-director
+
+A skill `ada-brand-director` estende o Claude Code (e o Claude Desktop) com contexto completo da marca ADA.
+
+### Localização
+
+```
+.claude/
+├── skills/ada-brand-director/
+│   ├── SKILL.md                    ← núcleo lean (~300 tokens)
+│   └── references/
+│       ├── design-system.md        ← tokens CSS, tipografia, componentes, SVG
+│       ├── sections-index.md       ← mapa das 9 seções com arquivos
+│       └── portfolio-schema.md     ← como consultar portfolio.json via GitHub
+└── desktop/
+    └── ada-brand-director-project-instructions.md  ← versão para Claude Desktop Projects
+```
+
+### Como usar
+
+**Claude Code:** `/ada-brand-director` em qualquer conversa.
+**Claude Desktop:** copiar o conteúdo de `.claude/desktop/ada-brand-director-project-instructions.md` em **Projects → [Projeto ADA] → Project Instructions**.
+
+### Escopo da skill
+
+Cobre copy, posts, emails, bio, componentes Astro, tokens de design, seções do manual e validação de identidade. Referências são carregadas sob demanda — não entram no contexto base.
+
+---
+
 ## Limpeza de arquivos temporários
 
 O editor deixa arquivos `.tmp.*` no projeto. **Ao final de cada sessão**, perguntar:
