@@ -1,0 +1,93 @@
+---
+import Section from '@components/Section.astro'
+import SectionHeader from '@components/SectionHeader.astro'
+import Hairline from '@components/Hairline.astro'
+
+const principios = [
+  { num: '01', titulo: 'Objetos com ponto de vista', corpo: 'Cada peça é extensão do manifesto — não catálogo de marca. A lógica é editorial, não promocional.' },
+  { num: '02', titulo: 'Preto e amarelo. Sempre.', corpo: 'Nenhum merch da ADA sai em cores fora da paleta primária. Sem gradientes, sem sublimação, sem DTF.' },
+  { num: '03', titulo: 'Acabamento de produção', corpo: 'Serigrafia e bordado. Volumes pequenos, nunca fast merch. O custo está no método, não no logotipo.' },
+  { num: '04', titulo: 'Séries, não catálogo fixo', corpo: 'Peças surgem associadas a projetos, exposições ou marcos. Não há linha permanente além das essenciais.' },
+]
+
+const produtos = [
+  {
+    num: '01',
+    nome: 'Camiseta',
+    desc: 'Malha 30.1 penteada. Serigrafia 1 cor. Símbolo no peito esquerdo · wordmark nas costas.',
+    imgs: [
+      '/assets/merch/merch_01_tshirt_conjunto.png',
+      '/assets/merch/merch_01_tshirt_flat_frente.png',
+      '/assets/merch/merch_01_tshirt_flat_costas.png',
+      '/assets/merch/merch_01_tshirt_homem.png',
+      '/assets/merch/merch_01_tshirt_mulher.png',
+    ],
+  },
+  {
+    num: '02',
+    nome: 'Boné 5-Panel',
+    desc: 'Frontal rígido com bordado do wordmark. Tela traseira ajustável. Preto · amarelo bordado.',
+    imgs: [
+      '/assets/merch/merch_02_bone_diretora.png',
+      '/assets/merch/merch_02_bone_flat.png',
+    ],
+  },
+  {
+    num: '03',
+    nome: 'Sticker Pack',
+    desc: 'Vinil fosco cortado no contorno. 4 adesivos por pack. Símbolo e wordmark em variações.',
+    imgs: [
+      '/assets/merch/merch_03_adesivo_01.png',
+      '/assets/merch/merch_03_adesivo_02.png',
+      '/assets/merch/merch_03_adesivo_03.png',
+      '/assets/merch/merch_03_adesivo_04.png',
+    ],
+  },
+  {
+    num: '04',
+    nome: 'Caneca',
+    desc: 'Cerâmica branca 300ml. Serigrafia preta dos dois lados. Alça preta.',
+    imgs: [
+      '/assets/merch/merch_04_caneca_diretora.png',
+      '/assets/merch/merch_04_caneca_branca.png',
+      '/assets/merch/merch_04_caneca_cafe.png',
+      '/assets/merch/merch_04_caneca_mao.png',
+    ],
+  },
+]
+---
+
+<Section id="s06">
+  <SectionHeader num="06" title="Merchandise" tag="Aplicação" />
+  <Hairline />
+
+  <p class="sub-label">Princípios</p>
+  <div class="d06-principios">
+    {principios.map(p => (
+      <div class="d06-principio">
+        <span class="d06-p-num">{p.num}</span>
+        <div class="d06-p-body">
+          <p class="d06-p-titulo">{p.titulo}</p>
+          <p class="d06-p-corpo">{p.corpo}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <Hairline />
+
+  {produtos.map(p => (
+    <>
+      <p class="sub-label">{p.num} — {p.nome}</p>
+      <div class="d06-imgs" style={`grid-template-columns: repeat(${p.imgs.length}, 1fr)`}>
+        {p.imgs.map(src => (
+          <div class="d06-img">
+            <img src={src} alt="" loading="lazy" />
+          </div>
+        ))}
+      </div>
+      <p class="d06-produto-desc">{p.desc}</p>
+      <Hairline />
+    </>
+  ))}
+</Section>

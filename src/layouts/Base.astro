@@ -1,0 +1,123 @@
+---
+interface Props {
+  title?: string
+}
+const { title = 'ADA — Manual de Marca' } = Astro.props
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ADA — Ateliê Digital Analógico. Design System." />
+  <title>{title}</title>
+
+  <!-- Fontes: is:inline bypassa Vite, paths absolutos do root do dev server -->
+  <style is:inline>
+    @font-face { font-family:'DM Mono'; font-weight:300; font-display:swap; src:url('/fonts/DMMono_w300.woff2') format('woff2'); }
+    @font-face { font-family:'DM Mono'; font-weight:400; font-display:swap; src:url('/fonts/DMMono_w400.woff2') format('woff2'); }
+    @font-face { font-family:'DM Mono'; font-weight:500; font-display:swap; src:url('/fonts/DMMono_w500.woff2') format('woff2'); }
+    @font-face { font-family:'Syne'; font-weight:400; font-display:swap; src:url('/fonts/Syne_w400.woff2') format('woff2'); }
+    @font-face { font-family:'Syne'; font-weight:600; font-display:swap; src:url('/fonts/Syne_w600.woff2') format('woff2'); }
+    @font-face { font-family:'Cormorant Garamond'; font-weight:300; font-style:italic; font-display:swap; src:url('/fonts/CormorantGaramond_w300_italic.woff2') format('woff2'); }
+    @font-face { font-family:'Cormorant Garamond'; font-weight:400; font-style:italic; font-display:swap; src:url('/fonts/CormorantGaramond_w400_italic.woff2') format('woff2'); }
+  </style>
+
+  <!-- SVG symbols inline — geometria canônica, não modificar -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="ada-sym" viewBox="225 225 126 126">
+      <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+      <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+      <polygon fill="currentColor" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+    </symbol>
+    <symbol id="ada-wm" viewBox="225 225 414 126">
+      <polygon fill="currentColor" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>
+      <polygon fill="currentColor" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>
+      <polygon fill="currentColor" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>
+      <path fill="currentColor" d="M387,297v-54h45c24.81,0,45,20.19,45,45,0,3.08-.31,6.09-.91,9h18.26c.42-2.94.65-5.94.65-9,0-34.79-28.21-63-63-63h-63v72h18Z"/>
+      <path fill="currentColor" d="M458.97,324c-7.52,5.65-16.86,9-26.97,9h-45v-9h-18v27h63c21.4,0,40.3-10.68,51.69-27h-24.72Z"/>
+      <polygon fill="currentColor" points="609.49 324 613.99 333 622.99 351 639 351 625.5 324 609.49 324"/>
+      <polygon fill="currentColor" points="556.01 297 576 257.02 595.99 297 612 297 576 225 540 297 556.01 297"/>
+      <polygon fill="currentColor" points="526.5 324 513 351 529.01 351 538.01 333 542.51 324 526.5 324"/>
+    </symbol>
+  </svg>
+</head>
+<body>
+  <slot />
+  <script>
+    type Mode = 'padrao' | 'inversao' | 'mono'
+    const CLASS: Record<Mode, string> = {
+      padrao: '', inversao: 'mode-inversao', mono: 'mode-mono',
+    }
+    function setMode(mode: Mode) {
+      Object.values(CLASS).forEach(c => c && document.body.classList.remove(c))
+      if (CLASS[mode]) document.body.classList.add(CLASS[mode])
+      document.querySelectorAll<HTMLElement>('[data-mode-btn]').forEach(btn => {
+        btn.dataset.active = btn.dataset.modeBtn === mode ? 'true' : 'false'
+      })
+    }
+    ;(window as unknown as Record<string, unknown>).setMode = setMode
+  </script>
+  <script>
+    function _renderSvgToCanvas(svgText: string, scale: number): Promise<HTMLCanvasElement> {
+      return new Promise((resolve, reject) => {
+        const blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' })
+        const url  = URL.createObjectURL(blob)
+        const img  = new Image()
+        img.onload = () => {
+          const w = img.naturalWidth  || 512
+          const h = img.naturalHeight || 512
+          const canvas = document.createElement('canvas')
+          canvas.width  = w * scale
+          canvas.height = h * scale
+          const ctx = canvas.getContext('2d')!
+          ctx.scale(scale, scale)
+          ctx.drawImage(img, 0, 0)
+          URL.revokeObjectURL(url)
+          resolve(canvas)
+        }
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('SVG load failed')) }
+        img.src = url
+      })
+    }
+
+    function _triggerDownload(dataUrl: string, filename: string) {
+      const a = document.createElement('a')
+      a.href = dataUrl
+      a.download = filename
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+    }
+
+    async function dlPng(svgUrl: string, filename: string, scale = 4) {
+      try {
+        const res = await fetch(svgUrl)
+        if (!res.ok) throw new Error('HTTP ' + res.status)
+        const text   = await res.text()
+        const canvas = await _renderSvgToCanvas(text, scale)
+        _triggerDownload(canvas.toDataURL('image/png'), filename)
+      } catch (e) {
+        console.error('dlPng:', e)
+        alert('Erro ao gerar PNG. Veja o console.')
+      }
+    }
+
+    async function dlFav(size: number) {
+      const sym = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="225 225 126 126"><rect x="225" y="225" width="126" height="126" fill="#000000"/><polygon fill="#FFD600" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/><polygon fill="#FFD600" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/><polygon fill="#FFD600" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/></svg>`
+      try {
+        const canvas = await _renderSvgToCanvas(sym, 1)
+        _triggerDownload(canvas.toDataURL('image/png'), `ada_favicon_${size}x${size}.png`)
+      } catch(e) { console.error('dlFav:', e) }
+    }
+
+    ;(window as any).dlPng = dlPng
+    ;(window as any).dlFav = dlFav
+  </script>
+</body>
+</html>
+
+<style is:global>
+  @import '../styles/reset.css';
+  @import '../styles/tokens.css';
+</style>

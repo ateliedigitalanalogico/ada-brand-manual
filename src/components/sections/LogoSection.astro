@@ -1,0 +1,285 @@
+---
+import Section from '@components/Section.astro'
+import SectionHeader from '@components/SectionHeader.astro'
+import Hairline from '@components/Hairline.astro'
+
+// viewBox sym: 126×126 — viewBox wm: 414×126 → ratio 3.286
+// Tamanhos pré-calculados para garantir proporção exata
+const sizes = [
+  { label: 'Mínimo', px: 32,  note: 'nunca abaixo' },
+  { label: 'SM',     px: 48,  note: '' },
+  { label: 'MD',     px: 64,  note: 'uso padrão' },
+  { label: 'LG',     px: 128, note: 'destaque / hero' },
+]
+---
+
+<Section id="s01">
+  <SectionHeader num="01" title="Logo e Wordmark" tag="Identidade" />
+  <Hairline />
+
+  <!-- Símbolo + Wordmark -->
+  <p class="sub-label">Símbolo e Wordmark</p>
+  <div class="hero-grid">
+    <div class="hero-cell">
+      <svg width="120" height="120" style="color:var(--accent)" aria-label="ADA símbolo">
+        <use href="#ada-sym"/>
+      </svg>
+      <span class="cell-caption">Alfa — símbolo isolado</span>
+    </div>
+    <div class="hero-cell">
+      <!-- wm ratio 414/126 = 3.286 → h=72px → w=237px -->
+      <svg width="237" height="72" style="color:var(--accent)" aria-label="ADA wordmark">
+        <use href="#ada-wm"/>
+      </svg>
+      <span class="cell-caption">Wordmark — símbolo + logotipo</span>
+    </div>
+  </div>
+
+  <Hairline />
+
+  <!-- Modos -->
+  <p class="sub-label">Variações de Aplicação</p>
+  <div class="modes-grid">
+    <div class="mode-cell m-padrao">
+      <!-- h=36 → w=118 -->
+      <svg width="118" height="36" aria-label="ADA wordmark modo padrão"><use href="#ada-wm"/></svg>
+      <span class="mode-caption">Padrão</span>
+    </div>
+    <div class="mode-cell m-inversao">
+      <svg width="118" height="36" aria-label="ADA wordmark modo inversão"><use href="#ada-wm"/></svg>
+      <span class="mode-caption">Inversão</span>
+    </div>
+    <div class="mode-cell m-mono">
+      <svg width="118" height="36" aria-label="ADA wordmark modo mono"><use href="#ada-wm"/></svg>
+      <span class="mode-caption">Mono</span>
+    </div>
+  </div>
+
+  <Hairline />
+
+  <!-- Escala mínima -->
+  <p class="sub-label">Escala Mínima — Símbolo</p>
+  <div class="scale-grid">
+    {sizes.map(s => (
+      <div class="scale-cell">
+        <div class="scale-stage">
+          <svg width={s.px} height={s.px} style="color:var(--accent)" aria-hidden="true">
+            <use href="#ada-sym"/>
+          </svg>
+        </div>
+        <div class="scale-info">
+          <span class="scale-label">{s.label}</span>
+          <span class="scale-val">{s.px}px</span>
+          {s.note && <span class="scale-note">{s.note}</span>}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <Hairline />
+
+  <!-- Regras -->
+  <p class="sub-label">Regras</p>
+  <div class="rules-grid">
+    <div class="rule-card">
+      <span class="rule-hed rule-hed--do">SIM</span>
+      <ul class="rule-list">
+        <li>SVG via <code>&lt;use href="#ada-sym"&gt;</code>, cor via <code>currentColor</code></li>
+        <li>Breathing mínimo de <code>var(--logo-breathing)</code> ao redor</li>
+        <li>Símbolo isolado quando largura disponível &lt; 240px</li>
+        <li>Apenas nas três combinações de cor definidas nos modos</li>
+      </ul>
+    </div>
+    <div class="rule-card">
+      <span class="rule-hed rule-hed--dont">NÃO</span>
+      <ul class="rule-list">
+        <li>Nunca como <code>&lt;img&gt;</code> — sempre SVG inline via <code>&lt;use&gt;</code></li>
+        <li>Nunca abaixo de 32px de altura</li>
+        <li>Nunca distorcer proporção — width sempre proporcional ao viewBox</li>
+        <li>Nunca modificar a geometria dos polígonos</li>
+      </ul>
+    </div>
+  </div>
+</Section>
+
+<style>
+.sub-label {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: var(--sublabel-gap);
+}
+
+/* ─── Hero ─── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+.hero-cell {
+  background: var(--card-bg);
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  overflow: hidden;
+}
+
+.cell-caption {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  color: var(--ink-faint);
+}
+
+/* ─── Modos ─── */
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+.mode-cell {
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+}
+
+.mode-caption {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  opacity: .4;
+}
+
+/* ─── Escala ─── */
+.scale-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+.scale-cell {
+  background: var(--card-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.scale-stage {
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: var(--sp-4);
+}
+
+.scale-info {
+  border-top: 1px solid var(--border-dim);
+  padding: var(--sp-2) var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.scale-label {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.scale-val {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  color: var(--ink-mid);
+}
+
+.scale-note {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+
+/* ─── Regras ─── */
+.rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+}
+
+.rule-card {
+  background: var(--card-bg);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.rule-hed {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+}
+
+.rule-hed--do   { color: var(--accent); }
+.rule-hed--dont { color: var(--ink-faint); }
+
+.rule-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.rule-list li {
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
+  color: var(--ink-mid);
+  padding-left: var(--sp-3);
+  position: relative;
+}
+
+.rule-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ink-faint);
+}
+
+.rule-list code {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  color: var(--accent-cold);
+}
+
+@media (max-width: 900px) {
+  .hero-grid  { grid-template-columns: 1fr; }
+  .scale-grid { grid-template-columns: repeat(2, 1fr); }
+  .rules-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .modes-grid { grid-template-columns: 1fr; }
+}
+</style>

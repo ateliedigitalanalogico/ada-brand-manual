@@ -1,0 +1,397 @@
+---
+import Section from '@components/Section.astro'
+import SectionHeader from '@components/SectionHeader.astro'
+import Hairline from '@components/Hairline.astro'
+
+const hierarchy = [
+  {
+    level: 'H1',
+    family: 'DM Mono',
+    weight: '400',
+    sizeToken: '--fs-3xl',
+    sizeVal: '36px',
+    trackToken: '--ls-tight',
+    trackVal: '-.02em',
+    leadToken: '--lh-none',
+    leadVal: '1.0',
+    colorToken: '--ink',
+    specimen: 'ADA',
+    specimenStyle: 'font-family:"DM Mono",monospace;font-size:36px;font-weight:400;letter-spacing:-.02em;line-height:1;color:var(--ink)',
+  },
+  {
+    level: 'H2',
+    family: 'DM Mono',
+    weight: '300',
+    sizeToken: '--fs-2xl',
+    sizeVal: '28px',
+    trackToken: '--ls-tight',
+    trackVal: '-.02em',
+    leadToken: '--lh-tight',
+    leadVal: '1.2',
+    colorToken: '--accent',
+    specimen: 'Ateliê Digital Analógico',
+    specimenStyle: 'font-family:var(--mono);font-size:var(--fs-2xl);font-weight:300;letter-spacing:var(--ls-tight);line-height:var(--lh-tight);color:var(--accent)',
+  },
+  {
+    level: 'H3',
+    family: 'Syne',
+    weight: '600',
+    sizeToken: '--fs-md',
+    sizeVal: '16px',
+    trackToken: '--ls-widest',
+    trackVal: '.20em',
+    leadToken: '—',
+    leadVal: '—',
+    colorToken: '--ink',
+    specimen: 'TECNOLOGIA COMO LINGUAGEM',
+    specimenStyle: 'font-family:var(--sans);font-size:var(--fs-md);font-weight:600;letter-spacing:var(--ls-widest);text-transform:uppercase;color:var(--ink)',
+  },
+  {
+    level: 'Body',
+    family: 'Syne',
+    weight: '400',
+    sizeToken: '--fs-base',
+    sizeVal: '14px',
+    trackToken: '--ls-normal',
+    trackVal: '0',
+    leadToken: '--lh-body',
+    leadVal: '1.65',
+    colorToken: '--ink-mid',
+    specimen: 'Brasil como ponto de vista. Desde 2015, o Ateliê Digital Analógico cria experiências que habitam a fronteira entre código e cultura — video mapping, instalações imersivas, sistemas audiovisuais.',
+    specimenStyle: 'font-family:var(--sans);font-size:var(--fs-base);font-weight:400;letter-spacing:var(--ls-normal);line-height:var(--lh-body);color:var(--ink-mid)',
+  },
+  {
+    level: 'Quote',
+    family: 'Cormorant',
+    weight: '300i',
+    sizeToken: '--fs-xl',
+    sizeVal: '22px',
+    trackToken: '--ls-wide',
+    trackVal: '.08em',
+    leadToken: '--lh-snug',
+    leadVal: '1.4',
+    colorToken: '--accent',
+    specimen: 'Antes da IA. Antes do prompt. Antes do imersivo.',
+    specimenStyle: 'font-family:var(--serif);font-size:var(--fs-xl);font-weight:300;font-style:italic;letter-spacing:var(--ls-wide);line-height:var(--lh-snug);color:var(--accent)',
+  },
+  {
+    level: 'Caption',
+    family: 'DM Mono',
+    weight: '400',
+    sizeToken: '--fs-xs',
+    sizeVal: '10px',
+    trackToken: '--ls-widest',
+    trackVal: '.20em',
+    leadToken: '—',
+    leadVal: '—',
+    colorToken: '--ink-faint',
+    specimen: 'BRASIL COMO PONTO DE VISTA · 2015–2026',
+    specimenStyle: 'font-family:var(--mono);font-size:var(--fs-xs);font-weight:400;letter-spacing:var(--ls-widest);text-transform:uppercase;color:var(--ink-faint)',
+  },
+  {
+    level: 'Tag',
+    family: 'DM Mono',
+    weight: '400',
+    sizeToken: '--fs-micro',
+    sizeVal: '9px',
+    trackToken: '--ls-ultra',
+    trackVal: '.28em',
+    leadToken: '—',
+    leadVal: '—',
+    colorToken: '--ink-mid',
+    specimen: 'VIDEO MAPPING · INSTALAÇÃO · PERFORMANCE · AUDIOVISUAL',
+    specimenStyle: 'font-family:var(--mono);font-size:var(--fs-micro);font-weight:400;letter-spacing:var(--ls-ultra);text-transform:uppercase;color:var(--ink-mid)',
+  },
+]
+
+const scale = [
+  { token: '--fs-micro', val: '9px'   },
+  { token: '--fs-xs',    val: '10px'  },
+  { token: '--fs-sm',    val: '12px'  },
+  { token: '--fs-base',  val: '14px'  },
+  { token: '--fs-md',    val: '16px'  },
+  { token: '--fs-lg',    val: '18px'  },
+  { token: '--fs-xl',    val: '22px'  },
+  { token: '--fs-2xl',   val: '28px'  },
+  { token: '--fs-3xl',   val: '36px'  },
+  { token: '--fs-4xl',   val: '48px'  },
+  { token: '--fs-5xl',   val: '64px'  },
+  { token: '--fs-num',   val: '120px' },
+]
+---
+
+<Section id="s03">
+  <SectionHeader num="03" title="Tipografia" tag="Sistema" />
+  <Hairline />
+
+  <!-- Famílias -->
+  <p class="sub-label">Famílias</p>
+  <div class="families-grid">
+
+    <div class="family-col">
+      <p class="family-specimen family-specimen--mono">AaBbCc<br />0123456789</p>
+      <div class="family-meta">
+        <span class="family-name">DM Mono</span>
+        <span class="family-role">Protagonista arquitetural</span>
+        <span class="family-desc">Títulos, UI, labels, metadados, grid. Toda estrutura visual passa por aqui.</span>
+        <div class="family-weights">
+          <span style="font-family:var(--mono);font-weight:300">300 Light</span>
+          <span style="font-family:var(--mono);font-weight:400">400 Regular</span>
+          <span style="font-family:var(--mono);font-weight:500">500 Medium</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="family-col">
+      <p class="family-specimen family-specimen--sans">AaBbCc<br />0123456789</p>
+      <div class="family-meta">
+        <span class="family-name">Syne</span>
+        <span class="family-role">Voz</span>
+        <span class="family-desc">Corpo, subtítulos, descrições. Nunca peso 800 — nunca competindo com DM Mono.</span>
+        <div class="family-weights">
+          <span style="font-family:var(--sans);font-weight:400">400 Regular</span>
+          <span style="font-family:var(--sans);font-weight:600">600 Semibold</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="family-col">
+      <p class="family-specimen family-specimen--serif">AaBbCc<br />0123456789</p>
+      <div class="family-meta">
+        <span class="family-name">Cormorant Garamond</span>
+        <span class="family-role">Manifesto — uso restrito</span>
+        <span class="family-desc">Apenas itálico. Apenas para citações e momentos de manifesto. Nunca em UI.</span>
+        <div class="family-weights">
+          <span style="font-family:var(--serif);font-weight:300;font-style:italic">300 Light Italic</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <Hairline />
+
+  <!-- Hierarquia -->
+  <p class="sub-label">Hierarquia — 7 Níveis</p>
+  <div class="hierarchy">
+    {hierarchy.map(h => (
+      <div class="h-row">
+        <div class="h-meta">
+          <span class="h-level">{h.level}</span>
+          <span class="h-family">{h.family} {h.weight}</span>
+          <div class="h-tokens">
+            <span class="h-token">{h.sizeToken}<em>{h.sizeVal}</em></span>
+            <span class="h-token">{h.trackToken}<em>{h.trackVal}</em></span>
+            {h.leadVal !== '—' && <span class="h-token">{h.leadToken}<em>{h.leadVal}</em></span>}
+            <span class="h-token">{h.colorToken}</span>
+          </div>
+        </div>
+        <div class="h-specimen">
+          <p style={h.specimenStyle}>{h.specimen}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <Hairline />
+
+  <!-- Escala -->
+  <p class="sub-label">Escala</p>
+  <div class="scale">
+    {scale.map(s => (
+      <div class="scale-row">
+        <span class="scale-token">{s.token}</span>
+        <span class="scale-val">{s.val}</span>
+        <span class="scale-specimen" style={`font-family:var(--mono);font-size:${s.val};font-weight:400;line-height:1;color:var(--ink)`}>
+          ADA
+        </span>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<style>
+.sub-label {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: var(--sublabel-gap);
+}
+
+/* ─── Famílias ─── */
+.families-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+.family-col {
+  background: var(--card-bg);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.family-specimen {
+  font-size: var(--fs-4xl);
+  font-weight: 300;
+  line-height: var(--lh-tight);
+  color: var(--ink);
+}
+.family-specimen--mono  { font-family: var(--mono); }
+.family-specimen--sans  { font-family: var(--sans); }
+.family-specimen--serif { font-family: var(--serif); font-style: italic; }
+
+.family-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  border-top: var(--hairline-h) solid var(--border-dim);
+  padding-top: var(--sp-2);
+}
+
+.family-name {
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: var(--ls-wide);
+  color: var(--accent);
+}
+
+.family-role {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+
+.family-desc {
+  font-family: var(--sans);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-body);
+  color: var(--ink-faint);
+  margin-top: var(--sp-1);
+}
+
+.family-weights {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-0);
+  margin-top: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--ink-mid);
+}
+
+/* ─── Hierarquia ─── */
+.hierarchy {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: var(--sp-4);
+}
+
+.h-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-3) 0;
+  border-bottom: var(--hairline-h) solid var(--border-dim);
+  align-items: center;
+}
+
+.h-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  flex-shrink: 0;
+}
+
+.h-level {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.h-family {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  color: var(--ink-mid);
+}
+
+.h-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  margin-top: var(--sp-1);
+}
+
+.h-token {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-wide);
+  color: var(--ink-faint);
+  background: var(--card-bg);
+  padding: 2px var(--sp-1);
+  white-space: nowrap;
+}
+
+.h-token em {
+  font-style: normal;
+  color: var(--accent-cold);
+  margin-left: 4px;
+}
+
+.h-specimen {
+  overflow: hidden;
+}
+
+/* ─── Escala ─── */
+.scale {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.scale-row {
+  display: grid;
+  grid-template-columns: 140px 60px 1fr;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-1) 0;
+  border-bottom: var(--hairline-h) solid var(--border-dim);
+}
+
+.scale-token {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  color: var(--accent);
+}
+
+.scale-val {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-wide);
+  color: var(--ink-faint);
+}
+
+.scale-specimen {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .families-grid { grid-template-columns: 1fr; }
+  .h-row { grid-template-columns: 1fr; }
+  .scale-row { grid-template-columns: 120px 50px 1fr; }
+}
+</style>

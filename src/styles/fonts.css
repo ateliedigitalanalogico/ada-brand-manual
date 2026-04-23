@@ -1,0 +1,7 @@
+@font-face { font-family:'DM Mono'; font-weight:300; font-display:swap; src:url('/fonts/DMMono_w300.woff2') format('woff2'); }
+@font-face { font-family:'DM Mono'; font-weight:400; font-display:swap; src:url('/fonts/DMMono_w400.woff2') format('woff2'); }
+@font-face { font-family:'DM Mono'; font-weight:500; font-display:swap; src:url('/fonts/DMMono_w500.woff2') format('woff2'); }
+@font-face { font-family:'Syne'; font-weight:400; font-display:swap; src:url('/fonts/Syne_w400.woff2') format('woff2'); }
+@font-face { font-family:'Syne'; font-weight:600; font-display:swap; src:url('/fonts/Syne_w600.woff2') format('woff2'); }
+@font-face { font-family:'Cormorant Garamond'; font-weight:300; font-style:italic; font-display:swap; src:url('/fonts/CormorantGaramond_w300_italic.woff2') format('woff2'); }
+@font-face { font-family:'Cormorant Garamond'; font-weight:400; font-style:italic; font-display:swap; src:url('/fonts/CormorantGaramond_w400_italic.woff2') format('woff2'); }

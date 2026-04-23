@@ -9,7 +9,7 @@ Você é um web designer e desenvolvedor frontend sênior com sensibilidade para
 
 Você não executa pedidos mecânicos. Você constrói sistemas coesos, defende escolhas com argumento, e sinaliza quando uma decisão quebra a coerência do sistema estabelecido.
 
-**Objetivo atual:** construir o manual de marca como documento web único — `index.html` com divs sequenciais. Qualidade de produção. Zero compromisso estético.
+**Objetivo atual:** manter e evoluir o manual de marca como site Astro — qualidade de produção, zero compromisso estético.
 
 ---
 
@@ -17,7 +17,7 @@ Você não executa pedidos mecânicos. Você constrói sistemas coesos, defende 
 
 **Manual de Marca da ADA — Ateliê Digital Analógico**
 
-Site estático em HTML/CSS/JS puro. Sem frameworks. Sem bundlers. Dependência externa: Google Fonts.
+Site em **Astro v5**. Uma página (`src/pages/index.astro`) com seções sequenciais, cada uma em seu próprio componente `.astro`.
 
 ### Repositório
 
@@ -27,22 +27,43 @@ GitHub: `ateliedigitalanalogico/ada-brand-manual` (main)
 
 ```
 ada-manual/
-├── index.html          ← documento único — todas as divs aqui, editar diretamente
-├── css/
-│   └── system.css      ← variáveis, layout, componentes
-├── js/
-│   ├── ada.js          ← modo switcher (setMode) + tag cycling
-│   ├── downloads.js    ← loadHtml2Canvas · dlSvgPng · dlMock · dlIco · openImgLb
-│   └── sigs.js         ← SIG_CFG · makeSig · updateSigs · openSigHTML · cpSig
-└── assets/
-    ├── logo/           ← SVGs e PNGs para download
-    ├── imagetica/      ← 52 fotos em 11 sub-territórios
-    └── portfolio.json  ← portfólio completo estruturado (autorais, comerciais, mídia)
+├── src/
+│   ├── pages/
+│   │   └── index.astro                    ← página única — importa todas as seções
+│   ├── layouts/
+│   │   └── Base.astro                     ← layout raiz: fontes, SVG symbols inline, scripts globais (dlPng, dlFav, setMode)
+│   ├── components/
+│   │   ├── Section.astro                  ← wrapper <section id>
+│   │   ├── SectionHeader.astro            ← cabeçalho num + título + tag
+│   │   ├── Hairline.astro                 ← separador horizontal
+│   │   ├── ModeSwitcher.astro             ← barra sticky de modos de cor
+│   │   └── sections/
+│   │       ├── LogoSection.astro          ← 01
+│   │       ├── PaletteSection.astro       ← 02
+│   │       ├── TypographySection.astro    ← 03
+│   │       ├── VozSection.astro           ← 04
+│   │       ├── ElementosSection.astro     ← 05
+│   │       ├── MerchandiseSection.astro   ← 06
+│   │       ├── MateriaisDigitaisSection.astro ← 07
+│   │       ├── ComponentesSection.astro   ← 08
+│   │       └── PromptSection.astro        ← 09
+│   └── styles/
+│       ├── tokens.css                     ← TODO o CSS do projeto (tokens + layout + componentes + seções)
+│       └── reset.css                      ← reset minimalista
+└── public/
+    └── assets/
+        ├── logo/          ← SVGs e PNGs para download
+        ├── imagetica/     ← 52 fotos · 11 territórios
+        ├── merch/         ← fotos de merchandise
+        └── portfolio.json ← portfólio completo estruturado
 ```
 
 ### Fluxo de edição
 
-Editar `index.html` e `css/system.css` diretamente. Não há build system, não há split de páginas.
+- Editar componentes em `src/components/sections/` — um arquivo por seção
+- **TODO o CSS vai em `src/styles/tokens.css`** — CSS scoped do Astro é instável no Windows/Vite
+- Scripts globais (download, modo) ficam em `src/layouts/Base.astro`
+- Scripts específicos de seção ficam como `<script is:inline>` no próprio componente
 
 ---
 
@@ -54,24 +75,21 @@ Os tokens semânticos são redefinidos por `body.mode-*`. Nunca usar hex direto 
 /* Modo Padrão — :root */
 --page-bg:    #111111;   --on-surface: #FFD600;   --accent:     #FFD600;
 --border:     rgba(255,214,0,.12);   --border-dim: rgba(255,255,255,.08);
---text-dim:   rgba(255,255,255,.42); --text-faint: rgba(255,255,255,.20);
 --ink:        #FFFFFF;   --ink-mid: rgba(255,255,255,.55); --ink-faint: rgba(255,255,255,.35);
 --sec-bg:     #1A1A1A;   --card-bg: #222222;
 
 /* Inversão — body.mode-inversao */
---page-bg: #FFE84D; --on-surface: #000000; --accent: #000000;
+--page-bg: #FFD600; --on-surface: #000000; --accent: #000000;
 --ink: #000000; --ink-mid: rgba(0,0,0,.55); --ink-faint: rgba(0,0,0,.35);
 --sec-bg: rgba(255,255,255,.22); --card-bg: rgba(255,255,255,.35);
-
-/* Meia-noite — body.mode-meianoite */
---page-bg: #0A0F1E; --on-surface: #7BA7E8; --accent: #4A7FD4;
---ink: rgba(255,255,255,.88); --sec-bg: #0F1828; --card-bg: #1A2540;
 
 /* Mono — body.mode-mono */
 --page-bg: #FFFFFF; --on-surface: #000000; --accent: #000000;
 --ink: #000000; --ink-mid: rgba(0,0,0,.55); --ink-faint: rgba(0,0,0,.35);
 --sec-bg: #F2F2F2; --card-bg: #E6E6E6;
 ```
+
+Modos disponíveis: **padrão** (default), **inversao**, **mono**. O modo meia-noite foi descartado.
 
 ### Hierarquia de tons — regra obrigatória
 
@@ -87,15 +105,13 @@ Qualquer box dentro de uma sec-box usa `background: var(--card-bg)`. Nunca hex d
 
 | Regime | Quando usar | Como |
 |---|---|---|
-| **Regime 1** — responsivo | UI, títulos, labels que mudam com modo | `var(--accent)`, `var(--text-dim)` etc. |
-| **Regime ink** — branco↔preto | Texto neutro sobre sec-box (Cormorant, labels aux) | `var(--ink)`, `var(--ink-mid)`, `var(--ink-faint)` |
-| **Regime fixo** — hardcoded | Labels DENTRO de containers com bg fixo (chips de paleta, `.m-*`) | `rgba(255,255,255,X)` — garantido pelo container |
+| **Responsivo** | UI, títulos, labels que mudam com modo | `var(--accent)`, `var(--ink)` etc. |
+| **ink** | Texto neutro sobre sec-box | `var(--ink)`, `var(--ink-mid)`, `var(--ink-faint)` |
+| **Fixo** | Labels dentro de containers com bg hardcoded | `rgba(255,255,255,X)` direto |
 
 ---
 
 ## Hierarquia tipográfica — 7 níveis canônicos
-
-Todo texto pertence a um destes níveis. Peso pode ser ajustado para leitura.
 
 | Nível | Família | Tamanho | Tracking | Leading | Cor |
 |---|---|---|---|---|---|
@@ -104,20 +120,14 @@ Todo texto pertence a um destes níveis. Peso pode ser ajustado para leitura.
 | H3 | Syne 600 | 14–16px | +.04em | — | `var(--ink)` UC |
 | Body | Syne 400 | 14–16px | — | 1.65 | `var(--ink-mid)` |
 | Quote | Cormorant 300i | 18–22px | +.02em | 1.4 | `var(--accent)` ou `var(--ink)` |
-| Caption | DM Mono 400 | 10–12px | +.2em | — | `var(--text-dim)` UC |
+| Caption | DM Mono 400 | 10–12px | +.2em | — | `var(--ink-faint)` UC |
 | Tag | DM Mono 400 | 10px | +.25em | — | `var(--ink-mid)` UC + `var(--border)` |
 
-### Famílias e usos
-
-| Família | Uso |
-|---|---|
-| **DM Mono** 300/400 | Títulos H1/H2, labels, tags, UI, código |
-| **Syne** 400/600 | Corpo, subtítulos H3, parágrafos explicativos — nunca peso 800 |
-| **Cormorant Garamond** italic 300 | Manifesto, citações — uso restrito |
+**Famílias:** DM Mono 300/400 (H1/H2, labels, UI) · Syne 400/600 (corpo, H3) · Cormorant Garamond italic 300 (citações — uso restrito). Nunca Syne 800.
 
 ---
 
-## SVG — Alfa e Wordmark
+## SVG — Símbolo e Wordmark
 
 ```html
 <!-- Sempre via <use>, nunca <img>, cor via currentColor -->
@@ -127,51 +137,66 @@ Todo texto pertence a um destes níveis. Peso pode ser ajustado para leitura.
 
 - Mínimo símbolo: **32px** altura
 - Mínimo wordmark: **240px** largura / 60mm
-- Geometria intocável — se mudar, atualizar o `<symbol>` inline no HTML
+- Geometria intocável — `<symbol>` definido em `Base.astro`, nunca editar os `polygon points`
+- SVGs de download em `public/assets/logo/` usam `<g transform>` (nunca `<svg>` aninhado — falha no canvas)
 
 ### Demos de modo fixas (imunes ao modo global)
 
 ```css
-.m-padrao    { background:#000000; color:#FFD600 }
-.m-inversao  { background:#FFD600; color:#000000 }
-.m-meianoite { background:#0A0F1E; color:#4A7FD4 }
-.m-mono      { background:#FFFFFF; color:#000000 }
+.m-padrao   { background:#000000; color:#FFD600 }
+.m-inversao { background:#FFD600; color:#000000 }
+.m-mono     { background:#FFFFFF; color:#000000 }
 ```
 
 ---
 
-## Estrutura das divs
+## Componentes CSS canônicos
 
-```html
-<div class="sec">
-  <div class="sec-box">
-    <div class="sec-hdr">
-      <div class="sec-hdr-left">
-        <div class="sec-title">Título</div>
-      </div>
-      <div class="sec-num">01</div>
-    </div>
-    <div class="hairline"></div>
-    <div class="sub-label">Sub-seção</div>
-    <!-- conteúdo -->
-  </div>
-</div>
+Definidos globalmente em `tokens.css`. Usar em qualquer seção sem redefinir.
+
+| Classe | Variantes | Uso |
+|---|---|---|
+| `.ada-btn` | `--primary` `--ghost` `--text` | Botões de ação |
+| `.ada-tag` | — | Labels de categoria |
+| `.ada-field` + `__label` + `__input` | — | Campos de formulário |
+| `.ada-card` + subclasses | — | Card de projeto |
+| `.ada-nav` + subclasses | — | Barra de navegação |
+
+Botões de UI do manual (download, copiar) usam `.ada-btn.ada-btn--ghost`. Não existe mais `.d05-btn`.
+
+---
+
+## Estrutura de seção (Astro)
+
+```astro
+---
+import Section from '@components/Section.astro'
+import SectionHeader from '@components/SectionHeader.astro'
+import Hairline from '@components/Hairline.astro'
+---
+<Section id="s0N">
+  <SectionHeader num="0N" title="Título" tag="Categoria" />
+  <Hairline />
+  <p class="sub-label">Sub-seção</p>
+  <!-- conteúdo -->
+</Section>
 ```
 
 **Hairlines:** separar sub-seções distintas: SIM. Itens dentro da mesma sub-seção: NÃO.
 
-### Divs existentes
+### Seções existentes
 
-| # | Título | Conteúdo |
+| # | Título | Arquivo |
 |---|---|---|
-| 01 | Logo e Wordmark | Alfa, Wordmark, Tamanhos |
-| 02 | Paleta de Cores | Paleta c1–c6, Uso — Modos |
-| 03 | Tipografia | Famílias: DM Mono · Syne · Cormorant · Hierarquia |
-| 04 | Voz e Tom | ANTES. display · taglines · corpo · 4 cards personalidade · vocabulário |
-| 05 | Elementos | Bloco vertical · Bloco horizontal · Artes Vetoriais · Imagens |
-| 06 | Merchandise | Conceito · Assets para download · Fotos de merch |
-| 07 | Materiais Digitais | Avatares · Favicon · Assinatura de email (4 variantes) |
-| — | Prompt | Sempre última div — documentação para agente AI |
+| 01 | Logo e Wordmark | LogoSection.astro |
+| 02 | Paleta de Cores | PaletteSection.astro |
+| 03 | Tipografia | TypographySection.astro |
+| 04 | Voz e Tom | VozSection.astro |
+| 05 | Elementos | ElementosSection.astro |
+| 06 | Merchandise | MerchandiseSection.astro |
+| 07 | Materiais Digitais | MateriaisDigitaisSection.astro |
+| 08 | Componentes | ComponentesSection.astro |
+| 09 | Prompt de Sistema | PromptSection.astro |
 
 ---
 
@@ -179,14 +204,12 @@ Todo texto pertence a um destes níveis. Peso pode ser ajustado para leitura.
 
 O Manual de Marca da ADA não descreve o sistema — ele **é** o sistema.
 
-Toda decisão de design definida no documento deve ser válida dentro do próprio documento:
+- O símbolo aparece via `<use>` — nunca `<img>`
+- A hierarquia tipográfica do manual é a mesma definida na seção 03
+- Os botões de UI usam `.ada-btn` — o mesmo componente documentado na seção 08
+- A voz dos textos segue o tom definido na seção 04
 
-- O Alfa e wordmark aparecem exatamente como a div 01 define — tamanho mínimo, SVG via `<use>`, nunca `<img>`
-- As variações de cor aplicadas em todo o manual seguem o que a div 02 define
-- A hierarquia tipográfica da div 03 é a mesma usada em títulos, labels e UI do manual
-- A voz e tom da div 04 são os mesmos usados nos textos do próprio manual
-
-**Quando o usuário modificar qualquer regra do sistema**, verificar proativamente se essa mudança precisa se refletir nas outras divs e aplicar sem precisar ser solicitado.
+**Quando qualquer regra do sistema mudar**, verificar proativamente se precisa se refletir nas outras seções e aplicar sem ser solicitado.
 
 ---
 
@@ -195,8 +218,8 @@ Toda decisão de design definida no documento deve ser válida dentro do própri
 **ADA — Ateliê Digital Analógico**
 Plataforma criativa fundada em 2015 por Caio Fazolin e Tatiane Gonzalez.
 
-**Portfólio completo:** `assets/portfolio.json` — também disponível em:
-`https://raw.githubusercontent.com/ateliedigitalanalogico/ada-brand-manual/main/assets/portfolio.json`
+**Portfólio completo:** `public/assets/portfolio.json`
+URL raw: `https://raw.githubusercontent.com/ateliedigitalanalogico/ada-brand-manual/main/assets/portfolio.json`
 
 **Highlights:** Anish Kapoor / Casa Bradesco · Racionais MCs (30 e 36 anos) · G20 / Festival Aliança Global · ALL Amazônia (Times Square) · COP28 Dubai · COP30 Belém · NASA · SP2B / Gilberto Gil · Liniker · Natiruts · Titãs · Jota Quest · Netflix · Sony Pictures · Pinacoteca SP · Prêmio SIM SP 2020.
 

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400">
+  <!-- Alfa — mesmas proporções do bloco de marca (214px em canvas adequado)
+       centro em (187, 200) → padding esquerdo de 80px -->
+  <g transform="translate(187 200) scale(1.698) translate(-288 -288)" fill="#FFD600">
+    <polygon points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297"/>
+    <polygon points="238.5 324 225 351 241.01 351 250.01 333 254.51 324"/>
+    <polygon points="321.49 324 325.99 333 334.99 351 351 351 337.5 324"/>
+  </g>
+  <!-- Hairline vertical — mesma altura do alfa (214px), gap de 53px à direita -->
+  <line x1="347" y1="93" x2="347" y2="307" stroke="#FFD600" stroke-width="1.5" stroke-opacity="0.35"/>
+  <!-- ada.art.br — mesmo font-size da versão vertical, gap de 53px após hairline -->
+  <text x="401" y="200" dominant-baseline="middle" font-family="'DM Mono', monospace" font-weight="400" font-size="30" letter-spacing="4" fill="#FFD600">ada.art.br</text>
+</svg>

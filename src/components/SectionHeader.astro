@@ -1,0 +1,60 @@
+---
+interface Props {
+  num: string    // '01', '02'...
+  title: string
+  tag?: string   // label opcional de categoria
+}
+const { num, title, tag } = Astro.props
+---
+<header class="sec-hdr">
+  <div class="sec-hdr-left">
+    {tag && <span class="sec-tag">{tag}</span>}
+    <h2 class="sec-title">{title}</h2>
+  </div>
+  <span class="sec-num" aria-hidden="true">{num}</span>
+</header>
+
+<style>
+.sec-hdr {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--hairline-gap-before);
+}
+
+.sec-hdr-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.sec-tag {
+  font-family: var(--mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.sec-title {
+  font-family: var(--mono);
+  font-size: var(--fs-3xl);
+  font-weight: 300;
+  letter-spacing: var(--ls-tight);
+  line-height: var(--lh-none);
+  color: var(--ink);
+}
+
+/* Número como elemento arquitetural — grande, recuado, não apenas label */
+.sec-num {
+  font-family: var(--mono);
+  font-size: var(--fs-num);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: var(--ls-tight);
+  color: var(--border-dim);
+  user-select: none;
+  flex-shrink: 0;
+}
+</style>

@@ -1,0 +1,168 @@
+---
+import Section from '@components/Section.astro'
+import SectionHeader from '@components/SectionHeader.astro'
+import Hairline from '@components/Hairline.astro'
+
+const blocosSym = [
+  { label: 'Padrão',      bg: '#000000', color: '#FFD600', rule: 'rgba(255,214,0,.35)', svg: '/assets/logo/ada_bloco_v_padrao.svg',   png: 'ada_bloco_v_padrao.png' },
+  { label: 'Inversão',    bg: '#FFD600', color: '#000000', rule: 'rgba(0,0,0,.3)',       svg: '/assets/logo/ada_bloco_v_inversao.svg', png: 'ada_bloco_v_inversao.png' },
+  { label: 'Mono',        bg: '#FFFFFF', color: '#000000', rule: 'rgba(0,0,0,.18)',      svg: '/assets/logo/ada_bloco_v_mono.svg',     png: 'ada_bloco_v_mono.png' },
+  { label: 'Transparente',bg: 'transp',  color: '#FFD600', rule: 'rgba(255,214,0,.35)', svg: '/assets/logo/ada_bloco_v_transp.svg',   png: 'ada_bloco_v_transp.png' },
+]
+
+const blocosSymIso = [
+  { label: 'Padrão',      bg: '#000000', color: '#FFD600', svg: '/assets/logo/ada_sym_padrao.svg',   png: 'ada_sym_padrao.png' },
+  { label: 'Inversão',    bg: '#FFD600', color: '#000000', svg: '/assets/logo/ada_sym_inversao.svg', png: 'ada_sym_inversao.png' },
+  { label: 'Mono',        bg: '#FFFFFF', color: '#000000', svg: '/assets/logo/ada_sym_mono.svg',     png: 'ada_sym_mono.png' },
+  { label: 'Transparente',bg: 'transp',  color: '#FFD600', svg: '/assets/logo/ada_sym_transp.svg',   png: 'ada_sym_transp.png' },
+]
+
+const blocosWm = [
+  { label: 'Padrão',      bg: '#000000', color: '#FFD600', svg: '/assets/logo/ada_wm_padrao.svg',   png: 'ada_wm_padrao.png' },
+  { label: 'Inversão',    bg: '#FFD600', color: '#000000', svg: '/assets/logo/ada_wm_inversao.svg', png: 'ada_wm_inversao.png' },
+  { label: 'Mono',        bg: '#FFFFFF', color: '#000000', svg: '/assets/logo/ada_wm_mono.svg',     png: 'ada_wm_mono.png' },
+  { label: 'Transparente',bg: 'transp',  color: '#FFD600', svg: '/assets/logo/ada_wm_transp.svg',   png: 'ada_wm_transp.png' },
+]
+
+const blocosH = [
+  { label: 'Padrão',      bg: '#000000', color: '#FFD600', rule: 'rgba(255,214,0,.35)', svg: '/assets/logo/ada_bloco_h_padrao.svg',   png: 'ada_bloco_h_padrao.png' },
+  { label: 'Inversão',    bg: '#FFD600', color: '#000000', rule: 'rgba(0,0,0,.25)',     svg: '/assets/logo/ada_bloco_h_inversao.svg', png: 'ada_bloco_h_inversao.png' },
+  { label: 'Mono',        bg: '#FFFFFF', color: '#000000', rule: 'rgba(0,0,0,.18)',     svg: '/assets/logo/ada_bloco_h_mono.svg',     png: 'ada_bloco_h_mono.png' },
+  { label: 'Transparente',bg: 'transp',  color: '#FFD600', rule: 'rgba(255,214,0,.35)', svg: '/assets/logo/ada_bloco_h_transp.svg',  png: 'ada_bloco_h_transp.png' },
+]
+
+const imgs = [
+  'ADA_urbano_feixe_01.jpg','ADA_urbano_feixe_02.jpg','ADA_urbano_feixe_03.jpg','ADA_urbano_feixe_04.jpg',
+  'ADA_urbano_mapping_01.jpg','ADA_urbano_mapping_02.jpg','ADA_urbano_mapping_03.jpg','ADA_urbano_mapping_04.jpg',
+  'ADA_urbano_mapping_05.jpg','ADA_urbano_mapping_06.jpg','ADA_urbano_mapping_07.jpg','ADA_urbano_mapping_08.jpg',
+  'ADA_natural_rio_01.jpg','ADA_natural_rio_02.jpg','ADA_natural_rio_03.jpg','ADA_natural_rio_04.jpg',
+  'ADA_natural_floresta_01.jpg','ADA_natural_floresta_02.jpg','ADA_natural_floresta_03.jpg','ADA_natural_floresta_04.jpg',
+  'ADA_abstrato_linhas_01.jpg','ADA_abstrato_linhas_02.jpg','ADA_abstrato_linhas_03.jpg','ADA_abstrato_linhas_04.jpg',
+  'ADA_abstrato_particulas_01.jpg','ADA_abstrato_particulas_02.jpg','ADA_abstrato_particulas_03.jpg','ADA_abstrato_particulas_04.jpg',
+  'ADA_abstrato_triangulo_01.jpg','ADA_abstrato_triangulo_02.jpg','ADA_abstrato_triangulo_03.jpg','ADA_abstrato_triangulo_04.jpg',
+  'ADA_imersivo_01.png','ADA_imersivo_02.png','ADA_imersivo_03.png','ADA_imersivo_04.png',
+  'ADA_imersivo_05.png','ADA_imersivo_06.png','ADA_imersivo_07.png','ADA_imersivo_08.png',
+  'ADA_performance_01.jpg','ADA_performance_02.jpg','ADA_performance_03.jpg','ADA_performance_04.jpg',
+  'ADA_tecnico_concreto_01.jpg','ADA_tecnico_concreto_02.jpg','ADA_tecnico_concreto_03.jpg','ADA_tecnico_concreto_04.jpg',
+  'ADA_tecnico_pcb_01.jpg','ADA_tecnico_pcb_02.jpg','ADA_tecnico_pcb_03.jpg','ADA_tecnico_pcb_04.jpg',
+]
+---
+
+<Section id="s05">
+  <SectionHeader num="05" title="Elementos" tag="Sistema" />
+  <Hairline />
+
+  <!-- Bloco Símbolo -->
+  <p class="sub-label">Bloco Símbolo</p>
+  <div class="d05-grid4">
+    {blocosSym.map(b => (
+      <div class="d05-asset">
+        <div class={`d05-sym-stage${b.bg === 'transp' ? ' d05-transp-bg' : ''}`}
+             style={b.bg !== 'transp' ? `background:${b.bg}` : ''}>
+          <svg width="48" height="48" style={`color:${b.color}`} aria-hidden="true"><use href="#ada-sym"/></svg>
+          <div class="d05-rule" style={`background:${b.rule}`}></div>
+          <span class="d05-bloco-label" style={`color:${b.color}`}>ada.art.br</span>
+        </div>
+        <div class="d05-asset-foot">
+          <span class="d05-asset-label">{b.label}</span>
+          <div class="d05-btns">
+            <a class="ada-btn ada-btn--ghost" href={b.svg} download>↓ SVG</a>
+            <button class="ada-btn ada-btn--ghost" onclick={`dlPng('${b.svg}','${b.png}',2)`}>↓ PNG</button>
+            <button class="ada-btn ada-btn--ghost" onclick={`dlPng('${b.svg}','${b.png.replace('.png','_4k.png')}',5)`}>↓ 4K</button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <Hairline />
+
+  <!-- Símbolo Isolado -->
+  <p class="sub-label">Símbolo</p>
+  <div class="d05-grid4">
+    {blocosSymIso.map(b => (
+      <div class="d05-asset">
+        <div class={`d05-sym-stage${b.bg === 'transp' ? ' d05-transp-bg' : ''}`}
+             style={b.bg !== 'transp' ? `background:${b.bg}` : ''}>
+          <svg width="64" height="64" style={`color:${b.color}`} aria-hidden="true"><use href="#ada-sym"/></svg>
+        </div>
+        <div class="d05-asset-foot">
+          <span class="d05-asset-label">{b.label}</span>
+          <div class="d05-btns">
+            <a class="ada-btn ada-btn--ghost" href={b.svg} download>↓ SVG</a>
+            <button class="ada-btn ada-btn--ghost" onclick={`dlPng('${b.svg}','${b.png}',2)`}>↓ PNG</button>
+            <button class="ada-btn ada-btn--ghost" onclick={`dlPng('${b.svg}','${b.png.replace('.png','_4k.png')}',5)`}>↓ 4K</button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <Hairline />
+
+  <!-- Wordmark -->
+  <p class="sub-label">Wordmark</p>
+  <div class="d05-grid4">
+    {blocosWm.map(b => (
+      <div class="d05-asset">
+        <div class={`d05-wm-stage${b.bg === 'transp' ? ' d05-transp-bg' : ''}`}
+             style={b.bg !== 'transp' ? `background:${b.bg}` : ''}>
+          <svg width="118" height="36" style={`color:${b.color}`} aria-hidden="true"><use href="#ada-wm"/></svg>
+        </div>
+        <div class="d05-asset-foot">
+          <span class="d05-asset-label">{b.label}</span>
+          <div class="d05-btns">
+            <a class="ada-btn ada-btn--ghost" href={b.svg} download>↓ SVG</a>
+            <button class="ada-btn ada-btn--ghost" onclick={`dlPng('${b.svg}','${b.png}',2)`}>↓ PNG</button>
+            <button class="ada-btn ada-btn--ghost" onclick={`dlPng('${b.svg}','${b.png.replace('.png','_4k.png')}',5)`}>↓ 4K</button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <Hairline />
+
+  <!-- Bloco Horizontal -->
+  <p class="sub-label">Bloco Horizontal</p>
+  <div class="d05-grid4">
+    {blocosH.map(b => (
+      <div class="d05-asset">
+        <div class={`d05-horiz-stage${b.bg === 'transp' ? ' d05-transp-bg' : ''}`}
+             style={b.bg !== 'transp' ? `background:${b.bg}` : ''}>
+          <svg width="40" height="40" style={`color:${b.color};flex-shrink:0`} aria-hidden="true"><use href="#ada-sym"/></svg>
+          <div class="d05-horiz-vr" style={`background:${b.rule}`}></div>
+          <div class="d05-horiz-text">
+            <span class="d05-horiz-site" style={`color:${b.color}`}>ada.art.br</span>
+            <span class="d05-horiz-tag" style={`color:${b.color};opacity:.45`}>Ateliê Digital Analógico</span>
+          </div>
+        </div>
+        <div class="d05-asset-foot">
+          <span class="d05-asset-label">{b.label}</span>
+          <div class="d05-btns">
+            <a class="ada-btn ada-btn--ghost" href={b.svg} download>↓ SVG</a>
+            <button class="ada-btn ada-btn--ghost" onclick={`dlPng('${b.svg}','${b.png}',2)`}>↓ PNG</button>
+            <button class="ada-btn ada-btn--ghost" onclick={`dlPng('${b.svg}','${b.png.replace('.png','_4k.png')}',5)`}>↓ 4K</button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <Hairline />
+
+  <!-- Imagética -->
+  <p class="sub-label">Imagética — 52 Fotografias · 11 Territórios</p>
+  <div class="d05-img-grid">
+    {imgs.map(f => (
+      <div class="d05-img-asset">
+        <div class="d05-img-stage">
+          <img src={`/assets/imagetica/${f}`} loading="lazy" alt="" />
+        </div>
+        <div class="d05-img-foot">
+          <a class="ada-btn ada-btn--ghost" href={`/assets/imagetica/${f}`} download>↓ JPG</a>
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>

@@ -1,0 +1,139 @@
+---
+import Section from '@components/Section.astro'
+import SectionHeader from '@components/SectionHeader.astro'
+import Hairline from '@components/Hairline.astro'
+
+const taglines = [
+  'Antes da IA virar assunto.',
+  'Antes do prompt virar promessa.',
+  'Antes do imersivo virar ingresso.',
+  'Antes do mapping virar serviço.',
+  'Antes do algoritmo virar filtro.',
+  'Antes da experiência virar formato.',
+]
+
+const traits = [
+  {
+    nome: 'Precisa',
+    corpo: 'Cada palavra tem função. Chega logo no ponto. Sem adjetivos decorativos, sem superlativo vazio. Se algo é bom, a descrição do trabalho prova — não o adjetivo.',
+    ex: '"Videomapping para a abertura de Anish Kapoor." — não "incrível videomapping para a icônica abertura do renomado Anish Kapoor."',
+  },
+  {
+    nome: 'Com ponto de vista',
+    corpo: 'A ADA tem opinião. Sobre tecnologia, sobre o mercado, sobre cultura. Não finge neutralidade. Comenta o hype, não o alimenta.',
+    ex: '"O Brasil não é contexto. É método." — não "A ADA é inspirada pela rica cultura brasileira."',
+  },
+  {
+    nome: 'Econômica',
+    corpo: 'Menos é mais. Uma frase boa vale mais que um parágrafo mediano. O silêncio também comunica — o preto do KV é parte do design.',
+    ex: '"Desde 2015, na borda." — quatro palavras que substituem um parágrafo de apresentação.',
+  },
+  {
+    nome: 'Situada',
+    corpo: 'A ADA fala de um lugar específico: Brasil, 2015, borda. O Brasil aparece como ponto de vista, não como cenário.',
+    ex: '"Amazônia como dado. G20 como palco. Times Square como suporte."',
+  },
+]
+
+const vocab = [
+  { term: 'Plataforma criativa',       desc: 'não "estúdio" ou "agência"' },
+  { term: 'Ponto de vista',            desc: 'perspectiva com autoria' },
+  { term: 'Borda / fronteira',         desc: 'onde a ADA opera' },
+  { term: 'Tecnologia como linguagem', desc: 'não como ferramenta' },
+  { term: 'Obra autoral',              desc: 'projetos além de clientes' },
+  { term: 'Direção criativa',          desc: 'crédito nos projetos' },
+  { term: 'Campo de operação',         desc: 'o espaço onde a ADA atua' },
+  { term: 'Antes',                     desc: 'postura temporal da marca' },
+  { term: 'Intervenção urbana',        desc: 'descreve o tipo de trabalho' },
+  { term: 'Desde 2015',               desc: 'âncora temporal sempre presente' },
+]
+
+const evitar = [
+  { term: 'Inovador / inovação',  desc: 'vazio, todo mundo usa' },
+  { term: 'Disruptivo',           desc: 'jargão corporativo desgastado' },
+  { term: 'Imersivo',             desc: 'nunca adjetivo de valor' },
+  { term: 'Incrível',             desc: 'adjetivo sem informação' },
+  { term: 'Temos o prazer de',   desc: 'linguagem de assessoria genérica' },
+  { term: 'Honra / privilegio',  desc: 'postura de prestador, não de autor' },
+  { term: 'State of the art',    desc: 'anglicismo corporativo' },
+  { term: 'Solucoes criativas',  desc: 'linguagem de agência' },
+  { term: '360 graus',           desc: 'jargão de marketing dos anos 2000' },
+  { term: 'Conteudo',            desc: 'prefira: obra, trabalho, projeto, peça' },
+]
+---
+
+<Section id="s04">
+  <SectionHeader num="04" title="Voz e Tom" tag="Linguagem" />
+  <Hairline />
+
+  <!-- Manifesto -->
+  <p class="sub-label">Manifesto</p>
+  <div class="d04-manifesto">
+    <div class="d04-manifesto-left">
+      <p class="d04-display">ANTES.</p>
+      <p class="d04-serif-sub">A ADA chegou antes.</p>
+    </div>
+    <div class="d04-taglines">
+      {taglines.map(t => <p class="d04-tagline">{t}</p>)}
+    </div>
+  </div>
+
+  <Hairline />
+
+  <div class="d04-corpo">
+    <p class="d04-quote">A gente já estava aqui.</p>
+    <div class="d04-paras">
+      <p class="d04-body-p">Em galpões, praças, ruas, empenas, florestas. Linguagem de máquina como material de trabalho. Código antes de virar ferramenta. Era o que fazia sentido.</p>
+      <p class="d04-body-p">Quem cria com a ADA chega antes. Antes das tendências ficarem óbvias. Antes de virar formato. Antes de ter preço.</p>
+      <p class="d04-body-p">A gente opera na borda — onde as coisas ainda não têm nome, antes das categorias, antes de alguém escrever um artigo explicando o que é. Não é confortável. Mas é o único lugar onde algo genuinamente novo pode aparecer.</p>
+    </div>
+  </div>
+
+  <Hairline />
+
+  <!-- Personalidade -->
+  <p class="sub-label">A Personalidade Verbal da ADA</p>
+  <p class="d04-intro">A ADA não tem um único tom — tem uma postura. Essa postura se adapta ao contexto sem perder a identidade. O que nunca muda: a ADA fala como quem sabe o que faz, não como quem precisa explicar o que faz.</p>
+  <div class="d04-traits">
+    {traits.map((t, i) => (
+      <div class="d04-trait">
+        <div class="d04-trait-top">
+          <span class="d04-trait-num">0{i+1}</span>
+          <span class="d04-trait-nome">{t.nome}</span>
+        </div>
+        <p class="d04-trait-body">{t.corpo}</p>
+        <p class="d04-trait-ex">{t.ex}</p>
+      </div>
+    ))}
+  </div>
+
+  <Hairline />
+
+  <!-- Vocabulário -->
+  <p class="sub-label">Vocabulário</p>
+  <div class="d04-vocab">
+    <div class="d04-vocab-col">
+      <p class="d04-vocab-hdr d04-vocab-hdr--ada">Vocabulário da ADA</p>
+      <div class="d04-vocab-list">
+        {vocab.map(v => (
+          <div class="d04-vocab-item">
+            <span class="d04-vocab-term d04-vocab-term--ada">{v.term}</span>
+            <span class="d04-vocab-desc">{v.desc}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="d04-vocab-col d04-vocab-evitar">
+      <p class="d04-vocab-hdr d04-vocab-hdr--ev">Evitar</p>
+      <div class="d04-vocab-list">
+        {evitar.map(v => (
+          <div class="d04-vocab-item">
+            <span class="d04-vocab-term d04-vocab-term--ev">{v.term}</span>
+            <span class="d04-vocab-desc">{v.desc}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</Section>
+

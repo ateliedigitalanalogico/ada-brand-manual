@@ -1,0 +1,236 @@
+---
+import Section from '@components/Section.astro'
+import SectionHeader from '@components/SectionHeader.astro'
+import Hairline from '@components/Hairline.astro'
+
+const avatarModos = [
+  { label: 'Padrão',   bg: '#000000', color: '#FFD600', ring: '#FFD600' },
+  { label: 'Inversão', bg: '#FFD600', color: '#000000', ring: '#000000' },
+  { label: 'Mono',     bg: '#FFFFFF', color: '#000000', ring: '#000000' },
+]
+
+const sigVariants = [
+  {
+    id: 'padrao',
+    label: 'Padrão',
+    bg: '#111111',
+    nameColor: '#FFD600',
+    metaColor: 'rgba(255,255,255,0.45)',
+    symColor: '#FFD600',
+    vrColor: 'rgba(255,214,0,0.3)',
+  },
+  {
+    id: 'inversao',
+    label: 'Inversão',
+    bg: '#FFD600',
+    nameColor: '#000000',
+    metaColor: 'rgba(0,0,0,0.5)',
+    symColor: '#000000',
+    vrColor: 'rgba(0,0,0,0.25)',
+  },
+  {
+    id: 'mono',
+    label: 'Mono',
+    bg: '#FFFFFF',
+    nameColor: '#000000',
+    metaColor: 'rgba(0,0,0,0.45)',
+    symColor: '#000000',
+    vrColor: 'rgba(0,0,0,0.18)',
+  },
+]
+---
+
+<Section id="s07">
+  <SectionHeader num="07" title="Materiais Digitais" tag="Aplicação" />
+  <Hairline />
+
+  <!-- Avatar -->
+  <p class="sub-label">Avatar — Perfil de Redes Sociais</p>
+  <div class="d07-avatar-row">
+    {avatarModos.map(m => (
+      <div class="d07-avatar-item">
+        <div class="d07-avatar-wrap">
+          <div class="d07-avatar-ring" style={`--ring:${m.ring}`}>
+            <div class="d07-avatar-circle" style={`background:${m.bg}`}>
+              <svg width="72" height="72" style={`color:${m.color}`} aria-hidden="true"><use href="#ada-sym"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="d07-avatar-foot">
+          <span class="d07-avatar-label">{m.label}</span>
+          <span class="d05-btn d07-btn-disabled">↓ PNG</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <Hairline />
+
+  <!-- Favicon -->
+  <p class="sub-label">Favicon</p>
+  <div class="d07-favicon-row">
+    <div class="d07-favicon-card">
+      <div class="d07-favicon-previews">
+        <div class="d07-fav-item">
+          <div class="d07-fav-wrap" style="background:#000; width:32px; height:32px;">
+            <svg width="16" height="16" style="color:#FFD600" aria-hidden="true"><use href="#ada-sym"/></svg>
+          </div>
+          <span class="d07-fav-size">16 × 16</span>
+        </div>
+        <div class="d07-fav-item">
+          <div class="d07-fav-wrap" style="background:#000; width:64px; height:64px;">
+            <svg width="32" height="32" style="color:#FFD600" aria-hidden="true"><use href="#ada-sym"/></svg>
+          </div>
+          <span class="d07-fav-size">32 × 32</span>
+        </div>
+        <div class="d07-fav-item">
+          <div class="d07-fav-wrap" style="background:#000; width:128px; height:128px;">
+            <svg width="80" height="80" style="color:#FFD600" aria-hidden="true"><use href="#ada-sym"/></svg>
+          </div>
+          <span class="d07-fav-size">180 × 180</span>
+        </div>
+      </div>
+      <div class="d07-favicon-info">
+        <p class="d07-fav-desc">Símbolo em fundo preto (#000). 32×32 para favicon padrão, 16×16 para navegadores antigos, 180×180 para Apple Touch Icon.</p>
+        <div class="d05-btns">
+          <button class="ada-btn ada-btn--ghost" onclick="dlFav(16)">↓ PNG 16</button>
+          <button class="ada-btn ada-btn--ghost" onclick="dlFav(32)">↓ PNG 32</button>
+          <button class="ada-btn ada-btn--ghost" onclick="dlFav(180)">↓ PNG 180</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Hairline />
+
+  <!-- Assinatura de E-mail -->
+  <p class="sub-label">Assinatura de E-mail — 3 Variantes</p>
+
+  <div class="d07-sig-fields">
+    <div class="d07-sig-field">
+      <label class="d07-sig-field-label" for="sig-nome">Nome</label>
+      <input class="d07-sig-input" id="sig-nome" type="text" value="Nome Sobrenome" />
+    </div>
+    <div class="d07-sig-field">
+      <label class="d07-sig-field-label" for="sig-cargo">Cargo</label>
+      <input class="d07-sig-input" id="sig-cargo" type="text" value="Direção Criativa" />
+    </div>
+    <div class="d07-sig-field">
+      <label class="d07-sig-field-label" for="sig-email">E-mail</label>
+      <input class="d07-sig-input" id="sig-email" type="email" value="nome@ada.art.br" />
+    </div>
+  </div>
+
+  <div class="d07-sig-grid">
+    {sigVariants.map(v => (
+      <div class="d07-sig-card"
+           data-bg={v.bg}
+           data-name-color={v.nameColor}
+           data-meta-color={v.metaColor}
+           data-sym-color={v.symColor}
+           data-vr-color={v.vrColor}
+           data-label={v.label}>
+        <div class="d07-sig-preview" style={`background:${v.bg}`}>
+          <svg width="40" height="40" style={`color:${v.symColor};flex-shrink:0`} aria-hidden="true"><use href="#ada-sym"/></svg>
+          <div class="d07-sig-vr" style={`background:${v.vrColor}`}></div>
+          <div class="d07-sig-text">
+            <span class="d07-sig-nome" data-sig="nome" style={`color:${v.nameColor}`}>Nome Sobrenome</span>
+            <span class="d07-sig-cargo" data-sig="cargo" style={`color:${v.metaColor}`}>Direção Criativa</span>
+            <span class="d07-sig-email" data-sig="email" style={`color:${v.metaColor}`}>nome@ada.art.br</span>
+            <span class="d07-sig-site" style={`color:${v.nameColor}`}>ada.art.br</span>
+            <span class="d07-sig-meta" style={`color:${v.metaColor}`}>São Paulo, Brasil · Desde 2015</span>
+          </div>
+        </div>
+        <div class="d07-sig-foot">
+          <span class="d07-sig-label">{v.label}</span>
+          <div class="d05-btns">
+            <button class="ada-btn ada-btn--ghost" onclick="dlSig(this.closest('[data-bg]'))">↓ HTML</button>
+            <button class="ada-btn ada-btn--ghost" id={`cp-sig-${v.id}`} onclick="cpSig(this.closest('[data-bg]'), this)">Copiar</button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<script is:inline>
+function buildSigHtml(card) {
+  var nome    = document.getElementById('sig-nome').value  || 'Nome Sobrenome'
+  var cargo   = document.getElementById('sig-cargo').value || 'Direção Criativa'
+  var email   = document.getElementById('sig-email').value || 'nome@ada.art.br'
+  var bg        = card.dataset.bg
+  var nameColor = card.dataset.nameColor
+  var metaColor = card.dataset.metaColor
+  var symColor  = card.dataset.symColor
+  var vrColor   = card.dataset.vrColor
+
+  var svgSrc = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="225 225 126 126">' +
+    '<polygon fill="' + symColor + '" points="268.01 297 288 257.02 307.99 297 324 297 288 225 252 297 268.01 297"/>' +
+    '<polygon fill="' + symColor + '" points="238.5 324 225 351 241.01 351 250.01 333 254.51 324 238.5 324"/>' +
+    '<polygon fill="' + symColor + '" points="321.49 324 325.99 333 334.99 351 351 351 337.5 324 321.49 324"/>' +
+    '</svg>'
+  )
+
+  return '<!DOCTYPE html>\n<html>\n<head><meta charset="UTF-8"><title>Assinatura ADA</title></head>\n<body style="margin:0;padding:0;">\n' +
+    '<table cellpadding="0" cellspacing="0" border="0" style="background:' + bg + ';padding:16px 20px;">\n<tr>\n' +
+    '<td style="vertical-align:middle;padding-right:16px;">' +
+      '<img src="' + svgSrc + '" width="40" height="40" alt="ADA" style="display:block;" />' +
+    '</td>\n' +
+    '<td style="width:1px;background:' + vrColor + ';vertical-align:middle;" bgcolor="' + vrColor + '">&nbsp;</td>\n' +
+    '<td style="vertical-align:middle;padding-left:16px;">' +
+      '<div style="color:' + nameColor + ';font-family:\'DM Mono\',monospace;font-size:13px;letter-spacing:0.04em;line-height:1.5;">' + nome + '</div>' +
+      '<div style="color:' + metaColor + ';font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;line-height:1.5;">' + cargo + '</div>' +
+      '<div style="color:' + metaColor + ';font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.04em;line-height:1.5;">' + email + '</div>' +
+      '<div style="color:' + nameColor + ';font-family:\'DM Mono\',monospace;font-size:12px;letter-spacing:0.06em;margin-top:4px;line-height:1.5;">ada.art.br</div>' +
+      '<div style="color:' + metaColor + ';font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:0.08em;line-height:1.5;">São Paulo, Brasil · Desde 2015</div>' +
+    '</td>\n</tr>\n</table>\n</body>\n</html>'
+}
+
+function dlSig(card) {
+  var html  = buildSigHtml(card)
+  var label = (card.dataset.label || 'assinatura').toLowerCase().replace(/\s+/g, '_')
+  var blob  = new Blob([html], { type: 'text/html' })
+  var a     = document.createElement('a')
+  a.href    = URL.createObjectURL(blob)
+  a.download = 'ada_assinatura_' + label + '.html'
+  a.click()
+  URL.revokeObjectURL(a.href)
+}
+
+function cpSig(card, btn) {
+  var html = buildSigHtml(card)
+  var orig = btn.textContent
+  if (navigator.clipboard && navigator.clipboard.write) {
+    navigator.clipboard.write([
+      new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }) })
+    ]).then(function() {
+      btn.textContent = '✓ Copiado'
+      setTimeout(function() { btn.textContent = orig }, 2000)
+    }).catch(function() { fallbackCopy(html, btn, orig) })
+  } else {
+    fallbackCopy(html, btn, orig)
+  }
+}
+
+function fallbackCopy(html, btn, orig) {
+  navigator.clipboard.writeText(html).then(function() {
+    btn.textContent = '✓ HTML copiado'
+    setTimeout(function() { btn.textContent = orig }, 2000)
+  })
+}
+
+// live preview update
+;(function() {
+  var fields = ['nome', 'cargo', 'email']
+  fields.forEach(function(f) {
+    var input = document.getElementById('sig-' + f)
+    if (!input) return
+    input.addEventListener('input', function() {
+      document.querySelectorAll('[data-sig="' + f + '"]').forEach(function(el) {
+        el.textContent = input.value
+      })
+    })
+  })
+})()
+</script>
