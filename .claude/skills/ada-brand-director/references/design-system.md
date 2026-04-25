@@ -37,12 +37,23 @@ Famílias: DM Mono 300/400 · Syne 400/600 · Cormorant Garamond italic 300 (uso
 
 ## SVG — Logo
 
+### Variantes de marca
+
+| Nome | Descrição | Quando usar |
+|---|---|---|
+| **Alpha** | Símbolo isolado, sem wordmark | Avatar, favicon, aplicações pequenas, contexts onde a marca já está estabelecida |
+| **Wordmark** | Logotipo tipográfico "ADA" sem símbolo | Títulos, rodapés, contextos textuais |
+| **Bloco** | Símbolo + wordmark juntos | Apresentação completa da marca |
+
 ```html
+<!-- Alpha — símbolo isolado -->
 <svg width="64" height="64" style="color:var(--accent)"><use href="#ada-sym"/></svg>
+
+<!-- Wordmark -->
 <svg height="32" style="color:var(--accent);width:auto"><use href="#ada-wm"/></svg>
 ```
 
-Sempre via `<use>`, nunca `<img>`. Mínimo símbolo: 32px. Mínimo wordmark: 240px / 60mm.
+Sempre via `<use>`, nunca `<img>`. Mínimo Alpha: 32px. Mínimo wordmark: 240px / 60mm.
 
 ## Componentes CSS
 

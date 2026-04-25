@@ -127,15 +127,25 @@ Qualquer box dentro de uma sec-box usa `background: var(--card-bg)`. Nunca hex d
 
 ---
 
-## SVG — Símbolo e Wordmark
+## SVG — Variantes de marca
+
+### Nomenclatura
+
+| Nome | Descrição | Quando usar |
+|---|---|---|
+| **Alpha** | Símbolo isolado, sem wordmark | Avatar, favicon, aplicações pequenas, contextos onde a marca já está estabelecida |
+| **Wordmark** | Logotipo tipográfico "ADA" sem símbolo | Títulos, rodapés, contextos textuais |
+| **Bloco** | Símbolo + wordmark juntos | Apresentação completa da marca |
 
 ```html
 <!-- Sempre via <use>, nunca <img>, cor via currentColor -->
+<!-- Alpha — símbolo isolado -->
 <svg width="64" height="64" style="color:var(--accent)"><use href="#ada-sym"/></svg>
+<!-- Wordmark -->
 <svg height="32" style="color:var(--accent); width:auto"><use href="#ada-wm"/></svg>
 ```
 
-- Mínimo símbolo: **32px** altura
+- Mínimo Alpha: **32px** altura
 - Mínimo wordmark: **240px** largura / 60mm
 - Geometria intocável — `<symbol>` definido em `Base.astro`, nunca editar os `polygon points`
 - SVGs de download em `public/assets/logo/` usam `<g transform>` (nunca `<svg>` aninhado — falha no canvas)
